@@ -1,22 +1,128 @@
 {
- "schemaVersion":1,"id":"yusei","no":"Direct13","name":"遊星","yomi":"ゆうせい","icon":"icon/d13_yusei.svg","category":"direct","categoryLabel":"直接打ち","updatedAt":"2026-08-01",
- "comment":"勉強の比重が高い珠型。\n白a、bは白勝ちのため省略。頻出は白c〜f及び白kと白n。\n白cの3と4は知識が要るが相当黒勝ちやすい。白dの7は推定黒勝ちだが難解。満局でいいなら手堅い。8は黒が安定する。\n白eのA1は難解で要研究。2は推定黒勝ち。3は合流型。\n白fはA3とA4が難しい。5以降は白が安定する。\n白g、j、mについては五珠を正確に押さえよう。\n白kの3は瑞星明星共通。白lはC1が難しく要研究。\n白nはA7が奇跡のような黒勝ちで一時話題となった。A8は名月白優勢との盤端違いだが、こちらも奇跡のような黒勝ちをする。A9は難解だが安定黒有利。10はタラグチ向き。",
- "baseView":{"size":11,"centerX":7,"centerY":7},"variationView":{"size":9,"centerX":7,"centerY":7},
- "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
- "baseBranches":[{"x":6,"y":10,"label":"g"},{"x":6,"y":9,"label":"c"},{"x":7,"y":9,"label":"n"},{"x":8,"y":9,"label":"l"},{"x":5,"y":8,"label":"h"},{"x":6,"y":8,"label":"b"},{"x":8,"y":8,"label":"k"},{"x":9,"y":8,"label":"d"},{"x":5,"y":7,"label":"j"},{"x":6,"y":7,"label":"a"},{"x":9,"y":7,"label":"m"},{"x":5,"y":6,"label":"i"},{"x":6,"y":6,"label":"e"},{"x":8,"y":6,"label":"f"}],
- "variations":[
-  {"id":"v1","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":6,"y":9,"color":"white","n":4}],"branches":[{"x":6,"y":8,"label":"4"},{"x":8,"y":8,"label":"A"},{"x":8,"y":7,"label":"3"},{"x":9,"y":6,"label":"A"}],"evalTags":["3 4 黒有利"]},
-  {"id":"v2","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":9,"y":8,"color":"white","n":4}],"branches":[{"x":8,"y":8,"label":"A"},{"x":10,"y":8,"label":"9"},{"x":6,"y":7,"label":"A6"},{"x":10,"y":7,"label":"7"},{"x":11,"y":7,"label":"8"},{"x":8,"y":6,"label":"A"},{"x":10,"y":6,"label":"A"},{"x":8,"y":5,"label":"A"},{"x":10,"y":5,"label":"A"}],"evalTags":["7 黒優勢","8 黒有利","9 黒主導"]},
-  {"id":"v3","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":6,"y":6,"color":"white","n":4}],"branches":[{"x":6,"y":7,"label":"4"},{"x":9,"y":7,"label":"C1"},{"x":6,"y":5,"label":"A1"},{"x":7,"y":5,"label":"3"},{"x":8,"y":5,"label":"2"}],"evalTags":["2 黒優勢","3 黒主導"]},
-  {"id":"v4","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":8,"y":6,"color":"white","n":4}],"branches":[{"x":8,"y":8,"label":"5"},{"x":7,"y":6,"label":"7"},{"x":9,"y":6,"label":"A"},{"x":10,"y":6,"label":"A3"},{"x":7,"y":5,"label":"8"},{"x":8,"y":5,"label":"A"},{"x":10,"y":5,"label":"A4"},{"x":9,"y":4,"label":"6"}],"evalTags":["5 白主導","6 白有利","7 8 白優勢"]},
-  {"id":"v5","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":5,"y":8,"color":"white","n":4}],"branches":[{"x":6,"y":8,"label":"7"},{"x":8,"y":8,"label":"A"},{"x":6,"y":6,"label":"6"},{"x":10,"y":6,"label":"A"},{"x":8,"y":5,"label":"A"},{"x":8,"y":4,"label":"A"}],"evalTags":["10 黒優勢"]},
-  {"id":"v6","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":5,"y":6,"color":"white","n":4}],"branches":[{"x":6,"y":8,"label":"C1?"},{"x":6,"y":7,"label":"A"},{"x":9,"y":7,"label":"3"},{"x":8,"y":6,"label":"A"}],"evalTags":["6 白有利","7 白優勢"]},
-  {"id":"v7","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":5,"y":7,"color":"white","n":4}],"branches":[{"x":5,"y":8,"label":"9"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":9,"y":7,"label":"A"},{"x":9,"y":6,"label":"A"},{"x":10,"y":6,"label":"A"},{"x":7,"y":5,"label":"A"},{"x":8,"y":4,"label":"A"},{"x":9,"y":4,"label":"A8"}],"evalTags":["3 白優勢"]},
-  {"id":"v8","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":9,"y":7,"color":"white","n":4}],"branches":[{"x":8,"y":8,"label":"10"},{"x":11,"y":7,"label":"A8"},{"x":8,"y":6,"label":"A"},{"x":10,"y":6,"label":"A"},{"x":7,"y":5,"label":"A"},{"x":8,"y":5,"label":"A"},{"x":10,"y":5,"label":"A"},{"x":7,"y":4,"label":"A"},{"x":8,"y":4,"label":"A"},{"x":7,"y":3,"label":"A9"}],"evalTags":["9 白有利"]},
-  {"id":"v9","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":7,"y":9,"color":"white","n":4}],"branches":[{"x":8,"y":9,"label":"A9"},{"x":5,"y":8,"label":"10"},{"x":9,"y":8,"label":"A"},{"x":8,"y":7,"label":"A8"},{"x":9,"y":7,"label":"A"},{"x":11,"y":7,"label":"A"},{"x":8,"y":6,"label":"A"},{"x":10,"y":6,"label":"A7"},{"x":7,"y":5,"label":"A"},{"x":10,"y":4,"label":"A"}],"evalTags":["10 白主導"]},
-  {"id":"v10","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":8,"y":8,"color":"white","n":4}],"branches":[{"x":9,"y":8,"label":"A"},{"x":8,"y":6,"label":"A"},{"x":7,"y":5,"label":"3"}],"evalTags":[]},
-  {"id":"v11","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":8,"y":9,"color":"white","n":4}],"branches":[{"x":8,"y":8,"label":"C1"},{"x":6,"y":7,"label":"A"}],"evalTags":[]},
-  {"id":"v12","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":6,"y":10,"color":"white","n":4}],"branches":[{"x":6,"y":8,"label":"A"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"A9"},{"x":6,"y":7,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":9,"y":7,"label":"A8"},{"x":6,"y":6,"label":"10"},{"x":9,"y":6,"label":"A"},{"x":10,"y":5,"label":"A"},{"x":9,"y":4,"label":"A"}],"evalTags":["10 白主導"]},
-  {"id":"v13","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],"moves":[{"x":10,"y":6,"color":"white","n":4}],"branches":[{"x":8,"y":9,"label":"A11?"},{"x":8,"y":8,"label":"A"},{"x":6,"y":7,"label":"A8"},{"x":9,"y":7,"label":"A"},{"x":10,"y":7,"label":"A10"},{"x":8,"y":6,"label":"A"},{"x":9,"y":6,"label":"A"},{"x":6,"y":5,"label":"A"},{"x":7,"y":5,"label":"A"},{"x":10,"y":5,"label":"A"},{"x":9,"y":4,"label":"A9"}],"evalTags":[]}
- ]
+  "schemaVersion": 1,
+  "id": "yusei",
+  "no": "Direct13",
+  "name": "遊星",
+  "yomi": "ゆうせい",
+  "icon": "icon/d13_yusei.svg",
+  "category": "direct",
+  "categoryLabel": "直接打ち",
+  "updatedAt": "2026-08-01",
+  "comment": "勉強の比重が高い珠型。\n白a、bは白勝ちのため省略。頻出は白c〜f及び白kと白n。\n白cの3と4は知識が要るが相当黒勝ちやすい。白dの7は推定黒勝ちだが難解。満局でいいなら手堅い。8は黒が安定する。\n白eのA1は難解で要研究。2は推定黒勝ち。3は合流型。\n白fはA3とA4が難しい。5以降は白が安定する。\n白g、j、mについては五珠を正確に押さえよう。\n白kの3は瑞星明星共通。白lはC1が難しく要研究。\n白nはA7が奇跡のような黒勝ちで一時話題となった。A8は名月白優勢との盤端違いだが、こちらも奇跡のような黒勝ちをする。A9は難解だが安定黒有利。10はタラグチ向き。",
+  "baseView": { "size": 11, "centerX": 7, "centerY": 7 },
+  "variationView": { "size": 9, "centerX": 7, "centerY": 7 },
+  "baseMoves": [
+    { "x": 7, "y": 7, "color": "black", "n": 1 },
+    { "x": 7, "y": 8, "color": "white", "n": 2 },
+    { "x": 9, "y": 5, "color": "black", "n": 3 }
+  ],
+  "baseBranches": [
+    { "x": 6, "y": 10, "label": "g" },
+    { "x": 6, "y": 9, "label": "c" },
+    { "x": 7, "y": 9, "label": "n" },
+    { "x": 8, "y": 9, "label": "l" },
+    { "x": 5, "y": 8, "label": "h" },
+    { "x": 6, "y": 8, "label": "b" },
+    { "x": 8, "y": 8, "label": "k" },
+    { "x": 9, "y": 8, "label": "d" },
+    { "x": 5, "y": 7, "label": "j" },
+    { "x": 6, "y": 7, "label": "a" },
+    { "x": 9, "y": 7, "label": "m" },
+    { "x": 5, "y": 6, "label": "i" },
+    { "x": 6, "y": 6, "label": "e" },
+    { "x": 8, "y": 6, "label": "f" }
+  ],
+  "variations": [
+    {
+      "id": "v1",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":6,"y":9,"color":"white","n":4}],
+      "branches": [{"x":6,"y":8,"label":"4"},{"x":8,"y":8,"label":"A"},{"x":8,"y":7,"label":"3"},{"x":9,"y":6,"label":"A"}],
+      "evalTags": ["3 4 黒有利"]
+    },
+    {
+      "id": "v2",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":9,"y":8,"color":"white","n":4}],
+      "branches": [{"x":8,"y":8,"label":"A4"},{"x":10,"y":8,"label":"9"},{"x":6,"y":7,"label":"A6"},{"x":10,"y":7,"label":"A7"},{"x":11,"y":7,"label":"8"},{"x":8,"y":6,"label":"A5"},{"x":10,"y":6,"label":"A3"},{"x":8,"y":5,"label":"A1"},{"x":10,"y":5,"label":"A2"}],
+      "evalTags": ["8 黒有利", "9 黒主導"]
+    },
+    {
+      "id": "v3",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":6,"y":6,"color":"white","n":4}],
+      "branches": [{"x":6,"y":7,"label":"4"},{"x":9,"y":7,"label":"C1"},{"x":6,"y":5,"label":"A1"},{"x":7,"y":5,"label":"3"},{"x":8,"y":5,"label":"2"}],
+      "evalTags": ["2 黒優勢", "3 黒主導"]
+    },
+    {
+      "id": "v4",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":8,"y":6,"color":"white","n":4}],
+      "branches": [{"x":8,"y":8,"label":"5"},{"x":7,"y":6,"label":"7"},{"x":9,"y":6,"label":"A"},{"x":10,"y":6,"label":"A3"},{"x":7,"y":5,"label":"8"},{"x":8,"y":5,"label":"A"},{"x":10,"y":5,"label":"A4"},{"x":9,"y":4,"label":"6"}],
+      "evalTags": ["5 白主導", "6 白有利", "7 8 白優勢"]
+    },
+    {
+      "id": "v5",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":5,"y":8,"color":"white","n":4}],
+      "branches": [{"x":6,"y":8,"label":"7"},{"x":8,"y":8,"label":"A1"},{"x":6,"y":6,"label":"6"},{"x":8,"y":6,"label":"A2"},{"x":10,"y":6,"label":"A4"},{"x":8,"y":5,"label":"A3"},{"x":8,"y":4,"label":"A5"}],
+      "evalTags": []
+    },
+    {
+      "id": "v6",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":5,"y":6,"color":"white","n":4}],
+      "branches": [{"x":6,"y":8,"label":"C1?"},{"x":6,"y":7,"label":"A"},{"x":9,"y":7,"label":"3"},{"x":8,"y":6,"label":"A"}],
+      "evalTags": ["6 白有利", "7 白優勢"]
+    },
+    {
+      "id": "v7",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":5,"y":7,"color":"white","n":4}],
+      "branches": [{"x":5,"y":8,"label":"9"},{"x":8,"y":8,"label":"A2"},{"x":9,"y":8,"label":"A3"},{"x":9,"y":7,"label":"A1"},{"x":9,"y":6,"label":"A5"},{"x":10,"y":6,"label":"A6"},{"x":7,"y":5,"label":"A4"},{"x":8,"y":4,"label":"A7"},{"x":9,"y":4,"label":"A8"}],
+      "evalTags": []
+    },
+    {
+      "id": "v8",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":9,"y":7,"color":"white","n":4}],
+      "branches": [{"x":8,"y":8,"label":"10"},{"x":11,"y":7,"label":"A8"},{"x":8,"y":6,"label":"A"},{"x":10,"y":6,"label":"A"},{"x":7,"y":5,"label":"A"},{"x":8,"y":5,"label":"A"},{"x":10,"y":5,"label":"A"},{"x":7,"y":4,"label":"A"},{"x":8,"y":4,"label":"A"},{"x":7,"y":3,"label":"A9"}],
+      "evalTags": ["9 白有利"]
+    },
+    {
+      "id": "v9",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":7,"y":9,"color":"white","n":4}],
+      "branches": [{"x":8,"y":9,"label":"A8"},{"x":5,"y":8,"label":"10"},{"x":9,"y":8,"label":"A5"},{"x":8,"y":7,"label":"A9"},{"x":9,"y":7,"label":"A1"},{"x":11,"y":7,"label":"A4"},{"x":8,"y":6,"label":"A2"},{"x":10,"y":6,"label":"A7"},{"x":7,"y":5,"label":"A6"},{"x":10,"y":4,"label":"A3"}],
+      "evalTags": ["10 白主導"]
+    },
+    {
+      "id": "v10",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":8,"y":8,"color":"white","n":4}],
+      "branches": [{"x":9,"y":8,"label":"A"},{"x":8,"y":6,"label":"A"},{"x":7,"y":5,"label":"3"}],
+      "evalTags": []
+    },
+    {
+      "id": "v11",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":8,"y":9,"color":"white","n":4}],
+      "branches": [{"x":8,"y":8,"label":"C1"},{"x":6,"y":7,"label":"A"}],
+      "evalTags": []
+    },
+    {
+      "id": "v12",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":6,"y":10,"color":"white","n":4}],
+      "branches": [{"x":6,"y":8,"label":"A6"},{"x":8,"y":8,"label":"A1"},{"x":9,"y":8,"label":"A8"},{"x":6,"y":7,"label":"A3"},{"x":8,"y":7,"label":"A9"},{"x":9,"y":7,"label":"A7"},{"x":6,"y":6,"label":"10"},{"x":9,"y":6,"label":"A2"},{"x":10,"y":5,"label":"A4"},{"x":9,"y":4,"label":"A5"}],
+      "evalTags": ["10 白主導"]
+    },
+    {
+      "id": "v13",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":5,"color":"black","n":3}],
+      "moves": [{"x":10,"y":6,"color":"white","n":4}],
+      "branches": [{"x":8,"y":9,"label":"A11?"},{"x":8,"y":8,"label":"A3"},{"x":6,"y":7,"label":"A8"},{"x":9,"y":7,"label":"A2"},{"x":10,"y":7,"label":"A10"},{"x":8,"y":6,"label":"A1"},{"x":9,"y":6,"label":"A7"},{"x":6,"y":5,"label":"A4"},{"x":7,"y":5,"label":"A5"},{"x":10,"y":5,"label":"A6"},{"x":9,"y":4,"label":"A9"}],
+      "evalTags": []
+    }
+  ]
 }
