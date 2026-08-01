@@ -76,6 +76,21 @@
     border-bottom:0.5px solid var(--border);
   }
   body.theme-dark .site-header{background:rgba(42,38,32,0.92);}
+  body.theme-dark .header-nav .nav-pill,
+  body.theme-dark .header-nav .nav-link-btn,
+  body.theme-dark .header-nav .nav-icon-btn{
+    background:transparent!important;color:#f2ede3!important;
+    border:1px solid transparent!important;border-radius:8px!important;
+    box-shadow:none;
+  }
+  body.theme-dark .header-nav .nav-pill.active{color:#f2ede3!important;background:rgba(255,255,255,.07)!important;}
+  body.theme-dark .header-nav .nav-pill.active::after{background:#74d29e;}
+  body.theme-dark .header-nav .nav-pill:hover,
+  body.theme-dark .header-nav .nav-link-btn:hover,
+  body.theme-dark .header-nav .nav-icon-btn:hover{background:rgba(255,255,255,.10)!important;color:#fff!important;}
+  body.theme-dark .header-nav .nav-favorite-heart path{stroke:currentColor;}
+  body.theme-dark .header-nav .nav-pill .stone-black{fill:#171512;stroke:#f2ede3;stroke-width:1.5;}
+  body.theme-dark .header-nav .nav-pill .stone-white{r:5px;fill:#fff;stroke:none;stroke-width:0;}
   .header-inner{
     max-width:920px;margin:0 auto;position:relative;
     display:flex;align-items:center;gap:10px;
@@ -517,7 +532,7 @@
     <nav class="header-nav" id="headerNav">
       <div class="header-nav-row">
         <div class="header-cat-group" id="categorySwitch">
-          <button class="nav-pill" data-cat="favorites" type="button" data-i18n-title="catFavorites" aria-label="My 珠型"><svg class="nav-favorite-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg></button>
+          <button class="nav-pill" data-cat="favorites" type="button" data-i18n-title="catFavorites" aria-label="my珠型"><svg class="nav-favorite-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg></button>
           <button class="nav-pill active" data-cat="direct" type="button" data-i18n-title="catDirect" aria-label="直接打ち"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="stone-black" cx="12" cy="17" r="4.55"/><circle class="stone-white" cx="12" cy="7" r="4.55"/></svg></button>
           <button class="nav-pill" data-cat="indirect" type="button" data-i18n-title="catIndirect" aria-label="間接打ち"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="stone-black" cx="8.5" cy="15.5" r="4.2"/><circle class="stone-white" cx="15.5" cy="8.5" r="4.2"/></svg></button>
         </div>
@@ -534,7 +549,7 @@
         <button class="nav-icon-btn" id="modeToggleBtn" type="button" data-i18n-title="settings" aria-label="設定">
           <i class="ti ti-settings" id="modeToggleIcon" aria-hidden="true"></i>
         </button>
-        <button class="nav-icon-btn" id="langToggleBtn" type="button" data-i18n-title="langToggle" aria-label="言語切替">
+        <button class="nav-icon-btn" id="langToggleBtn" type="button" data-i18n-title="langToggle" aria-label="言語切替" hidden>
           <span class="nav-lang-label" id="langToggleLabel">JP</span>
         </button>
         <button class="nav-icon-btn" id="editBtn" type="button" data-i18n-title="editMode" aria-label="編集モード" hidden>
@@ -650,15 +665,15 @@
         <h3>直接打ち・間接打ちの切り替え</h3>
         <p>画面上部にある二つの石のアイコンから、直接打ち一覧と間接打ち一覧を切り替えられます。</p>
 
-        <h3>お気に入りとMy珠型</h3>
-        <p>珠型カードのハートを押すと、その珠型をお気に入りに登録できます。登録した直接打ち・間接打ちは、画面上部のハートから開ける「My珠型」にまとめて、新しく登録した順に表示されます。</p>
+        <h3>お気に入りとmy珠型</h3>
+        <p>珠型カードのハートを押すと、その珠型をお気に入りに登録できます。登録した直接打ち・間接打ちは、画面上部のハートから開ける「my珠型」にまとめて、新しく登録した順に表示されます。</p>
         <p>気になる珠型や、あとで研究したい珠型を整理するときにお使いください。</p>
 
         <h3>局面検索</h3>
         <p>画面上部の虫眼鏡アイコンから、局面検索を開けます。</p>
 
         <h3>表示設定</h3>
-        <p>歯車アイコンから、盤と石の表示を変更できます。「JP」ボタンでは、日本語表示と英語表示を切り替えられます。珠型名や一部の評価表示も、選択した言語に合わせて表示されます。</p>
+        <p>歯車アイコンから、言語、ライト／ダークモード、盤と石の表示を変更できます。珠型名や一部の評価表示も、選択した言語に合わせて表示されます。</p>
       </section>
 
       <section>
@@ -872,7 +887,7 @@ const THEME_KEY = "josekiLab:theme";
 // 初期盤色(D・象牙紙)を上書きし、ブラウザごとに違う色になるのを防ぐ。
 const BOARD_SETTINGS_KEY = "taraguchiCodex:boardSettings:v1";
 let currentLang = localStorage.getItem(LANG_KEY) || "ja";
-let currentTheme = "light";
+let currentTheme = localStorage.getItem(THEME_KEY) === "dark" ? "dark" : "light";
 // v1.html(RenjuMemo初期版)の盤面デザイン(クリーム色・立体石)をベースにした配色。
 // bg=下地色、line=グリッド線、star=星目、label=符号(--board-label-colorが
 // 取れない場合のフォールバック)、dot=候補が1つだけの時の●の色。
@@ -916,10 +931,11 @@ try {
 
 function saveSettings(){
   localStorage.setItem(LANG_KEY, currentLang);
+  localStorage.setItem(THEME_KEY, currentTheme);
   localStorage.setItem(BOARD_SETTINGS_KEY, JSON.stringify(settings));
 }
 function applyTheme(){
-  document.body.classList.remove("theme-dark");
+  document.body.classList.toggle("theme-dark", currentTheme === "dark");
 }
 function currentBoardDesign(){
   return BOARD_COLOR_OPTIONS.find(o => o.key === settings.boardColor) || BOARD_COLOR_OPTIONS[0];
@@ -940,13 +956,13 @@ const I18N = {
     listLead: "黒1は天元に固定し、五珠交替打ちのルールで生まれる基本の珠型です。3手目までの形から、読みたい珠型を選んでください。",
     listLeadIndirect: "黒1を天元、白2を右斜め上に置いた間接打ちの基本珠型です。3手目までの形から、読みたい珠型を選んでください。",
     listLeadFavorites: "お気に入りに登録した直接打ち・間接打ちの珠型を、新しく登録した順に表示します。",
-    listTitleDirect: "直接打ち", listTitleIndirect: "間接打ち", listTitleFavorites: "My 珠型",
+    listTitleDirect: "直接打ち", listTitleIndirect: "間接打ち", listTitleFavorites: "my珠型",
     backToList: "珠型一覧へ戻る",
     pagerPrev: "前の珠型", pagerNext: "次の珠型",
     openMenu: "メニュー", help: "ヘルプ", settings: "設定",
     home: "ホーム", modeToggle: "モード切替", langToggle: "言語切替",
-    catFavorites: "My 珠型", catDirect: "直接", catIndirect: "間接", searchAria: "手順検索",
-    shapeListFavorites: "My 珠型", shapeListDirect: "直接珠型", shapeListIndirect: "間接珠型",
+    catFavorites: "my珠型", catDirect: "直接", catIndirect: "間接", searchAria: "手順検索",
+    shapeListFavorites: "my珠型", shapeListDirect: "直接珠型", shapeListIndirect: "間接珠型",
     variations: "五珠候補", variationGuideTitle: "白４と黒５の候補手",
     variationGuideNote: "A＝黒必勝、C＝白必勝、数字は実戦で有力な候補", share: "共有",
     openInRenjuMemo: "RenjuMemoで開く", downloadDiagram: "図面ダウンロード",
@@ -956,7 +972,7 @@ const I18N = {
     enterMoves: "手順を入力してください", noHits: "一致する珠型が見つかりませんでした",
     notRegistered: "この珠型はまだ登録されていません", preparing: "準備中",
     baseDiagram: "基本図", variationDiagram: "変化図",
-    light: "ライト", dark: "ダーク", boardPrefix: "盤のデザイン", stonePrefix: "石",
+    light: "ライト", dark: "ダーク", languagePrefix: "言語", modePrefix: "モード", boardPrefix: "盤のデザイン", stonePrefix: "石",
     langButtonLabel: "JP",
     rangeNote2: "白2：天元から1路以内（点線内）に置けます",
     rangeNote3: "黒3：天元から2路以内（点線内）に置けます",
@@ -999,7 +1015,7 @@ const I18N = {
     enterMoves: "Enter a move sequence", noHits: "No matching shapes found",
     notRegistered: "This shape hasn't been added yet", preparing: "Coming soon",
     baseDiagram: "Base diagram", variationDiagram: "Variation ",
-    light: "Light", dark: "Dark", boardPrefix: "Board design", stonePrefix: "Stone",
+    light: "Light", dark: "Dark", languagePrefix: "Language", modePrefix: "Mode", boardPrefix: "Board design", stonePrefix: "Stone",
     langButtonLabel: "EN",
     rangeNote2: "White 2: within 1 line of tengen (dashed area)",
     rangeNote3: "Black 3: within 2 lines of tengen (dashed area)",
@@ -1401,7 +1417,7 @@ const RECENTS_KEY = "taraguchiCodex:recents:v1";
 let favoriteOrder = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
 let favoriteShapes = new Set(favoriteOrder);
 let recentShapes = JSON.parse(localStorage.getItem(RECENTS_KEY) || "{}");
-// お気に入りがあれば次回訪問時はMy珠型から開始し、未登録なら直接打ちを維持する。
+// お気に入りがあれば次回訪問時はmy珠型から開始し、未登録なら直接打ちを維持する。
 currentCategory = favoriteOrder.length ? "favorites" : "direct";
 document.querySelectorAll(".header-cat-group .nav-pill[data-cat]").forEach(btn => {
   btn.classList.toggle("active", btn.dataset.cat === currentCategory);
@@ -1560,11 +1576,22 @@ function setupCategorySwitch(){
   const catBtns = document.querySelectorAll(".header-cat-group .nav-pill[data-cat]");
   catBtns.forEach(btn => {
     btn.addEventListener("click", () => {
-      currentCategory = btn.dataset.cat;
-      catBtns.forEach(b => b.classList.toggle("active", b === btn));
-      showListView();
+      showCategoryList(btn.dataset.cat);
     });
   });
+}
+
+function showCategoryList(category){
+  currentCategory = category;
+  document.querySelectorAll(".header-cat-group .nav-pill[data-cat]").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.cat === currentCategory);
+  });
+  showListView();
+}
+
+// ロゴは直前のカテゴリや検索状態に関係なく、常にサイトのトップ(直接打ち)へ戻す。
+function showHomeView(){
+  showCategoryList("direct");
 }
 
 document.getElementById("shapeGrid").addEventListener("click", e => {
@@ -1749,7 +1776,7 @@ function showEditView(){
   populateEditSelects();
   window.scrollTo(0, 0);
 }
-document.getElementById("brandBtn").addEventListener("click", showListView);
+document.getElementById("brandBtn").addEventListener("click", showHomeView);
 document.getElementById("backToListTop").addEventListener("click", showListView);
 document.getElementById("backToListBottom").addEventListener("click", showListView);
 document.getElementById("helpBtn").addEventListener("click", showHelpView);
@@ -1858,13 +1885,26 @@ function redrawForSettings(){
 function renderSettingsModal(){
   const boardOpt = currentBoardDesign();
   const stoneOpt = STONE_STYLE_OPTIONS.find(o => o.key === settings.stoneStyle) || STONE_STYLE_OPTIONS[0];
+  const languageLabel = currentLang === "ja" ? "日本語" : "English";
+  const themeLabel = currentTheme === "dark" ? t("dark") : t("light");
+  const themeIcon = currentTheme === "dark" ? "ti-moon" : "ti-sun";
   settingsModalContent.innerHTML = `
     <h3 id="settingsModalTitle">${t("settings")}</h3>
     <div class="settings-pill-row">
+      <button class="settings-pill" id="btnCycleLanguage" type="button"><i class="ti ti-language" aria-hidden="true"></i><span>${t("languagePrefix")} ${languageLabel}</span></button>
+      <button class="settings-pill" id="btnCycleTheme" type="button"><i class="ti ${themeIcon}" aria-hidden="true"></i><span>${t("modePrefix")} ${themeLabel}</span></button>
       <button class="settings-pill" id="btnCycleBoard" type="button"><i class="ti ti-grid-dots" aria-hidden="true"></i><span>${t("boardPrefix")} ${currentLang === "ja" ? boardOpt.ja : boardOpt.en}</span></button>
       <button class="settings-pill" id="btnCycleStone" type="button"><i class="ti ti-circle-filled" aria-hidden="true"></i><span>${t("stonePrefix")} ${currentLang === "ja" ? stoneOpt.ja : stoneOpt.en}</span></button>
     </div>
     <div class="modal-close-row"><button id="settingsCloseBtn" type="button" aria-label="${t("close")}">&times;</button></div>`;
+  document.getElementById("btnCycleLanguage").onclick = () => {
+    currentLang = currentLang === "ja" ? "en" : "ja";
+    saveSettings(); applyI18n(); redrawForSettings(); renderSettingsModal();
+  };
+  document.getElementById("btnCycleTheme").onclick = () => {
+    currentTheme = currentTheme === "light" ? "dark" : "light";
+    saveSettings(); applyTheme(); redrawForSettings(); renderSettingsModal();
+  };
   document.getElementById("btnCycleBoard").onclick = () => {
     const i = BOARD_COLOR_OPTIONS.findIndex(o => o.key === settings.boardColor);
     settings.boardColor = BOARD_COLOR_OPTIONS[(i + 1) % BOARD_COLOR_OPTIONS.length].key;
