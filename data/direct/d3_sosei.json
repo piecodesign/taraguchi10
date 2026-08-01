@@ -26,7 +26,8 @@
     { "x": 6, "y": 9, "label": "g" },
     { "x": 8, "y": 9, "label": "h" },
     { "x": 8, "y": 10, "label": "i" },
-    { "x": 8, "y": 7, "label": "j" }
+    { "x": 8, "y": 7, "label": "j" },
+    { "x": 8, "y": 11, "label": "k" }
   ],
   "variations": [
     {
