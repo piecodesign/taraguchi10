@@ -80,6 +80,11 @@
       "x": 7,
       "y": 5,
       "label": "g"
+    },
+    {
+      "x": 8,
+      "y": 5,
+      "label": "i"
     }
   ],
   "variations": [
@@ -426,32 +431,32 @@
         {
           "x": 6,
           "y": 8,
-          "label": "A"
+          "label": "A6"
         },
         {
           "x": 5,
           "y": 7,
-          "label": "A"
+          "label": "A4"
         },
         {
           "x": 6,
           "y": 7,
-          "label": "A"
+          "label": "A2"
         },
         {
           "x": 8,
           "y": 7,
-          "label": "A"
+          "label": "A3"
         },
         {
           "x": 9,
           "y": 7,
-          "label": "A"
+          "label": "A1"
         },
         {
           "x": 9,
           "y": 6,
-          "label": "A"
+          "label": "A5"
         }
       ],
       "evalTags": [
@@ -492,42 +497,42 @@
         {
           "x": 5,
           "y": 8,
-          "label": "A"
+          "label": "A8"
         },
         {
           "x": 6,
           "y": 8,
-          "label": "A"
+          "label": "A6"
         },
         {
           "x": 6,
           "y": 7,
-          "label": "A"
+          "label": "A1"
         },
         {
           "x": 8,
           "y": 7,
-          "label": "A"
+          "label": "A3"
         },
         {
           "x": 5,
           "y": 6,
-          "label": "A"
+          "label": "A5"
         },
         {
           "x": 8,
           "y": 6,
-          "label": "A"
+          "label": "A2"
         },
         {
           "x": 9,
           "y": 6,
-          "label": "A"
+          "label": "A4"
         },
         {
           "x": 8,
           "y": 5,
-          "label": "A"
+          "label": "A7"
         }
       ],
       "evalTags": [
@@ -738,6 +743,91 @@
         "12 未検証（原本白主導）",
         "13 白主導"
       ]
+    },
+    {
+      "id": "v9",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "note": "候補i",
+      "moves": [
+        {
+          "x": 8,
+          "y": 5,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 6,
+          "y": 9,
+          "label": "A8"
+        },
+        {
+          "x": 7,
+          "y": 9,
+          "label": "A7"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "label": "A4"
+        },
+        {
+          "x": 7,
+          "y": 8,
+          "label": "A1"
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "label": "A6"
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "label": "A3"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "label": "A5"
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "label": "A2"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "label": "A10"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "label": "A9"
+        }
+      ],
+      "evalTags": []
     }
   ]
 }
