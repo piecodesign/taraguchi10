@@ -1,0 +1,336 @@
+{
+  "schemaVersion": 1,
+  "id": "hogetsu",
+  "no": "Indirect7",
+  "name": "浦月",
+  "yomi": "ほげつ",
+  "romaji": "Hogetsu",
+  "icon": "icon/indirect.svg",
+  "category": "indirect",
+  "categoryLabel": "間接打ち",
+  "updatedAt": "2026-08-01",
+  "comment": "覚えるべき白4の少なさでは初心者向きと言えるが、バランスのとりやすい進行がなくマイナーである。\n白aはA5が難解。感覚としては白が少し損をする丘月なので、手広く実戦的には双方打ちやすいかも。6は白有利だが最善進行の難度が非常に高く変化を推奨。\n白bは初型が大桂馬ゆえ黒が間違えると爆発しやすい。作戦的にはアリかも。\n白cはタラグチ10では注目されている。",
+  "baseView": {
+    "size": 9,
+    "centerX": 7,
+    "centerY": 7
+  },
+  "variationView": {
+    "size": 9,
+    "centerX": 7,
+    "centerY": 7
+  },
+  "baseMoves": [
+    {
+      "x": 7,
+      "y": 7,
+      "color": "black",
+      "n": 1
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "color": "white",
+      "n": 2
+    },
+    {
+      "x": 8,
+      "y": 6,
+      "color": "black",
+      "n": 3
+    }
+  ],
+  "baseBranches": [
+    {
+      "x": 6,
+      "y": 8,
+      "label": "a"
+    },
+    {
+      "x": 9,
+      "y": 7,
+      "label": "c"
+    },
+    {
+      "x": 7,
+      "y": 5,
+      "label": "b"
+    }
+  ],
+  "variations": [
+    {
+      "id": "v1",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 9,
+          "y": 7,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 6,
+          "y": 10,
+          "label": "A8"
+        },
+        {
+          "x": 7,
+          "y": 9,
+          "label": "A"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "label": "A7"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "label": "A'"
+        },
+        {
+          "x": 10,
+          "y": 6,
+          "label": "A'"
+        },
+        {
+          "x": 8,
+          "y": 5,
+          "label": "A'"
+        },
+        {
+          "x": 9,
+          "y": 5,
+          "label": "A'"
+        },
+        {
+          "x": 11,
+          "y": 5,
+          "label": "8'"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "label": "7'"
+        }
+      ],
+      "evalTags": [
+        "7' 黒主導",
+        "8' 白優勢"
+      ]
+    },
+    {
+      "id": "v2",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 6,
+          "y": 8,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 5,
+          "y": 8,
+          "label": "C1"
+        },
+        {
+          "x": 7,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 10,
+          "y": 8,
+          "label": "7"
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "label": "6"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "label": "A5"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "label": "8"
+        }
+      ],
+      "evalTags": [
+        "6 白有利",
+        "7 8 白優勢",
+        "その他 白勝ち"
+      ]
+    },
+    {
+      "id": "v3",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 7,
+          "y": 5,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 6,
+          "y": 9,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 9,
+          "label": "A"
+        },
+        {
+          "x": 8,
+          "y": 9,
+          "label": "A"
+        },
+        {
+          "x": 5,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 5,
+          "y": 6,
+          "label": "A"
+        }
+      ],
+      "evalTags": []
+    }
+  ]
+}

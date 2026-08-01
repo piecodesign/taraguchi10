@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "id": "kansei",
+  "no": "Direct1",
+  "name": "寒星",
+  "yomi": "かんせい",
+  "icon": "icon/d1_kansei.svg",
+  "category": "direct",
+  "categoryLabel": "直接打ち",
+  "updatedAt": "2026-07-31",
+  "comment": "難解珠型。一般的に対称形は盤端違いがあり難しい。全体的にAが特に難しい。この形を打つにあたって2の右の恒星共通は必修。研究勝負になりやすい。eの明星共通八題A、またその盤端違いfは極めて難しいゆえ狙われやすい。bが満局狙いとしては有力。dも満局になりやすいがより複雑になる。cはAが複雑。主要五珠については序盤さえ覚えればよい。",
+  "baseView": { "size": 9, "centerX": 7, "centerY": 7 },
+  "variationView": { "size": 9, "centerX": 7, "centerY": 7 },
+  "baseMoves": [
+    { "x": 7, "y": 7, "color": "black", "n": 1 },
+    { "x": 7, "y": 8, "color": "white", "n": 2 },
+    { "x": 7, "y": 9, "color": "black", "n": 3 }
+  ],
+  "baseBranches": [
+    { "x": 7, "y": 10, "label": "h" },
+    { "x": 8, "y": 10, "label": "f" },
+    { "x": 8, "y": 9, "label": "d" },
+    { "x": 9, "y": 9, "label": "g" },
+    { "x": 8, "y": 8, "label": "a" },
+    { "x": 9, "y": 8, "label": "c" },
+    { "x": 8, "y": 7, "label": "b" },
+    { "x": 9, "y": 7, "label": "j" },
+    { "x": 7, "y": 6, "label": "i" },
+    { "x": 8, "y": 6, "label": "e" }
+  ],
+  "variations": [
+    {
+      "id": "v1",
+      "note": "候補a",
+      "moves": [{ "x": 8, "y": 8, "color": "white", "n": 4 }],
+      "branches": [
+        { "x": 6, "y": 9, "label": "C" },
+        { "x": 8, "y": 9, "label": "3b" },
+        { "x": 5, "y": 8, "label": "4" },
+        { "x": 6, "y": 8, "label": "A" },
+        { "x": 9, "y": 8, "label": "A" },
+        { "x": 6, "y": 7, "label": "C" },
+        { "x": 8, "y": 7, "label": "A*" }
+      ],
+      "evalTags": ["三題必勝", "4 黒主導(難解)", "その他 白勝ち"]
+    },
+    {
+      "id": "v2",
+      "note": "候補b",
+      "moves": [{ "x": 8, "y": 7, "color": "white", "n": 4 }],
+      "branches": [
+        { "x": 5, "y": 9, "label": "6" },
+        { "x": 6, "y": 9, "label": "A" },
+        { "x": 6, "y": 8, "label": "A" },
+        { "x": 9, "y": 8, "label": "A" },
+        { "x": 10, "y": 8, "label": "5" },
+        { "x": 9, "y": 6, "label": "A" }
+      ],
+      "evalTags": ["四題必勝", "5 互角", "6 白有利"]
+    },
+    {
+      "id": "v3",
+      "note": "候補c",
+      "moves": [{ "x": 9, "y": 8, "color": "white", "n": 4 }],
+      "branches": [
+        { "x": 6, "y": 8, "label": "A" },
+        { "x": 8, "y": 8, "label": "A" },
+        { "x": 9, "y": 9, "label": "6" },
+        { "x": 10, "y": 8, "label": "C1" },
+        { "x": 5, "y": 7, "label": "A" },
+        { "x": 6, "y": 7, "label": "A5" },
+        { "x": 8, "y": 7, "label": "8" },
+        { "x": 6, "y": 6, "label": "7" },
+        { "x": 8, "y": 6, "label": "A4" }
+      ],
+      "evalTags": ["五題必勝", "6 黒有利", "7 白優勢", "※盤端重要"]
+    },
+    {
+      "id": "v4",
+      "note": "候補d",
+      "moves": [{ "x": 8, "y": 9, "color": "white", "n": 4 }],
+      "branches": [
+        { "x": 9, "y": 10, "label": "A" },
+        { "x": 6, "y": 8, "label": "A" },
+        { "x": 8, "y": 8, "label": "A" },
+        { "x": 9, "y": 8, "label": "6" },
+        { "x": 5, "y": 7, "label": "5" },
+        { "x": 6, "y": 7, "label": "A" }
+      ],
+      "evalTags": ["四題必勝", "5 黒主導", "6 白有利"]
+    },
+    {
+      "id": "v5",
+      "note": "候補e",
+      "moves": [{ "x": 8, "y": 6, "color": "white", "n": 4 }],
+      "branches": [
+        { "x": 8, "y": 10, "label": "A" },
+        { "x": 6, "y": 9, "label": "A5" },
+        { "x": 8, "y": 9, "label": "A6" },
+        { "x": 9, "y": 9, "label": "A7!" },
+        { "x": 6, "y": 8, "label": "A" },
+        { "x": 8, "y": 8, "label": "A" },
+        { "x": 9, "y": 8, "label": "A8!" },
+        { "x": 5, "y": 7, "label": "A" },
+        { "x": 6, "y": 6, "label": "9" }
+      ],
+      "evalTags": ["八題必勝", "9 白有利", "※7A・8Aは特に難解"]
+    },
+    {
+      "id": "v6",
+      "note": "候補f",
+      "moves": [{ "x": 8, "y": 10, "color": "white", "n": 4 }],
+      "branches": [
+        { "x": 6, "y": 9, "label": "A" },
+        { "x": 6, "y": 8, "label": "A" },
+        { "x": 8, "y": 8, "label": "A" },
+        { "x": 6, "y": 7, "label": "A5" },
+        { "x": 8, "y": 7, "label": "A7" },
+        { "x": 9, "y": 7, "label": "A6" },
+        { "x": 8, "y": 6, "label": "A" }
+      ],
+      "evalTags": ["七題必勝", "※8題は盤端で白良し"]
+    },
+    {
+      "id": "v7",
+      "note": "候補g",
+      "moves": [{ "x": 9, "y": 9, "color": "white", "n": 4 }],
+      "branches": [
+        { "x": 6, "y": 10, "label": "A" },
+        { "x": 5, "y": 9, "label": "11" },
+        { "x": 6, "y": 9, "label": "A7" },
+        { "x": 6, "y": 8, "label": "A" },
+        { "x": 9, "y": 8, "label": "A" },
+        { "x": 4, "y": 7, "label": "A" },
+        { "x": 5, "y": 7, "label": "A" },
+        { "x": 6, "y": 7, "label": "A" },
+        { "x": 9, "y": 7, "label": "A" },
+        { "x": 6, "y": 6, "label": "A" },
+        { "x": 9, "y": 6, "label": "10" }
+      ],
+      "evalTags": ["九題必勝"]
+    },
+    {
+      "id": "v8",
+      "note": "候補h",
+      "moves": [{ "x": 7, "y": 10, "color": "white", "n": 4 }],
+      "branches": [
+        { "x": 8, "y": 10, "label": "8" },
+        { "x": 8, "y": 9, "label": "A" },
+        { "x": 9, "y": 9, "label": "A" },
+        { "x": 8, "y": 8, "label": "A" },
+        { "x": 8, "y": 7, "label": "A" },
+        { "x": 9, "y": 7, "label": "A" },
+        { "x": 7, "y": 6, "label": "7" },
+        { "x": 8, "y": 6, "label": "A" }
+      ],
+      "evalTags": ["六題必勝", "7 黒優勢", "8 白やや良し"]
+    },
+    {
+      "id": "v9",
+      "note": "候補i",
+      "moves": [{ "x": 7, "y": 6, "color": "white", "n": 4 }],
+      "branches": [
+        { "x": 7, "y": 10, "label": "8" },
+        { "x": 8, "y": 10, "label": "A" },
+        { "x": 8, "y": 9, "label": "A" },
+        { "x": 9, "y": 9, "label": "A" },
+        { "x": 8, "y": 8, "label": "A" },
+        { "x": 8, "y": 7, "label": "A" },
+        { "x": 9, "y": 7, "label": "A" },
+        { "x": 8, "y": 6, "label": "A7" }
+      ],
+      "evalTags": ["七題必勝", "8 黒優勢"]
+    },
+    {
+      "id": "v10",
+      "note": "候補j(※この図の座標はやや低確度。原本p.3で要確認)",
+      "moves": [{ "x": 9, "y": 7, "color": "white", "n": 4 }],
+      "branches": [
+        { "x": 7, "y": 10, "label": "A10?" },
+        { "x": 4, "y": 9, "label": "A" },
+        { "x": 5, "y": 9, "label": "A" },
+        { "x": 6, "y": 9, "label": "A" },
+        { "x": 9, "y": 9, "label": "A6" },
+        { "x": 6, "y": 8, "label": "A" },
+        { "x": 9, "y": 8, "label": "A5" },
+        { "x": 4, "y": 7, "label": "A" },
+        { "x": 6, "y": 7, "label": "A9!" },
+        { "x": 6, "y": 6, "label": "A" }
+      ],
+      "evalTags": ["十題必勝?"]
+    }
+  ]
+}

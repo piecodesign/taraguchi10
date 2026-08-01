@@ -1,0 +1,623 @@
+{
+  "schemaVersion": 1,
+  "id": "meigetsu",
+  "no": "Indirect12",
+  "name": "名月",
+  "yomi": "めいげつ",
+  "romaji": "Meigetsu",
+  "icon": "icon/indirect.svg",
+  "category": "indirect",
+  "categoryLabel": "間接打ち",
+  "updatedAt": "2026-08-01",
+  "comment": "ソーソロフ8特有型の一つで、非常に難解でもある。頻出は白abc及び共通型。\n白aは見た目とは裏腹に膠着状態になりがちである。白bはA4が難しい。5は黒安定。\n白cはA3が難しい。4は黒から満局定石を志向可能。5、6は奇襲で精度の高い応対が求められる。\n白dはA2の古典定石が難しい。3も正確に白優勢にするのは大変。\n白eは五珠を正確に押さえたい。A6、A7が大変。生死局。白fも生死局。五珠を押さえよう。",
+  "baseView": {
+    "size": 9,
+    "centerX": 7,
+    "centerY": 7
+  },
+  "variationView": {
+    "size": 9,
+    "centerX": 7,
+    "centerY": 7
+  },
+  "baseMoves": [
+    {
+      "x": 7,
+      "y": 7,
+      "color": "black",
+      "n": 1
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "color": "white",
+      "n": 2
+    },
+    {
+      "x": 6,
+      "y": 5,
+      "color": "black",
+      "n": 3
+    }
+  ],
+  "baseBranches": [
+    {
+      "x": 6,
+      "y": 9,
+      "label": "a"
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "label": "f"
+    },
+    {
+      "x": 8,
+      "y": 9,
+      "label": "g"
+    },
+    {
+      "x": 7,
+      "y": 8,
+      "label": "d"
+    },
+    {
+      "x": 9,
+      "y": 8,
+      "label": "e"
+    },
+    {
+      "x": 9,
+      "y": 7,
+      "label": "b"
+    },
+    {
+      "x": 9,
+      "y": 6,
+      "label": "c"
+    }
+  ],
+  "variations": [
+    {
+      "id": "v1",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 6,
+          "y": 9,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 7,
+          "y": 9,
+          "label": "A"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "label": "10"
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "label": "7"
+        },
+        {
+          "x": 5,
+          "y": 6,
+          "label": "9"
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "label": "A"
+        },
+        {
+          "x": 8,
+          "y": 5,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 5,
+          "label": "8"
+        }
+      ],
+      "evalTags": [
+        "7 8 黒主導",
+        "9 10 白やや有利"
+      ]
+    },
+    {
+      "id": "v2",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 9,
+          "y": 7,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 7,
+          "y": 9,
+          "label": "5"
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 5,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 10,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "label": "A4"
+        }
+      ],
+      "evalTags": [
+        "5 黒有利"
+      ]
+    },
+    {
+      "id": "v3",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 9,
+          "y": 6,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 7,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "label": "A3"
+        },
+        {
+          "x": 5,
+          "y": 6,
+          "label": "6"
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "label": "4"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "label": "5"
+        }
+      ],
+      "evalTags": [
+        "4 黒有利",
+        "5 6 白やや有利"
+      ]
+    },
+    {
+      "id": "v4",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 7,
+          "y": 8,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 6,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 8,
+          "label": "A2"
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "label": "3"
+        }
+      ],
+      "evalTags": [
+        "3 白優勢",
+        "その他 白勝ち"
+      ]
+    },
+    {
+      "id": "v5",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 9,
+          "y": 8,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 7,
+          "y": 9,
+          "label": "A7"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 8,
+          "label": "A6"
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "label": "A"
+        }
+      ],
+      "evalTags": [
+        "その他 白勝ち"
+      ]
+    },
+    {
+      "id": "v6",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 7,
+          "y": 9,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 4,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 5,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "label": "A5"
+        },
+        {
+          "x": 8,
+          "y": 5,
+          "label": "A6"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "label": "A"
+        }
+      ],
+      "evalTags": [
+        "その他 白勝ち"
+      ]
+    },
+    {
+      "id": "v7",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 8,
+          "y": 9,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 6,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "label": "3"
+        }
+      ],
+      "evalTags": [
+        "3 白優勢"
+      ]
+    },
+    {
+      "id": "v8",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 10,
+          "y": 6,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 7,
+          "y": 9,
+          "label": "A8"
+        },
+        {
+          "x": 8,
+          "y": 9,
+          "label": "10"
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "label": "A7"
+        },
+        {
+          "x": 5,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "label": "A9"
+        }
+      ],
+      "evalTags": [
+        "10 原本平衡"
+      ]
+    }
+  ]
+}

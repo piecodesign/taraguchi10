@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "kagetsu",
+  "no": "Direct4",
+  "name": "花月",
+  "yomi": "かげつ",
+  "icon": "icon/d4_kagetsu.svg",
+  "category": "direct",
+  "categoryLabel": "直接打ち",
+  "updatedAt": "2026-08-01",
+  "comment": "局面としては白aが唯一成立する。白aの5は黒必勝ではないかと言われている。しかし理論上の黒最善進行は超絶に難しいので、旧来よりの前例進行を推奨する。6〜8は記載よりも白有利に感じると思う。盤端が大事。7は形勢というより研究勝負である。白bは成立しないが、A7〜A9はいずれも難解。A7は初見でも黒有利に展開しやすい。A8は初見殺し。A9は超難度なので実戦的に避けるほうがよいだろう。少なくとも一つは10に換えるのが無難だ。",
+  "baseView": { "size": 9, "centerX": 7, "centerY": 7 },
+  "variationView": { "size": 9, "centerX": 7, "centerY": 7 },
+  "baseMoves": [
+    { "x": 7, "y": 7, "color": "black", "n": 1 },
+    { "x": 7, "y": 8, "color": "white", "n": 2 },
+    { "x": 8, "y": 8, "color": "black", "n": 3 }
+  ],
+  "baseBranches": [
+    { "x": 8, "y": 7, "label": "a" },
+    { "x": 6, "y": 6, "label": "b" },
+    { "x": 6, "y": 9, "label": "c" },
+    { "x": 8, "y": 6, "label": "d" },
+    { "x": 9, "y": 6, "label": "e" }
+  ],
+  "variations": [
+    {
+      "id": "v1",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":8,"color":"black","n":3}],
+      "moves": [{"x":8,"y":7,"color":"white","n":4}],
+      "branches": [{"x":9,"y":8,"label":"6"},{"x":10,"y":8,"label":"8"},{"x":9,"y":7,"label":"A"},{"x":10,"y":7,"label":"5"},{"x":6,"y":6,"label":"A"},{"x":9,"y":6,"label":"A"},{"x":9,"y":5,"label":"A"},{"x":10,"y":5,"label":"7"}],
+      "evalTags": ["四題必勝", "5 黒優勢", "6 白主導〜白有利", "7・8 白有利"]
+    },
+    {
+      "id": "v2",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":8,"color":"black","n":3}],
+      "moves": [{"x":6,"y":6,"color":"white","n":4}],
+      "branches": [{"x":6,"y":10,"label":"A"},{"x":9,"y":10,"label":"A"},{"x":10,"y":10,"label":"A9"},{"x":6,"y":9,"label":"A7"},{"x":7,"y":9,"label":"A"},{"x":8,"y":9,"label":"A"},{"x":9,"y":9,"label":"A"},{"x":9,"y":7,"label":"A"},{"x":10,"y":7,"label":"A8"},{"x":7,"y":6,"label":"11"},{"x":8,"y":6,"label":"10"}],
+      "evalTags": ["九題必勝", "10・11 黒有利"]
+    },
+    {
+      "id": "v3",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":8,"color":"black","n":3}],
+      "moves": [{"x":6,"y":9,"color":"white","n":4}],
+      "branches": [{"x":5,"y":9,"label":"A"},{"x":7,"y":9,"label":"A"},{"x":8,"y":9,"label":"A"},{"x":9,"y":9,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":9,"y":7,"label":"A"},{"x":10,"y":7,"label":"A"},{"x":9,"y":6,"label":"A"},{"x":10,"y":6,"label":"A"}],
+      "evalTags": ["九題必勝"]
+    },
+    {
+      "id": "v4",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":8,"color":"black","n":3}],
+      "moves": [{"x":8,"y":6,"color":"white","n":4}],
+      "branches": [{"x":6,"y":9,"label":"A"},{"x":7,"y":9,"label":"A"},{"x":9,"y":9,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":5,"y":7,"label":"A"},{"x":6,"y":7,"label":"A"},{"x":9,"y":7,"label":"A"},{"x":5,"y":6,"label":"A"},{"x":6,"y":6,"label":"A"},{"x":9,"y":6,"label":"A"}],
+      "evalTags": ["十題以上必勝"]
+    },
+    {
+      "id": "v5",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":8,"color":"black","n":3}],
+      "moves": [{"x":9,"y":6,"color":"white","n":4}],
+      "branches": [{"x":6,"y":9,"label":"A"},{"x":7,"y":9,"label":"A"},{"x":5,"y":8,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":5,"y":6,"label":"A"},{"x":6,"y":6,"label":"A"},{"x":7,"y":6,"label":"A"},{"x":8,"y":6,"label":"A"},{"x":9,"y":5,"label":"A"}],
+      "evalTags": ["九題必勝"]
+    }
+  ]
+}

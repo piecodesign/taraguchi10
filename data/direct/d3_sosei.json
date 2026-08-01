@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "id": "sosei",
+  "no": "Direct3",
+  "name": "疎星",
+  "yomi": "そせい",
+  "icon": "icon/d3_sosei.svg",
+  "category": "direct",
+  "categoryLabel": "直接打ち",
+  "updatedAt": "2026-08-01",
+  "comment": "自由打ちの入門珠型であり、ソーソロフ8では難解。主な白4は白a〜白e。白gは五珠で間違えると即負け濃厚故必修。白eのA6は初見殺し。A7、A8は非常に難しい。白fのA8は寒星・明星共通。とっつきやすいのは白aか白bと思われる。白cのA4は金星・明星共通、A5は渓月共通。共に難解。白cの7は非常に複雑である。",
+  "baseView": { "size": 9, "centerX": 7, "centerY": 7 },
+  "variationView": { "size": 9, "centerX": 7, "centerY": 7 },
+  "baseMoves": [
+    { "x": 7, "y": 7, "color": "black", "n": 1 },
+    { "x": 7, "y": 8, "color": "white", "n": 2 },
+    { "x": 9, "y": 9, "color": "black", "n": 3 }
+  ],
+  "baseBranches": [
+    { "x": 8, "y": 8, "label": "a" },
+    { "x": 6, "y": 6, "label": "b" },
+    { "x": 6, "y": 8, "label": "c" },
+    { "x": 9, "y": 8, "label": "d" },
+    { "x": 9, "y": 7, "label": "e" },
+    { "x": 8, "y": 6, "label": "f" },
+    { "x": 6, "y": 9, "label": "g" },
+    { "x": 8, "y": 9, "label": "h" },
+    { "x": 8, "y": 10, "label": "i" }
+  ],
+  "variations": [
+    {
+      "id": "v1",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":9,"color":"black","n":3}],
+      "moves": [{"x":8,"y":8,"color":"white","n":4}],
+      "branches": [{"x":8,"y":10,"label":"7"},{"x":8,"y":9,"label":"3"},{"x":6,"y":8,"label":"1"},{"x":9,"y":8,"label":"4"},{"x":10,"y":8,"label":"6"},{"x":8,"y":7,"label":"2"},{"x":9,"y":7,"label":"5"}],
+      "evalTags": ["1 黒主導〜黒有利", "2 互角〜白やや有利", "3 白有利", "4-7 白優勢"]
+    },
+    {
+      "id": "v2",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":9,"color":"black","n":3}],
+      "moves": [{"x":6,"y":6,"color":"white","n":4}],
+      "branches": [{"x":7,"y":11,"label":"8"},{"x":8,"y":10,"label":"A"},{"x":9,"y":10,"label":"A"},{"x":10,"y":10,"label":"A"},{"x":8,"y":9,"label":"7"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"6"},{"x":10,"y":8,"label":"A"}],
+      "evalTags": ["五題必勝", "6 黒有利", "7 黒主導", "8 白優勢"]
+    },
+    {
+      "id": "v3",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":9,"color":"black","n":3}],
+      "moves": [{"x":6,"y":8,"color":"white","n":4}],
+      "branches": [{"x":7,"y":10,"label":"7"},{"x":5,"y":9,"label":"A5"},{"x":4,"y":8,"label":"8"},{"x":5,"y":8,"label":"A3"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":10,"y":8,"label":"A6"},{"x":9,"y":7,"label":"A4"}],
+      "evalTags": ["六題必勝", "7 黒主導・難解", "8 白優勢"]
+    },
+    {
+      "id": "v4",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":9,"color":"black","n":3}],
+      "moves": [{"x":9,"y":8,"color":"white","n":4}],
+      "branches": [{"x":7,"y":9,"label":"7"},{"x":8,"y":9,"label":"A"},{"x":10,"y":9,"label":"6"},{"x":5,"y":8,"label":"8"},{"x":6,"y":8,"label":"A"},{"x":8,"y":8,"label":"A"},{"x":8,"y":6,"label":"A"},{"x":10,"y":6,"label":"A5"}],
+      "evalTags": ["五題必勝", "6 黒優勢", "7 黒有利", "9 互角〜白やや有利", "※盤端重要"]
+    },
+    {
+      "id": "v5",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":9,"color":"black","n":3}],
+      "moves": [{"x":9,"y":7,"color":"white","n":4}],
+      "branches": [{"x":6,"y":10,"label":"A8"},{"x":8,"y":10,"label":"A"},{"x":6,"y":9,"label":"A"},{"x":7,"y":9,"label":"A6"},{"x":6,"y":8,"label":"A7"},{"x":8,"y":8,"label":"A"},{"x":10,"y":8,"label":"10"},{"x":8,"y":7,"label":"9"},{"x":8,"y":6,"label":"A"},{"x":10,"y":6,"label":"A"}],
+      "evalTags": ["八題必勝", "9 黒有利", "10 白主導"]
+    },
+    {
+      "id": "v6",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":9,"color":"black","n":3}],
+      "moves": [{"x":8,"y":6,"color":"white","n":4}],
+      "branches": [{"x":8,"y":10,"label":"A"},{"x":6,"y":9,"label":"A8"},{"x":8,"y":9,"label":"A"},{"x":10,"y":9,"label":"A"},{"x":5,"y":8,"label":"9"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":10,"y":8,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":9,"y":7,"label":"11"},{"x":10,"y":6,"label":"10"}],
+      "evalTags": ["八題必勝", "9・10 黒主導", "11 白主導"]
+    },
+    {
+      "id": "v7",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":9,"color":"black","n":3}],
+      "moves": [{"x":6,"y":9,"color":"white","n":4}],
+      "branches": [{"x":10,"y":9,"label":"A"},{"x":5,"y":8,"label":"A"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":10,"y":8,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":9,"y":7,"label":"A"},{"x":9,"y":6,"label":"A"}],
+      "evalTags": ["八題必勝"]
+    },
+    {
+      "id": "v8",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":9,"color":"black","n":3}],
+      "moves": [{"x":8,"y":9,"color":"white","n":4}],
+      "branches": [{"x":9,"y":10,"label":"A"},{"x":6,"y":8,"label":"A"},{"x":8,"y":8,"label":"A"},{"x":10,"y":8,"label":"A"},{"x":8,"y":7,"label":"6"},{"x":9,"y":7,"label":"A"}],
+      "evalTags": ["五題必勝", "6 黒優勢"]
+    },
+    {
+      "id": "v9",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":9,"color":"black","n":3}],
+      "moves": [{"x":8,"y":11,"color":"white","n":4}],
+      "branches": [{"x":4,"y":10,"label":"10"},{"x":5,"y":10,"label":"9"},{"x":8,"y":10,"label":"A"},{"x":4,"y":9,"label":"A?"},{"x":5,"y":9,"label":"A"},{"x":8,"y":9,"label":"A"},{"x":4,"y":8,"label":"8"},{"x":5,"y":8,"label":"A"},{"x":8,"y":8,"label":"A7"},{"x":9,"y":8,"label":"A"}],
+      "evalTags": ["七題必勝", "8-10 黒優勢"]
+    }
+  ]
+}

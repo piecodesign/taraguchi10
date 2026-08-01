@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 1,
+  "id": "shagetsu",
+  "no": "Indirect11",
+  "name": "斜月",
+  "yomi": "しゃげつ",
+  "romaji": "Shagetsu",
+  "icon": "icon/indirect.svg",
+  "category": "indirect",
+  "categoryLabel": "間接打ち",
+  "updatedAt": "2026-08-01",
+  "comment": "白4の候補が少ないが、実戦的には丘月合流の際に色を選びたいがためによく好まれる。\nそのためスワップしたいが、スワップしようとすると難度が高い。頻出は白ab及び丘月共通。\n白aは3が白良しだが、精度が求められる。C1、C2、C3と総じて黒から奇襲手段に富むので要注意。\n白bはA8が難度が高い。白cは五珠が分かれば最善は難しくともある程度打てる。白dはタラグチ10で打たれる。",
+  "baseView": {
+    "size": 9,
+    "centerX": 7,
+    "centerY": 7
+  },
+  "variationView": {
+    "size": 9,
+    "centerX": 7,
+    "centerY": 7
+  },
+  "baseMoves": [
+    {
+      "x": 7,
+      "y": 7,
+      "color": "black",
+      "n": 1
+    },
+    {
+      "x": 8,
+      "y": 8,
+      "color": "white",
+      "n": 2
+    },
+    {
+      "x": 6,
+      "y": 6,
+      "color": "black",
+      "n": 3
+    }
+  ],
+  "baseBranches": [
+    {
+      "x": 6,
+      "y": 9,
+      "label": "b"
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "label": "c"
+    },
+    {
+      "x": 8,
+      "y": 9,
+      "label": "a"
+    },
+    {
+      "x": 9,
+      "y": 9,
+      "label": "d"
+    }
+  ],
+  "variations": [
+    {
+      "id": "v1",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 8,
+          "y": 9,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 8,
+          "y": 10,
+          "label": "C2"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "label": "3"
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "label": "5"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "label": "C1"
+        },
+        {
+          "x": 5,
+          "y": 6,
+          "label": "C3"
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "label": "4"
+        }
+      ],
+      "evalTags": [
+        "3 白主導",
+        "4 5 白優勢",
+        "その他 白勝ち"
+      ]
+    },
+    {
+      "id": "v2",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 6,
+          "y": 9,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 5,
+          "y": 9,
+          "label": "10"
+        },
+        {
+          "x": 4,
+          "y": 8,
+          "label": "A"
+        },
+        {
+          "x": 6,
+          "y": 8,
+          "label": "9"
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "label": "A8"
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "label": "A"
+        }
+      ],
+      "evalTags": [
+        "9 10 白優勢"
+      ]
+    },
+    {
+      "id": "v3",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 7,
+          "y": 9,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 6,
+          "y": 10,
+          "label": "A4"
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "label": "A"
+        }
+      ],
+      "evalTags": [
+        "その他 白勝ち"
+      ]
+    },
+    {
+      "id": "v4",
+      "baseMoves": [
+        {
+          "x": 7,
+          "y": 7,
+          "color": "black",
+          "n": 1
+        },
+        {
+          "x": 8,
+          "y": 8,
+          "color": "white",
+          "n": 2
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "color": "black",
+          "n": 3
+        }
+      ],
+      "moves": [
+        {
+          "x": 9,
+          "y": 9,
+          "color": "white",
+          "n": 4
+        }
+      ],
+      "branches": [
+        {
+          "x": 9,
+          "y": 8,
+          "label": "9"
+        },
+        {
+          "x": 10,
+          "y": 8,
+          "label": "10"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 8,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "label": "A"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "label": "A"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "label": "A"
+        },
+        {
+          "x": 9,
+          "y": 5,
+          "label": "A"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "label": "A"
+        }
+      ],
+      "evalTags": [
+        "9 10 未検証（原本白優勢）"
+      ]
+    }
+  ]
+}

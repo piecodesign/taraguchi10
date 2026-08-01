@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "kinsei",
+  "no": "Direct7",
+  "name": "金星",
+  "yomi": "きんせい",
+  "icon": "icon/d7_kinsei.svg",
+  "category": "direct",
+  "categoryLabel": "直接打ち",
+  "updatedAt": "2026-08-01",
+  "comment": "難解珠型。変化が多い。頻出は白a〜e。\n白aは3が有名な満局定石がある。必修。\n白bの6は正確に打てればほぼ黒勝ちだが難しい。7、8は細い攻めの継続に自信を持てるかどうか。\n白cはA7の難度が高く、研究なしでは容易に崩れる。\n白dは比較的とっつきやすい。白eは渓月に合流する。\n白fはA7の難度が非常に高く要対策。8は嵌め手の要素があり、黒も結構勝てる。白gのAは全体的に大変なので、黒有利の力戦くらいに見るのを推奨。白hはA8が特殊で、自然に打っていくと白有利になりやすい。",
+  "baseView": {"size": 9, "centerX": 7, "centerY": 7},
+  "variationView": {"size": 9, "centerX": 7, "centerY": 7},
+  "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":7,"color":"black","n":3}],
+  "baseBranches": [{"x":6,"y":7,"label":"a"},{"x":8,"y":9,"label":"b"},{"x":9,"y":8,"label":"c"},{"x":8,"y":8,"label":"d"},{"x":9,"y":6,"label":"e"},{"x":6,"y":8,"label":"f"},{"x":8,"y":6,"label":"g"},{"x":6,"y":6,"label":"h"}],
+  "variations": [
+    {
+      "id":"v1",
+      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":7,"color":"black","n":3}],
+      "moves":[{"x":6,"y":7,"color":"white","n":4}],
+      "branches":[{"x":7,"y":9,"label":"6"},{"x":8,"y":9,"label":"A"},{"x":6,"y":8,"label":"4"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"3"},{"x":5,"y":6,"label":"5"}],
+      "evalTags":["3 黒主導","4 5 6 白優勢"]
+    },
+    {
+      "id":"v2",
+      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":7,"color":"black","n":3}],
+      "moves":[{"x":8,"y":9,"color":"white","n":4}],
+      "branches":[{"x":8,"y":10,"label":"6"},{"x":9,"y":9,"label":"A"},{"x":5,"y":8,"label":"8"},{"x":8,"y":8,"label":"A"},{"x":10,"y":8,"label":"A"},{"x":5,"y":7,"label":"A"},{"x":8,"y":7,"label":"7"},{"x":8,"y":6,"label":"A"}],
+      "evalTags":["6 黒優勢","7 8 黒主導"]
+    },
+    {
+      "id":"v3",
+      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":7,"color":"black","n":3}],
+      "moves":[{"x":9,"y":8,"color":"white","n":4}],
+      "branches":[{"x":8,"y":10,"label":"A"},{"x":5,"y":9,"label":"10"},{"x":6,"y":9,"label":"A"},{"x":7,"y":9,"label":"9"},{"x":8,"y":9,"label":"A7"},{"x":6,"y":8,"label":"A"},{"x":8,"y":8,"label":"A"},{"x":6,"y":7,"label":"8"},{"x":8,"y":7,"label":"A?"},{"x":8,"y":6,"label":"A"}],
+      "evalTags":["8 9 白主導","10 白有利"]
+    },
+    {
+      "id":"v4",
+      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":7,"color":"black","n":3}],
+      "moves":[{"x":8,"y":8,"color":"white","n":4}],
+      "branches":[{"x":6,"y":9,"label":"7"},{"x":8,"y":9,"label":"A"},{"x":5,"y":8,"label":"A"},{"x":6,"y":8,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":10,"y":8,"label":"8"},{"x":6,"y":7,"label":"9"},{"x":8,"y":7,"label":"A"},{"x":8,"y":6,"label":"A"}],
+      "evalTags":["7 黒主導〜黒有利","8 黒主導","9 白主導"]
+    },
+    {
+      "id":"v5",
+      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":7,"color":"black","n":3}],
+      "moves":[{"x":9,"y":6,"color":"white","n":4}],
+      "branches":[{"x":6,"y":10,"label":"A"},{"x":8,"y":10,"label":"6"},{"x":8,"y":8,"label":"A"},{"x":6,"y":7,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":6,"y":6,"label":"A"}],
+      "evalTags":["6 黒主導"]
+    },
+    {
+      "id":"v6",
+      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":7,"color":"black","n":3}],
+      "moves":[{"x":6,"y":8,"color":"white","n":4}],
+      "branches":[{"x":6,"y":10,"label":"A6"},{"x":9,"y":10,"label":"A7"},{"x":5,"y":8,"label":"A5"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":6,"y":7,"label":"8"},{"x":6,"y":6,"label":"A"},{"x":9,"y":6,"label":"A"}],
+      "evalTags":["8 白主導"]
+    },
+    {
+      "id":"v7",
+      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":7,"color":"black","n":3}],
+      "moves":[{"x":8,"y":6,"color":"white","n":4}],
+      "branches":[{"x":6,"y":10,"label":"A"},{"x":8,"y":10,"label":"A8"},{"x":10,"y":10,"label":"10"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":10,"y":7,"label":"A"},{"x":7,"y":6,"label":"A7"},{"x":9,"y":6,"label":"A"},{"x":8,"y":5,"label":"A"}],
+      "evalTags":["10 黒優勢"]
+    },
+    {
+      "id":"v8",
+      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":7,"color":"black","n":3}],
+      "moves":[{"x":6,"y":6,"color":"white","n":4}],
+      "branches":[{"x":6,"y":10,"label":"A"},{"x":7,"y":10,"label":"A"},{"x":8,"y":10,"label":"A"},{"x":5,"y":8,"label":"A8"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"A7"},{"x":8,"y":7,"label":"A"},{"x":10,"y":7,"label":"A9?"},{"x":8,"y":6,"label":"A"},{"x":9,"y":6,"label":"11"},{"x":7,"y":5,"label":"10"}],
+      "evalTags":["10 黒主導","11 白主導"]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion":1,"id":"kyugetsu","no":"Direct9","name":"丘月","yomi":"きゅうげつ","icon":"icon/d9_kyugetsu.svg","category":"direct","categoryLabel":"直接打ち","updatedAt":"2026-08-01",
+  "comment":"ソーソロフ入門珠型。主な白4はa,b。\n白aについて。A1は強い。2が最も要研究。基礎知識がないと白有利になりがち。3は白の作戦選択の自由度が高く、実戦的には白打ちやすいと見る。C1、C2ともに安定的に白勝ちやすいが厳密に打ち切るのは大変だ。\n白bでは8でどちらの盤端を選ぶかでだいぶ展開が変わる。\n白cは五珠がわかればOK。",
+  "baseView":{"size":9,"centerX":7,"centerY":7},"variationView":{"size":9,"centerX":7,"centerY":7},
+  "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":6,"color":"black","n":3}],
+  "baseBranches":[{"x":6,"y":9,"label":"c"},{"x":6,"y":8,"label":"a"},{"x":9,"y":6,"label":"b"}],
+  "variations":[
+    {"id":"v1","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":6,"color":"black","n":3}],"moves":[{"x":6,"y":8,"color":"white","n":4}],"branches":[{"x":6,"y":9,"label":"C1"},{"x":8,"y":9,"label":"C2"},{"x":5,"y":8,"label":"A1"},{"x":8,"y":8,"label":"2"},{"x":6,"y":7,"label":"3"}],"evalTags":["2 黒有利","3 白主導","その他 白勝ち"]},
+    {"id":"v2","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":6,"color":"black","n":3}],"moves":[{"x":9,"y":6,"color":"white","n":4}],"branches":[{"x":6,"y":9,"label":"A"},{"x":7,"y":9,"label":"8"},{"x":9,"y":9,"label":"A"},{"x":6,"y":8,"label":"A"},{"x":9,"y":8,"label":"7"},{"x":6,"y":7,"label":"9*"},{"x":8,"y":7,"label":"A"},{"x":9,"y":7,"label":"A"},{"x":10,"y":6,"label":"8*"},{"x":7,"y":5,"label":"A"},{"x":8,"y":5,"label":"9"}],"evalTags":["7 黒優勢","8 及び対称 黒主導","9 及び対称 白主導"]},
+    {"id":"v3","baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":6,"color":"black","n":3}],"moves":[{"x":6,"y":9,"color":"white","n":4}],"branches":[{"x":5,"y":8,"label":"10"},{"x":6,"y":8,"label":"A"},{"x":8,"y":8,"label":"A"},{"x":10,"y":8,"label":"A"},{"x":6,"y":7,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":9,"y":7,"label":"A"},{"x":5,"y":6,"label":"9"},{"x":6,"y":6,"label":"A"},{"x":9,"y":6,"label":"A"}],"evalTags":["9 白主導","10 白優勢"]}
+  ]
+}

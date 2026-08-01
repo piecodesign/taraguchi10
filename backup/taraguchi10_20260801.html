@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Taraguchi-10 Guide</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.44.0/tabler-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- 見出し用の明朝体。棋書らしい少しの格調を出すための装飾用途のみで、
+     読み込めない場合(オフライン等)はbodyと同じシステムフォントに自然にフォールバックする。 -->
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --surface-0:#f3efe6;
+    --surface-1:#e8ddc9;
+    --surface-2:#fbf8f1;
+    --text-primary:#2c2620;
+    --text-secondary:#6b6153;
+    --text-muted:#948b7c;
+    --border:#d9cdb2;
+    --border-strong:#c7b998;
+    --bg-accent:#e3efe6;
+    --text-accent:#2f6f52;
+    --accent:#2f6f52;
+    --accent-hover:#255a42;
+    --card-bg:#ffffff;
+    --hover-bg:#ddcfae;
+    --on-primary:#ffffff;
+    --board-label-color:#a99a78;
+    --radius:8px;
+    --safe-top:env(safe-area-inset-top,0px);
+    --safe-bottom:env(safe-area-inset-bottom,0px);
+    --safe-left:env(safe-area-inset-left,0px);
+    --safe-right:env(safe-area-inset-right,0px);
+    --font-serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  }
+  /* ダークモード。RenjuMemo本体(v1.html)と同じ配色・同じ仕組み(bodyに
+     .theme-darkを付けて変数を上書きするだけ)にして、トーンマナーを揃えている。 */
+  body.theme-dark{
+    --surface-0:#2a2620;
+    --surface-1:#332e26;
+    --surface-2:#1c1a16;
+    --text-primary:#ece7dd;
+    --text-secondary:#b3a996;
+    --text-muted:#8a8272;
+    --border:#4f473a;
+    --border-strong:#635947;
+    --bg-accent:#20402f;
+    --text-accent:#74d29e;
+    --accent:#3d8f68;
+    --accent-hover:#4fa878;
+    --card-bg:#3d362b;
+    --hover-bg:#453e32;
+    --on-primary:#1c1a16;
+    --board-label-color:#c9bfa9;
+  }
+  *{box-sizing:border-box;}
+  .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
+  html,body{margin:0;min-height:100%;}
+  body{
+    font-family:-apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+    background:linear-gradient(180deg,var(--surface-0),var(--surface-1));
+    color:var(--text-primary);
+    -webkit-tap-highlight-color:transparent;
+    min-height:100vh;min-height:100dvh;
+  }
+
+  /* ---------- 上部固定ヘッダー。左サイドバーを廃止し、指南書全体を
+     上から下へ読む縦スクロール型の構成にするための唯一のナビゲーション。 ---------- */
+  .site-header{
+    position:sticky;top:0;z-index:60;
+    background:rgba(243,239,230,0.92);
+    -webkit-backdrop-filter:saturate(140%) blur(8px);
+    backdrop-filter:saturate(140%) blur(8px);
+    border-bottom:0.5px solid var(--border);
+  }
+  body.theme-dark .site-header{background:rgba(42,38,32,0.92);}
+  .header-inner{
+    max-width:920px;margin:0 auto;position:relative;
+    display:flex;align-items:center;gap:10px;
+    padding:calc(11px + var(--safe-top)) 20px 11px;
+  }
+  .header-brand{
+    border:none;background:none;padding:2px 6px;margin:-2px 0 -2px -6px;border-radius:6px;
+    font-family:var(--font-serif);font-size:18px;font-weight:700;letter-spacing:0.02em;
+    color:var(--text-primary);cursor:pointer;white-space:nowrap;
+  }
+  .header-brand:hover{color:var(--text-accent);background:var(--hover-bg);}
+  .content-revision-date{font-size:11px;letter-spacing:.15em;color:#c47732;white-space:nowrap;align-self:flex-end;margin:0 8px 4px -5px;}
+  .header-nav{display:flex;align-items:center;gap:8px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end;}
+  .header-cat-group{display:flex;gap:4px;padding:3px;border:0.5px solid var(--border);border-radius:999px;background:var(--surface-0);flex:none;}
+  .nav-pill{
+    border:none;background:transparent;border-radius:999px;
+    padding:6.5px 13px;font-size:12.5px;color:var(--text-secondary);cursor:pointer;
+    display:inline-flex;align-items:center;gap:5px;white-space:nowrap;
+  }
+  .nav-pill.active{background:var(--accent);color:#fff;}
+  .nav-pill:not(.active):hover{background:var(--hover-bg);color:var(--text-primary);}
+  .nav-link-btn{
+    border:0.5px solid var(--border);background:var(--card-bg);border-radius:999px;
+    padding:6.5px 13px;font-size:12.5px;color:var(--text-primary);cursor:pointer;
+    display:inline-flex;align-items:center;gap:5px;white-space:nowrap;
+  }
+  .nav-link-btn:hover{background:var(--hover-bg);}
+  .nav-icon-btn{
+    flex:none;width:33px;height:33px;border-radius:50%;
+    border:0.5px solid var(--border);background:var(--card-bg);color:var(--text-primary);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;
+  }
+  .nav-icon-btn:hover{background:var(--hover-bg);color:var(--text-accent);}
+  .nav-icon-btn[hidden]{display:none;}
+  .nav-lang-label{font-size:11.5px;font-weight:700;}
+  .header-menu-btn{
+    display:none;flex:none;width:34px;height:34px;border-radius:8px;
+    border:0.5px solid var(--border-strong);background:var(--card-bg);
+    align-items:center;justify-content:center;font-size:16px;cursor:pointer;color:var(--text-primary);
+  }
+  @media (max-width:860px){
+    .header-nav{
+      display:none;position:absolute;top:100%;left:0;right:0;
+      background:var(--surface-2);border-bottom:0.5px solid var(--border);
+      flex-direction:column;align-items:stretch;gap:10px;
+      padding:14px 20px calc(18px + var(--safe-bottom));
+      box-shadow:0 10px 20px rgba(50,38,16,0.10);
+    }
+    .header-nav.open{display:flex;}
+    .header-nav .header-cat-group{width:100%;justify-content:center;}
+    .header-nav-row{display:flex;gap:8px;}
+    .header-nav-row .nav-link-btn{flex:1;justify-content:center;}
+    .header-nav-row.header-nav-icons{justify-content:center;}
+    .header-menu-btn{display:flex;}
+  }
+
+  /* RenjuMemo本体と同じ設定モーダル。指南書では盤色と石の陰影だけを扱う。 */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(20,20,18,.28);display:flex;align-items:center;justify-content:center;z-index:80;padding:20px;}
+  .modal-backdrop[hidden]{display:none;}
+  .modal{background:var(--card-bg);border-radius:12px;width:min(92vw,400px);padding:20px 20px 16px;border:.5px solid var(--border);box-shadow:0 18px 50px rgba(40,30,14,.14);}
+  .modal h3{margin:0 0 14px;font-size:16px;font-weight:500;}
+  .settings-pill-row{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+  .settings-pill{display:flex;align-items:center;gap:6px;border:1.5px solid var(--border);border-radius:999px;padding:8px 16px;cursor:pointer;background:var(--card-bg);font-size:13px;font-weight:500;color:var(--text-primary);}
+  .settings-pill:hover{background:var(--hover-bg);border-color:var(--border-strong);}
+  .settings-pill i{font-size:15px;}
+  .modal-close-row{display:flex;justify-content:flex-end;}
+  .modal-close-row button{border:.5px solid var(--border-strong);background:var(--text-primary);color:var(--on-primary);width:32px;height:32px;padding:0;border-radius:50%;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+
+  /* ---------- ページ共通の型。本文の最大幅を絞り、参考書として
+     落ち着いて読める行幅にする(左右にゆったり余白を取る)。 ---------- */
+  .page{max-width:920px;margin:0 auto;padding:32px 20px 76px;}
+  .section-label{font-size:11px;color:var(--text-muted);letter-spacing:0.04em;padding:0 2px 10px;}
+  .empty-note{font-size:12.5px;color:var(--text-muted);padding:22px 4px;}
+
+  /* ---------- トップページ(3手目までの珠型一覧)。図面の羅列ではなく、
+     まず珠型の全体を見渡してから読みたいものを選ぶ入口にする。 ---------- */
+  .list-head{margin-bottom:32px;}
+  .list-title{
+    font-family:var(--font-serif);font-weight:700;
+    font-size:30px;line-height:1.4;margin:0 0 12px;color:var(--text-primary);
+  }
+  .list-lead{font-size:13.5px;line-height:2;color:var(--text-secondary);margin:0;max-width:52em;}
+  .list-cat-block{margin-top:36px;}
+  .list-cat-block:first-of-type{margin-top:0;}
+
+  .shape-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:14px;}
+  @media (max-width:400px){ .shape-grid{grid-template-columns:1fr;} }
+  @media (min-width:768px){ .shape-grid{grid-template-columns:repeat(3,1fr);gap:22px;} }
+  @media (min-width:1024px){ .shape-grid{grid-template-columns:repeat(4,1fr);gap:26px;} }
+
+  .shape-card{
+    display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;
+    background:var(--card-bg);border:0.5px solid var(--border);border-radius:14px;
+    padding:17px 12px 16px;cursor:pointer;font:inherit;color:inherit;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .shape-card:hover{box-shadow:0 10px 22px rgba(60,45,20,0.10);transform:translateY(-2px);border-color:var(--border-strong);}
+  .shape-card:active{transform:translateY(0);box-shadow:none;}
+  .shape-card.is-placeholder{cursor:default;opacity:1;}
+  .shape-card.is-placeholder:hover{box-shadow:none;transform:none;border-color:var(--border);}
+  .shape-card-board{
+    width:100%;max-width:132px;aspect-ratio:1/1;border-radius:7px;overflow:hidden;
+    border:0.5px solid var(--border-strong);background:var(--surface-0);
+  }
+  .shape-card-board canvas{width:100%;height:100%;display:block;}
+  .shape-card-board-blank{
+    display:block;
+    background:repeating-linear-gradient(135deg, var(--surface-0), var(--surface-0) 7px, var(--surface-1) 7px, var(--surface-1) 14px);
+  }
+  .shape-card-body{display:flex;flex-direction:column;gap:3px;}
+  .shape-card-no{font-size:12px;color:var(--text-muted);font-weight:500;letter-spacing:0.03em;}
+  .shape-card-no.is-en{font-size:15px;color:var(--text-primary);}
+  .shape-card-name{font-size:15px;font-weight:700;color:var(--text-primary);}
+  .shape-card-yomi{display:block;font-size:11px;font-weight:400;color:var(--text-muted);margin-top:1px;min-height:1.4em;}
+  .shape-card-badge{
+    font-size:10px;color:var(--text-muted);border:0.5px dashed var(--border-strong);
+    border-radius:999px;padding:2px 9px;margin-top:2px;display:inline-block;
+  }
+
+  /* ---------- 珠型詳細ページ。概要(表紙)→基本図→解説→変化図→前後移動の順で
+     参考書の1章のように読み進められる構成にする。 ---------- */
+  .crumb-nav{margin-bottom:20px;}
+  .crumb-back{
+    border:none;background:none;padding:6px 8px 6px 2px;margin-left:-8px;
+    font-size:12.5px;color:var(--text-secondary);cursor:pointer;font:inherit;
+    display:inline-flex;align-items:center;gap:5px;border-radius:6px;
+  }
+  .crumb-back:hover{color:var(--text-accent);background:var(--hover-bg);}
+  .crumb-back i{font-size:14px;}
+
+  .detail-cover{
+    display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start;
+    padding-bottom:30px;margin-bottom:32px;border-bottom:0.5px solid var(--border);
+  }
+  .detail-cover-board{width:300px;max-width:78vw;flex:none;position:relative;}
+  .detail-cover-board canvas{
+    width:100%;height:100%;display:block;border-radius:10px;
+    border:0.5px solid var(--border-strong);box-shadow:0 12px 28px rgba(50,38,16,0.10);
+  }
+  .detail-cover-info{flex:1;min-width:230px;padding-top:2px;}
+  .detail-no{font-size:15px;color:#806c4b;letter-spacing:0.06em;font-weight:400;margin-bottom:7px;}
+  .detail-name-row{margin:0 0 15px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-weight:700;}
+  .detail-name{font-family:var(--font-serif);font-size:32px;color:var(--text-primary);}
+  .detail-yomi{font-size:13px;font-weight:400;color:var(--text-muted);}
+  .detail-comment{font-size:14px;line-height:2;color:var(--text-secondary);white-space:pre-wrap;margin:0;}
+
+  .section-heading{
+    font-family:var(--font-serif);font-size:16.5px;font-weight:700;color:var(--text-primary);
+    margin:0 0 18px;padding-left:11px;border-left:3px solid var(--accent);
+  }
+  .var-intro{display:flex;align-items:baseline;gap:18px;margin:0 0 20px;}
+  .var-intro-title{
+    margin:0;font-family:var(--font-serif);font-size:24px;line-height:1.4;
+    font-weight:700;color:var(--text-primary);letter-spacing:.02em;
+  }
+  .var-intro-note{
+    margin:0;font-size:12.5px;line-height:1.7;font-weight:500;
+    color:#c47732;letter-spacing:.01em;
+  }
+  .var-section{margin-bottom:8px;}
+  .var-grid{display:grid;grid-template-columns:1fr;gap:18px;}
+  @media (min-width:600px){ .var-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (min-width:1024px){ .var-grid{grid-template-columns:repeat(3,1fr);gap:22px;} }
+
+  /* シェアメニューがカード幅より広く外側にはみ出して表示される仕様なので、
+     overflow:hiddenは付けない(canvasの角丸だけborder-radiusで表現する)。 */
+  .var-card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:12px;position:relative;}
+  .var-card canvas{width:100%;display:block;border-radius:12px 12px 0 0;border-bottom:0.5px solid var(--border);}
+  .var-eval{font-size:13.5px;color:var(--text-secondary);line-height:1.8;padding:13px 15px 15px;}
+
+  .share-btn{
+    position:absolute;top:9px;right:9px;z-index:5;
+    width:29px;height:29px;border-radius:50%;
+    border:0.5px solid var(--border);background:rgba(255,255,255,0.92);
+    color:var(--text-primary);display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .share-btn:hover{background:#ffffff;}
+  .share-btn i{font-size:14px;}
+  .share-menu{
+    display:none;position:absolute;top:44px;right:9px;z-index:10;
+    background:var(--surface-2);border:0.5px solid var(--border);
+    border-radius:var(--radius);padding:4px;min-width:168px;
+  }
+  .share-menu.open{display:block;}
+  .share-menu button{
+    display:flex;align-items:center;gap:8px;width:100%;
+    border:none;background:transparent;color:var(--text-primary);
+    font-size:13px;padding:8px 10px;border-radius:6px;cursor:pointer;text-align:left;
+  }
+  .share-menu button:hover{background:var(--surface-0);}
+  .share-menu button i{font-size:15px;color:var(--text-secondary);}
+
+  /* 詳細ページ下部の前後移動。参考書のページをめくる感覚で連続して読み進められるように。 */
+  .detail-pager{
+    display:flex;align-items:stretch;gap:10px;margin-top:36px;padding-top:24px;border-top:0.5px solid var(--border);
+  }
+  .pager-btn{
+    flex:1;min-width:0;display:flex;align-items:center;gap:8px;
+    border:0;background:transparent;border-radius:6px;
+    padding:10px 8px;font-size:13px;color:var(--text-secondary);cursor:pointer;min-height:42px;font:inherit;
+  }
+  .pager-btn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .pager-btn:hover:not(:disabled){background:var(--hover-bg);color:var(--text-accent);}
+  .pager-btn:disabled{opacity:0.4;cursor:default;}
+  .pager-btn-next{justify-content:flex-end;text-align:right;}
+  .pager-mid{
+    flex:none;border:0;background:transparent;border-radius:6px;
+    padding:10px 8px;font-size:12.5px;color:var(--text-secondary);cursor:pointer;min-height:42px;font:inherit;
+  }
+  .pager-mid:hover{background:var(--hover-bg);color:var(--text-accent);}
+  @media (max-width:560px){
+    .detail-pager{flex-wrap:wrap;}
+    .pager-mid{order:3;flex:1 1 100%;}
+  }
+
+  /* --- 手順検索パネル --- */
+  .search-view-header{display:flex;align-items:center;justify-content:flex-end;margin-bottom:6px;}
+  .search-page-title{font-family:var(--font-serif);font-weight:700;font-size:19px;color:var(--text-primary);margin:0;}
+  .search-page-desc{margin:0 0 22px;font-size:13px;line-height:1.9;color:var(--text-secondary);}
+  .search-close-btn{
+    flex:none;border:none;background:none;padding:5px;
+    font-size:18px;color:var(--text-secondary);cursor:pointer;
+    display:flex;align-items:center;border-radius:50%;
+  }
+  .search-close-btn:hover{background:var(--hover-bg);color:var(--text-primary);}
+  .search-flex-row{display:flex;gap:26px;align-items:flex-start;flex-wrap:wrap;}
+  .search-board-wrap{width:min(92vw,600px);flex:none;}
+  .search-board-canvas{width:100%;height:auto;display:block;cursor:crosshair;border-radius:0;border:0.5px solid var(--border-strong);box-shadow:0 18px 38px rgba(66,48,22,.18);}
+  .search-range-note{font-size:16px;color:var(--text-primary);margin:16px auto 0;line-height:1.7;text-align:center;font-weight:500;max-width:560px;}
+  .range-note-dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin:0 4px 0 3px;vertical-align:1px;}
+  .range-note-dot--single{background:#2f6f52;}
+  .range-note-dot--ten{background:#c17a2f;}
+  .search-action-btns{display:flex;gap:9px;margin-top:16px;justify-content:center;}
+  .search-small-btn{
+    border:0.5px solid var(--border);background:var(--card-bg);border-radius:var(--radius);
+    padding:9px 15px;font-size:15px;cursor:pointer;color:var(--text-primary);
+    display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+  }
+  .search-small-btn:hover{background:var(--hover-bg);}
+  .search-run-btn{background:var(--accent);color:#fff;border-color:var(--accent);font-size:20px;font-weight:600;padding:0;width:44px;height:44px;border-radius:50%;}
+  .search-run-btn:hover{background:var(--accent-hover);}
+  .search-side-panel{flex:1;min-width:220px;}
+  .search-side-panel.is-empty{display:none;}
+  .search-results-count{font-size:12.5px;color:var(--text-muted);margin-bottom:10px;}
+  .search-result-item{display:flex;gap:8px;align-items:flex-start;padding:10px 9px;border-radius:9px;cursor:pointer;}
+  .search-result-item:hover{background:var(--surface-1);}
+  .search-result-item i{font-size:15px;color:var(--text-secondary);flex:none;margin-top:2px;}
+  .search-result-item .result-title{font-size:13.5px;}
+  .search-result-item .result-meta{font-size:11.5px;color:var(--text-muted);}
+
+  /* --- ヘルプページ。モーダルではなく本文エリアにページとして表示する
+     (.search-view-headerと同じ見出し+閉じるボタンの型を流用)。 --- */
+  .help-page-body{max-width:780px;}
+  .help-page-body section{padding:0 0 30px;margin:0 0 30px;border-bottom:1px solid var(--border);}
+  .help-page-body section:last-child{border-bottom:0;margin-bottom:0;}
+  .help-page-body h2{font-family:var(--font-serif);font-size:25px;line-height:1.35;margin:0 0 18px;color:var(--text-primary);}
+  .help-page-body h3{font-family:var(--font-serif);font-size:18px;line-height:1.5;margin:24px 0 8px;color:var(--text-primary);}
+  .help-page-body p,.help-page-body li{font-size:13.5px;line-height:1.95;color:var(--text-primary);}
+  .help-page-body p{margin:0 0 14px;}
+  .help-page-body p:last-child{margin-bottom:0;}
+  .help-page-body ul{margin:8px 0 0;padding-left:1.35em;}
+  .help-page-body a{color:var(--text-accent);text-decoration:none;border-bottom:1px solid transparent;overflow-wrap:anywhere;}
+  .help-page-body a:hover{border-bottom-color:currentColor;}
+  .help-credit-name{font-family:var(--font-serif);font-size:17px!important;line-height:1.7!important;}
+  .help-table-wrap{margin-top:18px;}
+  .help-eval-table{width:100%;border-collapse:collapse;border:1px solid var(--border-strong);background:rgba(255,255,255,.16);}
+  .help-eval-table th,.help-eval-table td{border:1px solid var(--border-strong);padding:13px 15px;vertical-align:top;}
+  .help-eval-table th{width:150px;font-family:var(--font-serif);font-size:16px;line-height:1.65;text-align:center;white-space:nowrap;color:var(--text-primary);font-weight:700;}
+  .help-eval-table td{font-size:13.5px;line-height:1.9;color:var(--text-primary);}
+  @media(max-width:680px){
+    .help-page-body h2{font-size:22px;}
+    .help-page-body h3{font-size:17px;}
+    .help-page-body section{padding-bottom:24px;margin-bottom:24px;}
+    .help-eval-table,.help-eval-table tbody,.help-eval-table tr,.help-eval-table th,.help-eval-table td{display:block;width:100%;}
+    .help-eval-table{border:0;background:transparent;}
+    .help-eval-table tr{border:1px solid var(--border-strong);margin-bottom:12px;background:rgba(255,255,255,.16);}
+    .help-eval-table th{border:0;border-bottom:1px solid var(--border);padding:10px 12px;text-align:left;white-space:normal;}
+    .help-eval-table td{border:0;padding:11px 12px 13px;}
+  }
+
+  /* --- 編集モード。search-view/help-viewと同じヘッダー・本文パターンを流用し、
+     配色や余白もそちらに揃えている。フォーム系のUIだけこの画面独自。 --- */
+  .edit-io-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+  .edit-file-btn{
+    border:0.5px solid var(--border);background:var(--card-bg);border-radius:var(--radius);
+    padding:9px 15px;font-size:13px;cursor:pointer;color:var(--text-primary);
+    display:inline-flex;align-items:center;
+  }
+  .edit-file-btn:hover{background:var(--hover-bg);}
+  .edit-select{
+    border:0.5px solid var(--border);background:var(--card-bg);border-radius:var(--radius);
+    padding:9px 11px;font-size:13px;color:var(--text-primary);max-width:220px;
+  }
+  .edit-fields{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
+  .edit-field{display:flex;flex-direction:column;gap:4px;font-size:11.5px;color:var(--text-muted);width:150px;}
+  .edit-field-wide{width:100%;}
+  .edit-field input, .edit-field textarea{
+    font:inherit;font-size:13.5px;color:var(--text-primary);
+    border:0.5px solid var(--border);border-radius:6px;background:var(--surface-0);
+    padding:8px 10px;resize:vertical;
+  }
+  .edit-board-block{margin-bottom:24px;}
+  .edit-board-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px;}
+  .edit-board-label{font-size:13px;font-weight:600;color:var(--text-secondary);}
+  .edit-toolbar{display:flex;align-items:center;gap:6px;margin-bottom:9px;flex-wrap:wrap;}
+  .edit-tool-btn{
+    width:33px;height:33px;flex:none;
+    border:0.5px solid var(--border);border-radius:7px;background:var(--card-bg);
+    font-size:14px;cursor:pointer;color:var(--text-primary);
+  }
+  .edit-tool-btn:hover{background:var(--hover-bg);}
+  .edit-tool-btn.active{background:var(--bg-accent);border-color:var(--accent);color:var(--text-accent);}
+  .edit-tool-n{width:52px;padding:7px 7px;font-size:13px;border:0.5px solid var(--border);border-radius:7px;background:var(--surface-0);color:var(--text-primary);}
+  .edit-tool-label{width:52px;padding:7px 7px;font-size:13px;border:0.5px solid var(--border);border-radius:7px;background:var(--surface-0);color:var(--text-primary);}
+  .edit-canvas{width:min(100%,320px);aspect-ratio:1/1;display:block;border-radius:10px;border:0.5px solid var(--border-strong);cursor:crosshair;background:var(--surface-0);}
+  .edit-canvas-small{width:min(100%,220px);}
+  .edit-var-section{margin-bottom:20px;}
+  .edit-var-card{
+    border:0.5px solid var(--border);border-radius:10px;padding:16px;margin-bottom:16px;background:var(--card-bg);
+  }
+  .edit-remove-btn{
+    border:0.5px solid var(--border);background:var(--surface-0);border-radius:7px;
+    padding:6px 11px;font-size:12px;color:var(--text-secondary);cursor:pointer;
+  }
+  .edit-remove-btn:hover{background:var(--hover-bg);color:var(--text-primary);}
+  .edit-evaltags-label{display:block;font-size:11.5px;color:var(--text-muted);margin-top:12px;}
+  .edit-evaltags-label textarea{
+    display:block;width:100%;margin-top:5px;font:inherit;font-size:13px;color:var(--text-primary);
+    border:0.5px solid var(--border);border-radius:7px;background:var(--surface-0);padding:8px 10px;resize:vertical;
+  }
+  .edit-export-row{margin:22px 0;}
+  .edit-json-preview{margin-top:12px;}
+  .edit-json-preview summary{font-size:12.5px;color:var(--text-muted);cursor:pointer;}
+  .edit-json-preview textarea{
+    width:100%;margin-top:9px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;
+    border:0.5px solid var(--border);border-radius:7px;background:var(--surface-0);color:var(--text-secondary);padding:10px;
+  }
+
+  @media (max-width:768px){
+    .page{padding:22px 16px 64px;}
+    .list-title{font-size:24px;}
+    .detail-name{font-size:26px;}
+    .detail-cover-board{width:100%;max-width:100%;}
+  }
+
+  /* Codex edition: confirmed guidebook layout */
+  .header-inner{max-width:1060px;padding:calc(10px + var(--safe-top)) 24px 10px;gap:16px;}
+  .header-brand{font-size:17px;letter-spacing:.04em;margin-right:0;}
+  .header-menu-btn{display:none!important;}
+  .header-nav{display:flex!important;position:static!important;flex-direction:row!important;align-items:center!important;gap:4px!important;margin-left:auto;padding:0!important;background:none!important;border:0!important;box-shadow:none!important;}
+  .header-nav-row{display:flex;gap:4px;align-items:center;}
+  .header-cat-group{border:0;background:none;padding:0;border-radius:0;gap:4px;}
+  .nav-pill,.nav-link-btn,.nav-icon-btn{
+    width:36px;height:36px;padding:6px;border:0;border-radius:0;background:transparent;
+    display:flex;align-items:center;justify-content:center;color:var(--text-secondary);position:relative;
+  }
+  .nav-pill.active{background:transparent;color:var(--text-accent);}
+  .nav-pill.active::after{content:"";position:absolute;left:5px;right:5px;bottom:0;height:2px;background:currentColor;}
+  .nav-pill svg{width:24px;height:24px;display:block;}
+  .nav-pill .stone-black{fill:#201d19;stroke:#201d19;stroke-width:1.25;}
+  .nav-pill .stone-white{fill:#faf6ec;stroke:#766a57;stroke-width:1.5;}
+  .nav-pill .nav-favorite-heart{width:18px;height:18px;display:block;overflow:visible;}
+  .nav-favorite-heart path{fill:none;stroke:#2b261f;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-link-btn i,.nav-icon-btn i{font-size:20px;}
+  .nav-link-btn span:not(.sr-only){display:none;}
+  .page{max-width:1060px;padding:42px 42px 76px;}
+  .list-head{margin-bottom:28px;display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap;}
+  .list-title-row{display:flex;align-items:flex-end;gap:14px;min-width:0;}
+  .list-title{font-size:30px;margin:0;line-height:1;}
+  .list-title-en{font-size:11px;letter-spacing:.15em;color:#806c4b;line-height:1.15;white-space:nowrap;}
+  .list-sort{margin-left:auto;border:0;border-bottom:1px solid var(--border-strong);background:transparent;color:var(--text-secondary);font:inherit;font-size:13px;padding:4px 20px 4px 3px;}
+  .list-lead{display:none;}
+  .section-label{text-transform:uppercase;letter-spacing:.15em;color:#806c4b;padding:0 0 7px;}
+  .shape-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:17px;margin-top:0;}
+  .shape-card{gap:0;text-align:left;align-items:stretch;background:#fbf8ef;border:1px solid #ddd0b5;border-radius:0;padding:9px 9px 11px;box-shadow:0 5px 14px rgba(72,51,20,.06);transform:scale(.9);transform-origin:top center;}
+  .shape-card:hover{transform:scale(.9) translateY(-2px);}
+  .shape-card:active{transform:scale(.9);}
+  .shape-card.is-placeholder:hover{transform:scale(.9);}
+  body.theme-dark .shape-card{background:#302d27;border-color:#50493e;}
+  .shape-card-board{max-width:none;width:100%;border-radius:0;border:1px solid #cfc3a5;}
+  .shape-card-body{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;align-items:baseline;gap:8px;padding:9px 2px 0;white-space:nowrap;}
+  .shape-card-no{font-size:15px;color:#aaa397;font-weight:500;min-height:0;letter-spacing:.01em;}
+  .shape-card-no.is-en{font-size:19px;color:var(--text-primary);}
+  .shape-card-yomi{font-size:10.5px;color:var(--text-muted);min-height:0;}
+  .shape-card-name{font-family:var(--font-serif);font-size:19px;font-weight:700;min-width:0;}
+  .shape-card-name.is-en{font-family:-apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;font-size:15.6px;font-weight:300;color:var(--text-muted);}
+  .shape-card-yomi{font-size:10.5px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;}
+  .shape-favorite{border:0;background:transparent;color:var(--text-muted);width:25px;height:25px;padding:2px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .shape-card-body .shape-favorite{grid-column:4;justify-self:end;}
+  .shape-favorite svg{width:13px;height:13px;display:block;fill:transparent;stroke:currentColor;stroke-width:1.8;transition:fill .14s,color .14s,transform .14s;}
+  .shape-favorite.is-favorite{color:#c47732;}
+  .shape-favorite.is-favorite svg{fill:currentColor;stroke:currentColor;}
+  .shape-favorite:hover{color:#c47732;}
+  .shape-favorite:active svg{transform:scale(.9);}
+  .shape-card-badge{margin-left:auto;}
+  .detail-cover{display:grid;grid-template-columns:minmax(280px,390px) 1fr;gap:48px;align-items:center;padding-bottom:0;margin-bottom:48px;border:0;}
+  .detail-cover-board{width:100%;max-width:none;padding:9px;background:#fbf8ef;border:1px solid #ddd0b5;}
+  .detail-cover-board canvas{border-radius:0;border:0;box-shadow:none;}
+  .detail-no{font-size:15px;letter-spacing:.12em;color:#806c4b;}
+  .detail-name{font-size:34px;}
+  .section-heading{font-size:0;height:1px;margin:0 0 22px;padding:0;border:0;background:var(--border-strong);}
+  .var-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;}
+  .var-card{padding:9px 9px 11px;background:#fbf8ef;border:1px solid #ddd0b5;border-radius:0;}
+  body.theme-dark .var-card{background:#302d27;border-color:#50493e;}
+  .var-card canvas{border-radius:0;border:0;}
+  .var-eval{padding:10px 3px 0;line-height:1.8;min-height:3.6em;}
+  @media(max-width:680px){
+    .header-inner{padding:calc(9px + var(--safe-top)) 12px 9px;gap:6px;}
+    .content-revision-date{font-size:9px;margin-left:-4px;margin-right:2px;}
+    .header-brand{font-size:14px;white-space:nowrap;line-height:1.25;}
+    .header-brand .brand-ja-second{display:block;}
+    .nav-pill,.nav-link-btn,.nav-icon-btn{width:32px;height:34px;padding:5px;}
+    #helpBtn,#langToggleBtn{display:none;}
+    .page{padding:28px 16px 56px;}
+    .shape-grid{grid-template-columns:1fr;gap:16px;}
+    .shape-card{display:grid;grid-template-columns:minmax(150px,48%) minmax(0,1fr);align-items:center;gap:14px;padding:10px;}
+    .shape-card-body{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;gap:4px 8px;padding:0;white-space:normal;}
+    .shape-card-name{font-size:22px;}
+    .shape-card-name.is-en{font-size:15.6px;}
+    .shape-card-no{font-size:18px;}
+    .shape-card-no.is-en{font-size:22px;}
+    .detail-cover{grid-template-columns:1fr;gap:24px;margin-bottom:38px;}
+    .var-intro{display:block;}
+    .var-intro-title{margin-bottom:7px;}
+    .var-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <button class="header-brand" id="brandBtn" type="button">Taraguchi-10 <span class="brand-ja-second">五珠指南書</span></button>
+    <span class="content-revision-date" id="contentRevisionDate">last update&nbsp; 2026/4/3</span>
+    <button class="header-menu-btn" id="headerMenuBtn" type="button" aria-label="メニュー" aria-expanded="false">&#9776;</button>
+    <nav class="header-nav" id="headerNav">
+      <div class="header-nav-row">
+        <div class="header-cat-group" id="categorySwitch">
+          <button class="nav-pill" data-cat="favorites" type="button" data-i18n-title="catFavorites" aria-label="My 珠型"><svg class="nav-favorite-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg></button>
+          <button class="nav-pill active" data-cat="direct" type="button" data-i18n-title="catDirect" aria-label="直接打ち"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="stone-black" cx="12" cy="17" r="4.55"/><circle class="stone-white" cx="12" cy="7" r="4.55"/></svg></button>
+          <button class="nav-pill" data-cat="indirect" type="button" data-i18n-title="catIndirect" aria-label="間接打ち"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="stone-black" cx="8.5" cy="15.5" r="4.2"/><circle class="stone-white" cx="15.5" cy="8.5" r="4.2"/></svg></button>
+        </div>
+      </div>
+      <div class="header-nav-row">
+        <button class="nav-link-btn" id="searchOpenBtn" type="button">
+          <i class="ti ti-search" aria-hidden="true"></i><span class="sr-only" data-i18n="searchTitle">手順検索</span>
+        </button>
+        <button class="nav-link-btn" id="helpBtn" type="button">
+          <i class="ti ti-help" aria-hidden="true"></i><span class="sr-only" data-i18n="help">ヘルプ</span>
+        </button>
+      </div>
+      <div class="header-nav-row header-nav-icons">
+        <button class="nav-icon-btn" id="modeToggleBtn" type="button" data-i18n-title="settings" aria-label="設定">
+          <i class="ti ti-settings" id="modeToggleIcon" aria-hidden="true"></i>
+        </button>
+        <button class="nav-icon-btn" id="langToggleBtn" type="button" data-i18n-title="langToggle" aria-label="言語切替">
+          <span class="nav-lang-label" id="langToggleLabel">JP</span>
+        </button>
+        <button class="nav-icon-btn" id="editBtn" type="button" data-i18n-title="editMode" aria-label="編集モード" hidden>
+          <i class="ti ti-pencil" aria-hidden="true"></i>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <section id="listView">
+    <div class="list-head">
+      <div class="list-title-row">
+        <h1 class="list-title">直接打ち</h1>
+        <span class="list-title-en">DIRECT OPENINGS</span>
+      </div>
+      <p class="list-lead" data-i18n="listLead">黒1は天元に固定し、五珠交替打ちのルールで生まれる基本の珠型です。3手目までの形から、読みたい珠型を選んでください。</p>
+    </div>
+    <div class="section-label" id="listCategoryLabel" hidden></div>
+    <div class="shape-grid" id="shapeGrid"></div>
+  </section>
+
+  <section id="detailView" hidden>
+    <nav class="crumb-nav">
+      <button class="crumb-back" id="backToListTop" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i><span data-i18n="backToList">珠型一覧へ戻る</span></button>
+    </nav>
+
+    <div class="detail-cover">
+      <div class="detail-cover-board">
+        <canvas id="detailBaseBoard"></canvas>
+      </div>
+      <div class="detail-cover-info">
+        <div class="detail-no" id="detailNo"></div>
+        <h2 class="detail-name-row">
+          <span class="detail-name" id="detailName"></span>
+          <span class="detail-yomi" id="detailYomi"></span>
+        </h2>
+        <p class="detail-comment" id="detailComment"></p>
+      </div>
+    </div>
+
+    <div class="var-section">
+      <h3 class="section-heading" data-i18n="variations">五珠候補</h3>
+      <div class="var-intro">
+        <h3 class="var-intro-title" data-i18n="variationGuideTitle">白４と黒５の候補手</h3>
+        <p class="var-intro-note" data-i18n="variationGuideNote">A＝黒必勝、C＝白必勝、数字は実戦で有力な候補</p>
+      </div>
+      <div class="var-grid" id="varGrid"></div>
+    </div>
+
+    <nav class="detail-pager">
+      <button class="pager-btn" id="prevShapeBtn" type="button"><i class="ti ti-chevron-left" aria-hidden="true"></i><span id="prevShapeLabel"></span></button>
+      <button class="pager-mid" id="backToListBottom" type="button" data-i18n="backToList">珠型一覧へ</button>
+      <button class="pager-btn pager-btn-next" id="nextShapeBtn" type="button"><span id="nextShapeLabel"></span><i class="ti ti-chevron-right" aria-hidden="true"></i></button>
+    </nav>
+  </section>
+
+  <div id="searchView" hidden>
+    <div class="search-view-header">
+      <button class="search-close-btn" id="searchCloseBtn" type="button" data-i18n-title="close" aria-label="閉じる"><i class="ti ti-x" aria-hidden="true"></i></button>
+    </div>
+    <div class="search-flex-row">
+      <div class="search-board-wrap">
+        <canvas id="searchBoardCanvas" class="search-board-canvas"></canvas>
+        <p class="search-range-note" id="searchRangeNote"></p>
+        <div class="search-action-btns">
+          <button class="search-small-btn" id="searchUndoBtn" type="button" data-i18n-title="undo" aria-label="一手戻す"><i class="ti ti-arrow-back-up" aria-hidden="true"></i></button>
+          <button class="search-small-btn" id="searchClearBtn" type="button" data-i18n-title="clear" aria-label="クリア"><i class="ti ti-refresh" aria-hidden="true"></i></button>
+          <button class="search-small-btn search-run-btn" id="searchRunBtn" type="button" data-i18n-title="runSearchBtn" aria-label="検索"><i class="ti ti-search" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      <div class="search-side-panel is-empty" id="searchSidePanel">
+        <div class="search-results-count" id="searchResultsCount"></div>
+        <div id="searchResultsList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="helpView" hidden>
+    <div class="search-view-header">
+      <p class="search-page-title" data-i18n="help">ヘルプ</p>
+      <button class="search-close-btn" id="helpCloseBtn" type="button" data-i18n-title="close" aria-label="閉じる"><i class="ti ti-x" aria-hidden="true"></i></button>
+    </div>
+    <div class="help-page-body">
+      <section>
+        <h2>このページについて</h2>
+        <p>本サイト『Taraguchi-10 Guide』は、連珠（競技五目並べ）の国際ルール「タラグチ10（五珠交替打ち）」のガイドブックです。2023年の『ソーソロフ8指南書 日本語版』（那智暴虐の連珠石・著）と最新の『漱星阁开局指南』をもとに、珠型や五珠候補をWeb上で確認しやすい形へ再構成しました。</p>
+        <p>自分が指してみたい形、調べてみたい形を見つけるためにお使いください。</p>
+      </section>
+
+      <section>
+        <h2>評価の見方</h2>
+        <p>各図についているコメントは2023年当時のものです。現在は結論が変化している可能性もあることをご留意の上で参考にしてください。</p>
+        <div class="help-table-wrap">
+          <table class="help-eval-table">
+            <tbody>
+              <tr><th scope="row">A</th><td>黒勝ち。比較的難度が高いと判断されたものには数字を併記しています。数字は提示する五珠候補の数を表します。</td></tr>
+              <tr><th scope="row">C</th><td>白勝ち。</td></tr>
+              <tr><th scope="row">黒優勢<br>白優勢</th><td>どちらかが非常に勝ちに近いものの、理論上の結論までは出ていない局面です。元の資料では、主にKataGoの評価が80％以上のものに使われています。</td></tr>
+              <tr><th scope="row">黒有利<br>白有利</th><td>どちらかが一定以上指しやすいと考えられている局面です。主にKataGoの評価が65％以上80％未満のものに使われています。</td></tr>
+              <tr><th scope="row">黒主導<br>白主導</th><td>単純な評価値だけでは表しにくいものの、その側が作戦や局面を選びやすく、主導権を持っていると考えられる局面です。「局面を選べる」「主導権がある」という意味合いで、互角形ながら打ちやすい局面となっています。</td></tr>
+              <tr><th scope="row">未検証・？</th><td>元の指南書に記載があっても、作成者自身が十分に確認できていないものや、評価がまだ定まりにくい局面です。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:16px">「A」が付いているからといって、その局面が簡単とは限りません。主要な変化を知らなければ、実戦で勝ちにつなげることが難しいものもあります。評価や記号は、あくまで局面を選ぶための目安として受け取ってください。</p>
+      </section>
+
+      <section>
+        <h2>基本的な使い方</h2>
+        <p>珠型一覧のカードを選ぶと詳細ページへ移動し、4手目までの基本図と五珠候補を確認できます。詳細ページの下にある「前の珠型」「次の珠型」から、続けて別の珠型を見ることもできます。「珠型一覧へ」を押すと、トップページへ戻ります。</p>
+
+        <h3>直接打ち・間接打ちの切り替え</h3>
+        <p>画面上部にある二つの石のアイコンから、直接打ち一覧と間接打ち一覧を切り替えられます。</p>
+
+        <h3>お気に入りとMy珠型</h3>
+        <p>珠型カードのハートを押すと、その珠型をお気に入りに登録できます。登録した直接打ち・間接打ちは、画面上部のハートから開ける「My珠型」にまとめて、新しく登録した順に表示されます。</p>
+        <p>気になる珠型や、あとで研究したい珠型を整理するときにお使いください。</p>
+
+        <h3>局面検索</h3>
+        <p>画面上部の虫眼鏡アイコンから、局面検索を開けます。</p>
+
+        <h3>表示設定</h3>
+        <p>歯車アイコンから、盤と石の表示を変更できます。「JP」ボタンでは、日本語表示と英語表示を切り替えられます。珠型名や一部の評価表示も、選択した言語に合わせて表示されます。</p>
+      </section>
+
+      <section>
+        <h2>今後実装予定の機能</h2>
+        <p>このサイトは現在制作途中です。今後、次の内容を順次追加する予定です。</p>
+        <ul>
+          <li>各珠型の五珠候補と評価を随時更新</li>
+          <li>RenjuMemoとの連携</li>
+          <li>英語表示の拡充</li>
+          <li>学習のためのミニゲーム・クイズ</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>参考資料</h2>
+        <p>『ソーソロフ8指南書 日本語版』（那智暴虐の連珠石）<br>『漱星阁开局指南』</p>
+      </section>
+
+      <section>
+        <h2>制作</h2>
+        <p class="help-credit-name">ふじたまいこ<br>Maiko Fujita</p>
+        <p><a href="https://x.com/pieco_renju" target="_blank" rel="noopener noreferrer">https://x.com/pieco_renju</a><br><a href="https://note.com/pieco_renju" target="_blank" rel="noopener noreferrer">https://note.com/pieco_renju</a></p>
+      </section>
+    </div>
+  </div>
+
+  <!-- 編集モード。管理者が珠型データ(盤面・分岐・コメント・評価文)をブラウザ上で
+       作成・修正し、JSONとして書き出すためのツール。書き出したファイルは
+       サイトへ自動保存されず、管理者からオーナーへ渡してdata/direct(または
+       data/indirect)へ配置してもらう運用(相談の結果決めた「書き出し→手渡し」方式)。 -->
+  <div id="editView" hidden>
+    <div class="search-view-header">
+      <p class="search-page-title" data-i18n="editModeTitle">編集モード</p>
+      <button class="search-close-btn" id="editCloseBtn" type="button" data-i18n-title="close" aria-label="閉じる"><i class="ti ti-x" aria-hidden="true"></i></button>
+    </div>
+    <p class="search-page-desc" data-i18n="editModeDesc">珠型図をブラウザ上で編集し、JSONファイルとして書き出せます。この画面での変更はサイトへ自動保存されません。書き出したJSONファイルをオーナーに送って反映してもらってください。</p>
+
+    <div class="edit-io-row">
+      <label class="edit-file-btn" for="editImportInput" data-i18n="editImport">JSONを読み込む</label>
+      <input type="file" id="editImportInput" accept="application/json,.json" hidden>
+      <select id="editExistingSelect" class="edit-select">
+        <option value="" data-i18n="editPickExisting">既存珠型を選んで編集…</option>
+      </select>
+      <select id="editNewSelect" class="edit-select">
+        <option value="" data-i18n="editPickTemplate">未登録の珠型から新規作成…</option>
+      </select>
+      <button class="search-small-btn" id="editBlankBtn" type="button" data-i18n="editBlankNew">白紙から新規作成</button>
+    </div>
+
+    <div id="editEmptyNote" class="empty-note" data-i18n="editEmptyNote">上のメニューから、編集する珠型を選ぶか新規作成してください。</div>
+
+    <div id="editFormBody" hidden>
+      <div class="edit-fields">
+        <label class="edit-field">no<input type="text" id="editFieldNo" data-field="no"></label>
+        <label class="edit-field">id<input type="text" id="editFieldId" data-field="id"></label>
+        <label class="edit-field"><span data-i18n="editFieldName">名称(漢字)</span><input type="text" id="editFieldName" data-field="name"></label>
+        <label class="edit-field"><span data-i18n="editFieldYomi">よみ</span><input type="text" id="editFieldYomi" data-field="yomi"></label>
+        <label class="edit-field edit-field-wide"><span data-i18n="editFieldIcon">アイコン画像パス</span><input type="text" id="editFieldIcon" data-field="icon"></label>
+        <label class="edit-field edit-field-wide"><span data-i18n="editFieldComment">解説コメント</span><textarea id="editFieldComment" rows="3"></textarea></label>
+      </div>
+
+      <div class="edit-board-block">
+        <div class="edit-board-head">
+          <span class="edit-board-label" data-i18n="editBaseDiagram">基本図</span>
+        </div>
+        <div class="edit-toolbar" id="editBaseToolbar"></div>
+        <canvas id="editBaseCanvas" class="edit-canvas"></canvas>
+      </div>
+
+      <div class="edit-var-section">
+        <div class="edit-board-head">
+          <span class="edit-board-label" data-i18n="variations">変化図</span>
+          <button class="search-small-btn" id="editAddVarBtn" type="button" data-i18n="editAddVariation">+ 変化図を追加</button>
+        </div>
+        <div id="editVarList"></div>
+      </div>
+
+      <div class="edit-export-row">
+        <button class="search-small-btn search-run-btn" id="editExportBtn" type="button" data-i18n="editExport">JSONを書き出す</button>
+      </div>
+
+      <details class="edit-json-preview">
+        <summary data-i18n="editJsonPreview">JSONプレビュー(コピー用)</summary>
+        <textarea id="editJsonPreviewText" readonly rows="12"></textarea>
+      </details>
+    </div>
+  </div>
+</main>
+
+<div class="modal-backdrop" id="settingsBackdrop" hidden>
+  <div class="modal" id="settingsModalContent" role="dialog" aria-modal="true" aria-labelledby="settingsModalTitle"></div>
+</div>
+
+<script>
+const CANVAS_SIZE = 480;
+const TENGEN = { x: 7, y: 7 };
+
+// --- 盤面はRenjuMemo本体の現行デザイン(index.html / js/main.js)と全く同じ方式。
+// v1.htmlは旧デザインのアーカイブで、あちらはPNG画像を使っていたが、現行は画像を
+// 廃止してグリッド線・星目・符号もすべてcanvasにベクター描画している(main.jsの
+// drawBoardBackground)。ここでも同じ計算式・同じ色をそのまま使う。
+// 座標系はRenjuMemo本体と同じ0始まり(x:0=A列〜14=O列、y:0=1行目〜14=15行目、天元はx=7,y=7)。 ---
+const LETTERS = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"];
+// 星目(星印を打つ交点)。main.jsのSTAR_POINTSと同じ、四隅寄りの4点+中心の計5点。
+const STAR_POINTS = [[3,3],[3,11],[11,3],[11,11],[7,7]];
+
+// 検索盤(符号込み・15路盤フル表示)用のgeometry。main.jsのgetBoardGeometryForSize/
+// getBoardGeometry/isMobileBoardViewportと全く同じ計算式・同じ定数(BOARD_SIZE=700,
+// 余白58px(PC)/32px(スマホ))を使う。canvas解像度もRenjuMemo本体の検索盤(#searchBoardCanvas,
+// width=height=700)と同じにし、CSS側の表示サイズ(.search-board-wrap)も揃えることで、
+// 見た目のサイズ・符号の大きさが完全に一致するようにしている。
+const BOARD_SIZE = 700; // main.jsのBOARD_SIZEと同じ
+const MOBILE_BOARD_MAX_WIDTH = 768; // main.jsのMOBILE_BOARD_MAX_WIDTHと同じ
+function isMobileBoardViewport(){ return window.innerWidth <= MOBILE_BOARD_MAX_WIDTH; }
+function getBoardGeometryForSize(size, mobile){
+  // 検索盤は符号を読み取れる余白を残しつつ、盤面を少し大きく見せる。
+  const baseMargin = mobile ? 24 : 40;
+  const margin = baseMargin * (size / BOARD_SIZE);
+  const step = (size - margin * 2) / 14;
+  const originX = margin, originY = size - margin;
+  return {
+    originX, originY, step, margin, min: 0, max: 14, showCoords: true,
+    // 検索盤(このgeometryを使うのはSEARCH_GEOのみ)は、RenjuMemo本体の局面検索と同じく
+    // settings.stoneStyleを無視して常にフラット表示にする(drawSearchStoneを使わせる)。
+    forceFlatStones: true,
+    canvasW: size, canvasH: size, stoneR: step * 0.46,
+    cellToPixel(x, y){ return { px: originX + x * step, py: originY - y * step }; },
+    pixelToCell(px, py){ return { x: Math.round((px - originX) / step), y: Math.round((originY - py) / step) }; }
+  };
+}
+// 検索画面を開くたびに(リサイズ・回転でモバイル判定が変わっていても対応できるよう)
+// その時点のビューポートに合わせて作り直す。main.jsのwireSearchPanel()が呼ばれるたびに
+// geoを取り直すのと同じ挙動。
+function computeSearchGeo(){
+  return getBoardGeometryForSize(BOARD_SIZE, isMobileBoardViewport());
+}
+// 珠型図(7x7の局所ウィンドウ)用のgeometry。符号は表示しないので余白を持たず、
+// 指定範囲(4〜10列・4〜10行)がキャンバスいっぱいに収まるように原点・間隔を逆算する
+// (PDF風のクローズアップ表示。main.jsには無い、この珠型ツール独自の見せ方)。
+function makeLocalBoardGeometry(minCol, maxCol, minRow, maxRow, size){
+  const step = size / (maxCol - minCol);
+  const originX = -minCol * step, originY = maxRow * step;
+  return {
+    originX, originY, step, margin: 0, min: minCol, max: maxCol, showCoords: false,
+    canvasW: size, canvasH: size, stoneR: step * 0.46,
+    cellToPixel(x, y){ return { px: originX + x * step, py: originY - y * step }; },
+    pixelToCell(px, py){ return { x: Math.round((px - originX) / step), y: Math.round((originY - py) / step) }; }
+  };
+}
+const JOSEKI_GEO = makeLocalBoardGeometry(4, 10, 4, 10, CANVAS_SIZE);
+function makeInsetLocalBoardGeometry(minCol, maxCol, minRow, maxRow, size, inset){
+  const step = (size - inset * 2) / (maxCol - minCol);
+  const originX = inset - minCol * step;
+  const originY = size - inset + minRow * step;
+  return {
+    originX, originY, step, margin: inset, min: minCol, max: maxCol, showCoords: false,
+    canvasW: size, canvasH: size, stoneR: step * 0.46,
+    cellToPixel(x, y){ return { px: originX + x * step, py: originY - y * step }; },
+    pixelToCell(px, py){ return { x: Math.round((px - originX) / step), y: Math.round((originY - py) / step) }; }
+  };
+}
+// 詳細ページの盤は15路盤の一部を切り出した「部分図」。表示窓の四辺は盤端では
+// ないため、外周の交点をcanvasの縁へ一致させず、半端なマスの途中で切り取る。
+// これによりPDFの作図枠を盤端と誤認せず、罫線が画面外へ続くように見える。
+function makeCroppedLocalBoardGeometry(minCol, maxCol, minRow, maxRow, size){
+  const step = size / (maxCol - minCol + 1);
+  const originX = step * 0.5 - minCol * step;
+  const originY = step * 0.5 + maxRow * step;
+  return {
+    originX, originY, step, margin: 0, min: minCol, max: maxCol,
+    showCoords: false, partialDiagram: true,
+    canvasW: size, canvasH: size, stoneR: step * 0.46,
+    cellToPixel(x, y){ return { px: originX + x * step, py: originY - y * step }; },
+    pixelToCell(px, py){ return { x: Math.round((px - originX) / step), y: Math.round((originY - py) / step) }; }
+  };
+}
+// 詳細図は通常9x9。図ごとのview.size指定、または要素の広がりに応じて
+// 11x11・13x13へ拡張できる。棋譜座標は変えず、見える窓だけを変える。
+function diagramGeometry(moves, branches, inset, view){
+  const points = (moves || []).concat(branches || []);
+  const requested = view && [9,11,13,15].includes(view.size) ? view.size : null;
+  let size = requested || 9;
+  if (!requested && points.length){
+    const xs = points.map(p => p.x), ys = points.map(p => p.y);
+    const spread = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
+    size = [9,11,13,15].find(n => spread <= n - 3) || 15;
+  }
+  const centerX = view && Number.isFinite(view.centerX) ? view.centerX : 7;
+  const centerY = view && Number.isFinite(view.centerY) ? view.centerY : 7;
+  const half = (size - 1) / 2;
+  const minCol = centerX - half, maxCol = centerX + half;
+  const minRow = centerY - half, maxRow = centerY + half;
+  return inset
+    ? makeInsetLocalBoardGeometry(minCol,maxCol,minRow,maxRow,CANVAS_SIZE,22)
+    : makeCroppedLocalBoardGeometry(minCol,maxCol,minRow,maxRow,CANVAS_SIZE);
+}
+let SEARCH_GEO = computeSearchGeo();
+const BOARD_MIN = 0, BOARD_MAX = 14; // 検索盤で入力できる座標の範囲(A〜O・1〜15)
+
+// タラグチ10ルール(五珠交替打ち)の範囲: 白2=天元から1路、黒3=2路、白4=3路、
+// 黒5=4路(1手だけ指定する場合)。黒5はさらに、候補を10題宣言する場合に限り5路まで広がる。
+const RULE_RADIUS = { 2: 1, 3: 2, 4: 3, 5: 4 };
+const RULE_RADIUS_DECLARE10 = { 5: 5 };
+
+// --- 設定(言語・テーマ・盤面色・石のスタイル)。RenjuMemo本体と同じくlocalStorageに
+// 保存し、次回開いたときも同じ表示で開けるようにする。左上の設定ボタン1つに
+// すべてまとめている(RenjuMemo本体では左メニューのモード・言語切替と、盤面下の
+// 設定ボタンの盤面色・石のスタイルが別々になっているが、このサイトでは統一する)。
+const LANG_KEY = "josekiLab:lang";
+const THEME_KEY = "josekiLab:theme";
+// 旧Claude版と保存キーを分ける。旧版で選ばれていたcream等がCodex版の
+// 初期盤色(D・象牙紙)を上書きし、ブラウザごとに違う色になるのを防ぐ。
+const BOARD_SETTINGS_KEY = "taraguchiCodex:boardSettings:v1";
+let currentLang = localStorage.getItem(LANG_KEY) || "ja";
+let currentTheme = "light";
+// v1.html(RenjuMemo初期版)の盤面デザイン(クリーム色・立体石)をベースにした配色。
+// bg=下地色、line=グリッド線、star=星目、label=符号(--board-label-colorが
+// 取れない場合のフォールバック)、dot=候補が1つだけの時の●の色。
+// 元々あったblue/yellow/green/grayは将来の盤面色設定UIのために定義だけ残してある
+// (現在このサイトに切替UIは無く、既定のcreamのみを使う)。
+// 設定は単独の盤色ではなく、大きな基本図と小さな変化図を組み合わせた2セット。
+// paper: D3深い象牙 + D象牙、wood: E淡い檜 + 従来の薄い檜。
+const BOARD_COLOR_OPTIONS = [
+  {
+    key: "paper", ja: "和紙", en: "Paper",
+    // 大盤の象牙濃度案。D2へ変更する場合は bgを#e3d6b7、lineをrgba(68,58,42,.40)へ差し替える。
+    large: { key: "ivory-deep", bg: "#dacba8", line: "rgba(65,55,39,0.43)", star: "#62543c", label: "rgba(65,55,39,0.56)", dot: "#3f7255" },
+    small: { key: "ivory", bg: "#f1ead4", line: "rgba(72,64,48,0.34)", star: "#6f6249", label: "rgba(72,64,48,0.52)", dot: "#3f7255" }
+  },
+  {
+    key: "wood", ja: "木目", en: "Wood",
+    large: { key: "hinoki", bg: "#e6c98d", line: "rgba(88,54,22,0.38)", star: "#71502b", label: "rgba(88,54,22,0.52)", dot: "#3f7255" },
+    small: { key: "hinoki-light", bg: "#f0ddb3", line: "rgba(88,54,22,0.30)", star: "#81603a", label: "rgba(88,54,22,0.45)", dot: "#3f7255" }
+  }
+];
+// 詳細ページ冒頭の「白4候補図」は珠型全体を理解する案内図として最も重要なので、
+// 通常のクリームより少し深みのある色にして、他の変化図より目立たせる。
+const BASE_BOARD_COLOR = { key: "cream-deep", bg: "#e9dcb3", line: "rgba(80,58,20,0.42)", star: "rgba(80,58,20,0.6)", label: "rgba(80,58,20,0.5)", dot: "rgba(150,86,18,0.78)" };
+// トップページの珠型カード(3手目までのミニ盤面)用。基本図よりさらに淡いクリームにして、
+// 一覧を俯瞰したときにうるさくならないようにする。
+const CARD_BOARD_COLOR = { key: "cream-card", bg: "#f6f0dc", line: "rgba(100,80,45,0.24)", star: "rgba(100,80,45,0.4)", label: "rgba(100,80,45,0.4)", dot: "rgba(150,86,18,0.6)" };
+const STONE_STYLE_OPTIONS = [
+  { key: "flat", ja: "シンプル", en: "Simple" },
+  { key: "3d",   ja: "立体",     en: "3D" }
+];
+// 既定を立体(3d)にして、v1.htmlのような少し格調のある見た目にする。ただし五珠候補の
+// 変化図だけは図の数が多くくどく見えるため、renderBoard呼び出し側でflatStones=trueを
+// 渡して常にシンプル表示を強制する(下のdrawStone/renderBoardのforceFlat引数を参照)。
+const settings = { boardColor: "paper", stoneStyle: "3d" };
+try {
+  const savedSettings = JSON.parse(localStorage.getItem(BOARD_SETTINGS_KEY) || "{}");
+  const migratedBoardColor = savedSettings.boardColor === "ivory" ? "paper" : savedSettings.boardColor === "hinoki" ? "wood" : savedSettings.boardColor;
+  if (BOARD_COLOR_OPTIONS.some(o => o.key === migratedBoardColor)) settings.boardColor = migratedBoardColor;
+  if (savedSettings.stoneStyle) settings.stoneStyle = savedSettings.stoneStyle;
+} catch (e) { /* 壊れたデータは無視してデフォルトのまま使う */ }
+
+function saveSettings(){
+  localStorage.setItem(LANG_KEY, currentLang);
+  localStorage.setItem(BOARD_SETTINGS_KEY, JSON.stringify(settings));
+}
+function applyTheme(){
+  document.body.classList.remove("theme-dark");
+}
+function currentBoardDesign(){
+  return BOARD_COLOR_OPTIONS.find(o => o.key === settings.boardColor) || BOARD_COLOR_OPTIONS[0];
+}
+function currentBoardOption(){
+  return currentBoardDesign().small;
+}
+function currentLargeBoardOption(){
+  return currentBoardDesign().large;
+}
+
+// UI(チュートリアル文・ボタン名など)の文言はここに集約する。珠型データ本体
+// (DATA.name/comment/evalTagsやヘルプページの仮テキスト)は翻訳対象外
+// (実際の指南書の内容そのものなので、内容確定後に別途対応する)。
+const I18N = {
+  ja: {
+    siteTitle: "Taraguchi-10 五珠指南書",
+    listLead: "黒1は天元に固定し、五珠交替打ちのルールで生まれる基本の珠型です。3手目までの形から、読みたい珠型を選んでください。",
+    listLeadIndirect: "黒1を天元、白2を右斜め上に置いた間接打ちの基本珠型です。3手目までの形から、読みたい珠型を選んでください。",
+    listLeadFavorites: "お気に入りに登録した直接打ち・間接打ちの珠型を、新しく登録した順に表示します。",
+    listTitleDirect: "直接打ち", listTitleIndirect: "間接打ち", listTitleFavorites: "My 珠型",
+    backToList: "珠型一覧へ戻る",
+    pagerPrev: "前の珠型", pagerNext: "次の珠型",
+    openMenu: "メニュー", help: "ヘルプ", settings: "設定",
+    home: "ホーム", modeToggle: "モード切替", langToggle: "言語切替",
+    catFavorites: "My 珠型", catDirect: "直接", catIndirect: "間接", searchAria: "手順検索",
+    shapeListFavorites: "My 珠型", shapeListDirect: "直接珠型", shapeListIndirect: "間接珠型",
+    variations: "五珠候補", variationGuideTitle: "白４と黒５の候補手",
+    variationGuideNote: "A＝黒必勝、C＝白必勝、数字は実戦で有力な候補", share: "共有",
+    openInRenjuMemo: "RenjuMemoで開く", downloadDiagram: "図面ダウンロード",
+    searchTitle: "手順検索", close: "閉じる",
+    searchDesc: "黒1は天元(星印、h8)に固定です。点線はタラグチ10ルール(五珠交替打ち)で次の一手が打てる範囲を示します。5手目だけは、1手を指定する場合と候補を10題宣言する場合とで範囲が異なるため、点線が2本表示されます。範囲内をタップして手順を入力すると、その手順で始まる珠型を探します(部分図一致には対応していません)。",
+    undo: "一手戻す", clear: "クリア", runSearchBtn: "検索",
+    enterMoves: "手順を入力してください", noHits: "一致する珠型が見つかりませんでした",
+    notRegistered: "この珠型はまだ登録されていません", preparing: "準備中",
+    baseDiagram: "基本図", variationDiagram: "変化図",
+    light: "ライト", dark: "ダーク", boardPrefix: "盤のデザイン", stonePrefix: "石",
+    langButtonLabel: "JP",
+    rangeNote2: "白2：天元から1路以内（点線内）に置けます",
+    rangeNote3: "黒3：天元から2路以内（点線内）に置けます",
+    rangeNote4: "白4：天元から3路以内（点線内）に置けます",
+    rangeNoteFree: "盤上の空いている交点に置けます",
+    editMode: "編集モード", editModeTitle: "編集モード",
+    editModeDesc: "珠型図をブラウザ上で編集し、JSONファイルとして書き出せます。この画面での変更はサイトへ自動保存されません。書き出したJSONファイルをオーナーに送って反映してもらってください。",
+    editImport: "JSONを読み込む",
+    editPickExisting: "既存珠型を選んで編集…", editPickTemplate: "未登録の珠型から新規作成…",
+    editBlankNew: "白紙から新規作成",
+    editEmptyNote: "上のメニューから、編集する珠型を選ぶか新規作成してください。",
+    editFieldName: "名称(漢字)", editFieldYomi: "よみ", editFieldIcon: "アイコン画像パス", editFieldComment: "解説コメント",
+    editBaseDiagram: "基本図", editAddVariation: "+ 変化図を追加", editRemoveVariation: "この変化図を削除",
+    editEvalTags: "評価タグ(1行に1つ)",
+    editExport: "JSONを書き出す", editJsonPreview: "JSONプレビュー(コピー用)",
+    editToolBlack: "黒石を置く", editToolWhite: "白石を置く", editToolBranch: "分岐記号を置く", editToolErase: "消す",
+    editToolMoveNumber: "手数", editToolLabelPlaceholder: "記号",
+    editInvalidFields: "書き出す前に、少なくとも「no」と「名称」を入力してください。",
+    editInvalidJson: "JSONとして読み込めませんでした。ファイルの形式を確認してください。",
+    editLoadFailed: "珠型データの読み込みに失敗しました。"
+  },
+  en: {
+    siteTitle: "Taraguchi-10 Guide",
+    listLead: "Black 1 is fixed at tengen. These are the basic shapes that arise under the five-move alternating-declaration rule. Choose a shape by its first three moves.",
+    listLeadIndirect: "Black 1 is fixed at tengen and White 2 is placed diagonally above it. Choose an indirect opening by its first three moves.",
+    listLeadFavorites: "Your favorite direct and indirect openings, with the most recently added shown first.",
+    listTitleDirect: "Direct Openings", listTitleIndirect: "Indirect Openings", listTitleFavorites: "My Shapes",
+    backToList: "Back to shape list",
+    pagerPrev: "Previous shape", pagerNext: "Next shape",
+    openMenu: "Menu", help: "Help", settings: "Settings",
+    home: "Home", modeToggle: "Switch mode", langToggle: "Switch language",
+    catFavorites: "My Shapes", catDirect: "Direct", catIndirect: "Indirect", searchAria: "Move search",
+    shapeListFavorites: "My Shapes", shapeListDirect: "Direct shapes", shapeListIndirect: "Indirect shapes",
+    variations: "Candidates", variationGuideTitle: "White 4 and Black 5 Candidates",
+    variationGuideNote: "A = Black win, C = White win; numbers indicate practical candidate moves", share: "Share",
+    openInRenjuMemo: "Open in RenjuMemo", downloadDiagram: "Download diagram",
+    searchTitle: "Move search", close: "Close",
+    searchDesc: "Black 1 is fixed at tengen (star, h8). The dashed line shows where the next move can be played under the Taraguchi-10 rule. Move 5 shows two dashed lines, since the allowed range differs depending on whether one move is specified or 10 candidates are declared. Tap inside the range to build a sequence and search for shapes that start with it (partial-diagram matching is not supported).",
+    undo: "Undo", clear: "Clear", runSearchBtn: "Search",
+    enterMoves: "Enter a move sequence", noHits: "No matching shapes found",
+    notRegistered: "This shape hasn't been added yet", preparing: "Coming soon",
+    baseDiagram: "Base diagram", variationDiagram: "Variation ",
+    light: "Light", dark: "Dark", boardPrefix: "Board design", stonePrefix: "Stone",
+    langButtonLabel: "EN",
+    rangeNote2: "White 2: within 1 line of tengen (dashed area)",
+    rangeNote3: "Black 3: within 2 lines of tengen (dashed area)",
+    rangeNote4: "White 4: within 3 lines of tengen (dashed area)",
+    rangeNoteFree: "Place on any empty intersection",
+    editMode: "Edit mode", editModeTitle: "Edit mode",
+    editModeDesc: "Edit a shape's diagrams in the browser and export it as a JSON file. Changes here are not auto-saved to the site — send the exported JSON file to the site owner to publish it.",
+    editImport: "Load JSON",
+    editPickExisting: "Edit an existing shape…", editPickTemplate: "Start a new shape from an unregistered slot…",
+    editBlankNew: "Start blank",
+    editEmptyNote: "Choose a shape to edit above, or start a new one.",
+    editFieldName: "Name (kanji)", editFieldYomi: "Reading", editFieldIcon: "Icon path", editFieldComment: "Commentary",
+    editBaseDiagram: "Base diagram", editAddVariation: "+ Add variation", editRemoveVariation: "Remove this variation",
+    editEvalTags: "Evaluation tags (one per line)",
+    editExport: "Export JSON", editJsonPreview: "JSON preview (for copying)",
+    editToolBlack: "Place black stone", editToolWhite: "Place white stone", editToolBranch: "Place branch label", editToolErase: "Erase",
+    editToolMoveNumber: "Move #", editToolLabelPlaceholder: "Label",
+    editInvalidFields: "Please fill in at least \"no\" and \"name\" before exporting.",
+    editInvalidJson: "This file could not be read as JSON. Please check the file format.",
+    editLoadFailed: "Failed to load this shape's data."
+  }
+};
+function t(key){
+  return (I18N[currentLang] && I18N[currentLang][key]) || I18N.ja[key] || key;
+}
+// data-i18n(本文)/data-i18n-title(aria-label+title)を持つ要素をすべて
+// 現在の言語に合わせて書き換える。言語切替のたびに呼び直す。
+function applyI18n(){
+  const brandBtn = document.getElementById("brandBtn");
+  if (currentLang === "ja"){
+    brandBtn.innerHTML = `Taraguchi-10 <span class="brand-ja-second">五珠指南書</span>`;
+  } else {
+    brandBtn.textContent = "Taraguchi-10 Guide";
+  }
+  document.title = t("siteTitle");
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach(el => {
+    const label = t(el.dataset.i18nTitle);
+    el.setAttribute("aria-label", label);
+    el.title = label;
+  });
+  const sort = document.getElementById("listSort");
+  if (sort){
+    sort.options[0].textContent = currentLang === "ja" ? "番号順" : "Number";
+    sort.options[1].textContent = currentLang === "ja" ? "お気に入り順" : "Favorites";
+    sort.options[2].textContent = currentLang === "ja" ? "最近見た順" : "Recently viewed";
+    sort.setAttribute("aria-label", currentLang === "ja" ? "並び順" : "Sort order");
+  }
+}
+
+// サイトの更新日時ではなく、指南内容の結論が変わった時点を表示する。
+// ファイル更新時刻とは同期せず、編集者がdata/site-meta.jsonを明示的に更新する。
+async function loadContentRevisionDate(){
+  try {
+    const res = await fetch("data/site-meta.json", { cache: "no-cache" });
+    if (!res.ok) return;
+    const meta = await res.json();
+    if (meta.contentRevisionDate){
+      document.getElementById("contentRevisionDate").textContent = `last update  ${meta.contentRevisionDate}`;
+    }
+  } catch (err){
+    console.warn("内容基準日を読み込めませんでした。HTML内の仮日付を表示します。", err);
+  }
+}
+
+// 珠型データはこのファイルへ直書きせず、珠型ごとの外部JSON(data/direct/*.json、
+// 将来のdata/indirect/*.json)から読み込む。プログラム本体(このファイル)と
+// 管理者が更新するデータを分離し、管理者はJSONファイル1つの差し替えだけで
+// 内容を更新できるようにするため(編集モード=editViewが、そのJSONの作成・
+// 書き出しを助けるツールになる)。
+let DATA = null;          // 現在表示中の珠型データ(選択されるまではnull)
+let currentShapeNo = null; // サイドバーの選択状態(shape.no)の判定に使う
+const shapeDataCache = {}; // 一度読み込んだJSONはdataFileごとに使い回す
+
+// --- 編集モードの入口を隠す仕組み -----------------------------------------
+// 通常のメニューには編集ボタンを出さず、URLに合言葉付きのパラメータ
+// (?edit=合言葉)が付いているときだけボタンを表示する。管理者にはこの
+// 合言葉付きのURLを直接伝える運用を想定している。
+// 注意: これは本物のアクセス制御ではない。ログインもサーバーも無い静的サイト
+// なので、合言葉自体もこのファイルのソースを見れば誰でも分かってしまう。
+// あくまで「普段の閲覧でうっかり編集ボタンを見つけて押してしまう」ことを
+// 防ぐための軽い仕組みで、実際の被害を防いでいるのは編集モードが
+// 「書き出し(ダウンロード)のみでサイトへ自動保存しない」設計そのものの方。
+// 合言葉を変えたいときは、下のEDIT_ACCESS_TOKENの値を書き換えるだけでよい。
+const EDIT_ACCESS_PARAM = "edit";
+const EDIT_ACCESS_TOKEN = "taraguchi-kanri";
+function hasEditAccess(){
+  try {
+    return new URLSearchParams(location.search).get(EDIT_ACCESS_PARAM) === EDIT_ACCESS_TOKEN;
+  } catch (e){
+    return false;
+  }
+}
+function revealEditButtonsIfAllowed(){
+  document.getElementById("editBtn").hidden = !hasEditAccess();
+}
+
+// RenjuMemo本体(js/main.js)のdrawBoardBackgroundと全く同じ描き方。下地色は
+// geoで指定した範囲(min〜max)の内側だけに塗り、グリッド線・星目もその範囲だけ
+// 描く(珠型図は7x7の局所ウィンドウなので、範囲外の星目は自動的に描かれない)。
+// 符号(A〜O・1〜15)はgeo.showCoordsがtrueのとき(検索盤)だけ描く。
+function drawBoardVector(ctx, geo, boardColorOverride){
+  const boardDef = boardColorOverride || currentBoardOption();
+  const { originX, originY, step, min, max } = geo;
+  const x0 = originX + min * step, x1 = originX + max * step;
+  const y0 = originY - min * step, y1 = originY - max * step;
+
+  ctx.save();
+  // 検索盤は座標を置く外周と15路の盤面を分離する。設定で選んだ紙・木目の色は
+  // 罫線の内側だけに塗り、外周はカードと同系色の余白にする。
+  if (geo.showCoords){
+    ctx.fillStyle = document.body.classList.contains("theme-dark") ? "#302d27" : "#fbf8ef";
+    ctx.fillRect(0, 0, geo.canvasW, geo.canvasH);
+    ctx.fillStyle = boardDef.bg;
+    ctx.fillRect(x0, y1, x1 - x0, y0 - y1);
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x0, y1, x1 - x0, y0 - y1);
+    ctx.clip();
+  } else {
+    ctx.fillStyle = boardDef.bg;
+    ctx.fillRect(0, 0, geo.canvasW, geo.canvasH);
+  }
+
+  // 承認済みの盤見本と同じ、控えめな紙・木の表情。乱数は固定して再描画時のちらつきを防ぐ。
+  if (boardDef.key === "ivory" || boardDef.key === "ivory-deep" || boardDef.key === "cream" || boardDef.key === "wafu"){
+    const shade = ctx.createRadialGradient(geo.canvasW*.48,geo.canvasH*.44,geo.canvasW*.08,geo.canvasW*.5,geo.canvasH*.5,geo.canvasW*.72);
+    shade.addColorStop(0,"rgba(255,255,255,.055)");
+    shade.addColorStop(1,(boardDef.key === "ivory" || boardDef.key === "ivory-deep") ? "rgba(82,64,31,.055)" : "rgba(82,54,20,.045)");
+    ctx.fillStyle = shade; ctx.fillRect(0,0,geo.canvasW,geo.canvasH);
+    let seed = 19790317;
+    for (let i=0;i<150;i++){
+      seed = (seed * 1664525 + 1013904223) >>> 0; const x = (seed / 4294967296) * geo.canvasW;
+      seed = (seed * 1664525 + 1013904223) >>> 0; const y = (seed / 4294967296) * geo.canvasH;
+      seed = (seed * 1664525 + 1013904223) >>> 0; const a = .012 + (seed / 4294967296) * .018;
+      ctx.fillStyle = `rgba(91,69,34,${a})`; ctx.fillRect(x,y,1,1);
+    }
+  } else if (boardDef.key === "hinoki" || boardDef.key === "hinoki-light"){
+    ctx.strokeStyle = "rgba(104,61,21,.035)"; ctx.lineWidth = 1;
+    for (let x=7;x<geo.canvasW;x+=13){ ctx.beginPath(); ctx.moveTo(x,0); ctx.bezierCurveTo(x+3,geo.canvasH*.32,x-2,geo.canvasH*.68,x+1,geo.canvasH); ctx.stroke(); }
+  }
+
+  if (geo.showCoords) ctx.restore();
+
+  ctx.strokeStyle = boardDef.line;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  const gridStart = geo.hideOuterGrid ? min + 1 : min;
+  const gridEnd = geo.hideOuterGrid ? max - 1 : max;
+  const lineLeft = geo.partialDiagram ? 0 : x0;
+  const lineRight = geo.partialDiagram ? geo.canvasW : x1;
+  const lineTop = geo.partialDiagram ? 0 : y1;
+  const lineBottom = geo.partialDiagram ? geo.canvasH : y0;
+  for (let i = gridStart; i <= gridEnd; i++){ const x = originX + i * step; ctx.moveTo(x, lineTop); ctx.lineTo(x, lineBottom); }
+  for (let i = gridStart; i <= gridEnd; i++){ const y = originY - i * step; ctx.moveTo(lineLeft, y); ctx.lineTo(lineRight, y); }
+  ctx.stroke();
+
+  ctx.fillStyle = boardDef.star;
+  if (geo.showStars !== false){
+    STAR_POINTS.forEach(([sx, sy]) => {
+      if (sx < min || sx > max || sy < min || sy > max) return;
+      const px = originX + sx * step, py = originY - sy * step;
+      ctx.beginPath(); ctx.arc(px, py, Math.max(2, step * 0.07), 0, Math.PI * 2); ctx.fill();
+    });
+  }
+
+  if (geo.showCoords){
+    ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--board-label-color").trim() || boardDef.label;
+    ctx.font = `${Math.round(step * 0.32)}px -apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif`;
+    ctx.textAlign = "center"; ctx.textBaseline = "top";
+    LETTERS.forEach((letter, i) => {
+      if (i < min || i > max) return;
+      ctx.fillText(letter, originX + i * step, y0 + geo.margin * 0.22);
+    });
+    ctx.textAlign = "right"; ctx.textBaseline = "middle";
+    for (let i = min; i <= max; i++){
+      ctx.fillText(String(i + 1), x0 - geo.margin * 0.28, originY - i * step);
+    }
+  }
+  ctx.restore();
+}
+
+// タラグチ10ルールで、次の一手が打てる範囲(天元からのチェビシェフ距離)を
+// 点線の正方形で示す。範囲外をタップしても石は置けない。
+function drawRangeBoundary(ctx, geo, radius, style){
+  style = style || {};
+  const half = geo.step / 2;
+  const tl = geo.cellToPixel(TENGEN.x - radius, TENGEN.y + radius);
+  const br = geo.cellToPixel(TENGEN.x + radius, TENGEN.y - radius);
+  ctx.save();
+  ctx.strokeStyle = style.color || "#2f6f52";
+  ctx.lineWidth = style.lineWidth || 2;
+  ctx.setLineDash(style.dash || [7, 5]);
+  ctx.strokeRect(tl.px - half, tl.py - half, (br.px - tl.px) + geo.step, (br.py - tl.py) + geo.step);
+  ctx.restore();
+}
+
+// 実際に打たれた石(1,2,3,4...)。4手目だけはPDFにならい赤字で番号を表示し、
+// その変化図で注目してほしい一手だとひと目でわかるようにする。
+// RenjuMemo初期版(v1.html)のcreateStoneFill/drawStoneと全く同じ配色・グラデーション・
+// 影の付き方にしている(影のぼかし量へのdevicePixelRatio倍率も含めて忠実に再現)。
+// flat引数がtrueのときは、settings.stoneStyleの値に関わらずシンプル表示を強制する
+// (五珠候補の変化図だけ、図の数が多くてもくどく見えないよう常にこちらを使う)。
+function createStoneFill(ctx, px, py, r, isBlack, flat){
+  if (flat || settings.stoneStyle === "flat"){
+    return isBlack ? "#20201e" : "#ffffff";
+  }
+  const g = ctx.createRadialGradient(px - r*0.36, py - r*0.42, r*0.06, px, py, r*1.04);
+  if (isBlack){
+    g.addColorStop(0, "#4e4941"); g.addColorStop(0.35, "#312e29"); g.addColorStop(0.75, "#201d19"); g.addColorStop(1, "#14110d");
+  } else {
+    g.addColorStop(0, "#ffffff"); g.addColorStop(0.45, "#faf6ec"); g.addColorStop(0.85, "#eee4d0"); g.addColorStop(1, "#dccfb6");
+  }
+  return g;
+}
+
+function drawStone(ctx, px, py, r, color, n, flat){
+  const isBlack = color === "black";
+  const isFlat = flat || settings.stoneStyle === "flat";
+  ctx.beginPath(); ctx.arc(px, py, r, 0, Math.PI*2);
+  ctx.fillStyle = createStoneFill(ctx, px, py, r, isBlack, flat);
+
+  if (isFlat){
+    ctx.fill();
+    ctx.lineWidth = Math.max(0.6, Math.min(1, r * 0.062));
+    ctx.strokeStyle = "#333";
+    ctx.stroke();
+  } else {
+    ctx.save();
+    // RenjuMemo本体はcanvas解像度自体はdpr倍していないが、影のぼかし量だけ
+    // devicePixelRatioを掛けている(main.jsのdrawStoneと同じ)。ここを省略すると
+    // Retinaディスプレイで本体より影が控えめに見えてしまうため、忠実に合わせる。
+    const dpr = window.devicePixelRatio || 1;
+    ctx.shadowColor = "rgba(38, 24, 10, 0.32)";
+    ctx.shadowBlur = r * 0.45 * dpr;
+    ctx.shadowOffsetY = r * 0.16 * dpr;
+    ctx.fill();
+    ctx.restore();
+
+    ctx.beginPath();
+    ctx.arc(px, py, r - 0.25, 0, Math.PI*2);
+    ctx.lineWidth = Math.max(0.5, r * 0.03);
+    ctx.strokeStyle = isBlack ? "rgba(0, 0, 0, 0.2)" : "rgba(74, 54, 34, 0.28)";
+    ctx.stroke();
+  }
+
+  if (n){
+    const numberScale = String(n).length >= 2 ? 0.95 : 1;
+    ctx.font = `${n === 4 ? 700 : 600} ${Math.round(r*0.95*0.95*numberScale*0.9)}px -apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif`;
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    // 4手目だけはPDFにならい赤字で表示し、その変化図で注目してほしい一手だと
+    // ひと目でわかるようにする(この珠型ツール独自のルールで、RenjuMemo本体にはない)。
+    ctx.fillStyle = (n === 4) ? "#c47732" : (isBlack ? "rgba(255,255,255,0.92)" : "rgba(30,30,28,0.85)");
+    ctx.fillText(String(n), px, py + r*0.05);
+  }
+}
+
+// RenjuMemo本体の局面検索(js/main.js wireSearchPanel)の石はsettings.stoneStyleを
+// 一切見ず、常にこの通りのシンプルな塗り(グラデーション・影なし)で描かれる。検索盤
+// だけこの専用関数を使い、「立体」設定を選んでいても検索盤では常にフラット表示にする
+// (これが前回「シャドウが違って見える」の原因だった。RenjuMemo本体の検索盤は
+// そもそも立体スタイルを反映しない作りになっている)。
+function drawSearchStone(ctx, px, py, r, color, n){
+  const isBlack = color === "black";
+  ctx.beginPath();
+  ctx.arc(px, py, r, 0, Math.PI * 2);
+  ctx.fillStyle = isBlack ? "#20201e" : "#ffffff";
+  ctx.fill();
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = "#333";
+  ctx.stroke();
+  if (n){
+    ctx.save();
+    ctx.font = `600 ${Math.round(r * 0.95)}px -apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = isBlack ? "rgba(255,255,255,0.92)" : "rgba(30,30,28,0.85)";
+    ctx.fillText(String(n), px, py + r * 0.05);
+    ctx.restore();
+  }
+}
+
+// 候補手・参考情報のラベル(a, A, 9, 10など)は石ではないので丸で囲まず、
+// 文字だけを表示する。実際の石(丸)とひと目で区別できるようにするため。色は
+// 呼び出し側から指定できる(未指定時はブランドカラーの深緑で統一)。
+function drawBranch(ctx, px, py, r, letter, color, serif, fontScale){
+  ctx.save();
+  ctx.font = `700 ${Math.round(r*0.95*(fontScale || 1))}px ${serif ? '"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif' : '-apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif'}`;
+  ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillStyle = color || "#2f6f52";
+  ctx.fillText(letter, px, py + r*0.05);
+  ctx.restore();
+}
+
+// flatStones=trueのときは、settings.stoneStyleが立体(3d)でも常にシンプルな石で描く
+// (五珠候補の変化図一覧で使う。図が多くても装飾がくどくならないようにするため)。
+function renderBoard(canvas, moves, branches, geo, branchColor, boardColorOverride, flatStones, branchSerif, branchFontScale){
+  geo = geo || JOSEKI_GEO;
+  canvas.width = geo.canvasW; canvas.height = geo.canvasH;
+  const ctx = canvas.getContext("2d");
+  drawBoardVector(ctx, geo, boardColorOverride);
+  const stoneDraw = geo.forceFlatStones
+    ? drawSearchStone
+    : (c, px, py, r, color, n) => drawStone(c, px, py, r, color, n, flatStones);
+  moves.forEach(m => { const p = geo.cellToPixel(m.x, m.y); stoneDraw(ctx, p.px, p.py, geo.stoneR, m.color, m.n); });
+  (branches || []).forEach(b => {
+    const p = geo.cellToPixel(b.x, b.y);
+    const px = p.px + (b.offsetX || 0) * geo.step;
+    const py = p.py - (b.offsetY || 0) * geo.step;
+    drawBranch(ctx, px, py, geo.stoneR, b.label, branchColor, branchSerif, branchFontScale);
+  });
+}
+
+let currentCategory = "direct";
+
+// 直接系珠型13種の一覧(icon/d1〜d13.svg)。Direct2(渓月)だけ実データ(DATA)が
+// あるので一覧ではDATA側の内容で描画し、それ以外は無効化したプレビュー行として
+// 並べる。noはDATA.noとの照合用の内部ID(詳細ページ見出しの"Direct2"表記に合わせる)、
+// labelは左メニュー表示用の短縮表記("D1"〜"D13")。kanji/romajiは公益社団法人
+// 日本連珠社「基本珠型」(https://renjusha.net/words/posts/基本珠型/)の直接一号〜
+// 十三号の表記、およびrenju.net「26 Renju Openings」(https://www.renju.net/openings/)
+// の英語表記に基づく(D11のみ、renju.netは"Zuigetsu"表記だが、瑞星の音読みおよび
+// アイコンファイル名(d11_zuisei.svg)に合わせて"Zuisei"を採用。renju.net側の表記
+// ゆれの可能性がある)。
+// dataFileを持つ珠型だけが実際にクリックできる(=対応するJSONが存在する)。
+// 持たない珠型は従来通り「準備中」の無効プレースホルダーとして並ぶだけ。
+// 今後、管理者がJSONを追加した珠型からdataFileを埋めていく想定。
+const DIRECT_SHAPES = [
+  { no: "Direct1",  label: "D1",  kanji: "寒星", romaji: "Kansei",    icon: "icon/d1_kansei.svg", dataFile: "data/direct/d1_kansei.json" },
+  { no: "Direct2",  label: "D2",  kanji: "渓月", romaji: "Keigetsu",  icon: "icon/d2_keigetsu.svg", dataFile: "data/direct/d2_keigetsu.json" },
+  { no: "Direct3",  label: "D3",  kanji: "疎星", romaji: "Sosei",     icon: "icon/d3_sosei.svg", dataFile: "data/direct/d3_sosei.json" },
+  { no: "Direct4",  label: "D4",  kanji: "花月", romaji: "Kagetsu",   icon: "icon/d4_kagetsu.svg", dataFile: "data/direct/d4_kagetsu.json" },
+  { no: "Direct5",  label: "D5",  kanji: "残月", romaji: "Zangetsu",  icon: "icon/d5_zangetsu.svg", dataFile: "data/direct/d5_zangetsu.json" },
+  { no: "Direct6",  label: "D6",  kanji: "雨月", romaji: "Ugetsu",    icon: "icon/d6_zangetsu.svg", dataFile: "data/direct/d6_ugetsu.json" },
+  { no: "Direct7",  label: "D7",  kanji: "金星", romaji: "Kinsei",    icon: "icon/d7_kinsei.svg", dataFile: "data/direct/d7_kinsei.json" },
+  { no: "Direct8",  label: "D8",  kanji: "松月", romaji: "Shogetsu",  icon: "icon/d8_shogetsu.svg", dataFile: "data/direct/d8_shogetsu.json" },
+  { no: "Direct9",  label: "D9",  kanji: "丘月", romaji: "Kyugetsu",  icon: "icon/d9_kyugetsu.svg", dataFile: "data/direct/d9_kyugetsu.json" },
+  { no: "Direct10", label: "D10", kanji: "新月", romaji: "Shingetsu", icon: "icon/d10_shingetsu.svg", dataFile: "data/direct/d10_shingetsu.json" },
+  { no: "Direct11", label: "D11", kanji: "瑞星", romaji: "Zuisei",    icon: "icon/d11_zuisei.svg", dataFile: "data/direct/d11_zuisei.json" },
+  { no: "Direct12", label: "D12", kanji: "山月", romaji: "Sangetsu",  icon: "icon/d12_sangetsu.svg", dataFile: "data/direct/d12_sangetsu.json" },
+  { no: "Direct13", label: "D13", kanji: "遊星", romaji: "Yusei",     icon: "icon/d13_yusei.svg", dataFile: "data/direct/d13_yusei.json" }
+];
+// 間接打ち13珠型。詳細データはPDFから図ごとの座標を読み取り、個別JSONに分離する。
+const INDIRECT_SHAPES = [
+  { no:"Indirect1",  label:"I1",  kanji:"長星", romaji:"Chosei",   icon:"icon/indirect.svg", dataFile:"data/indirect/i1_chosei.json" },
+  { no:"Indirect2",  label:"I2",  kanji:"峡月", romaji:"Kyogetsu", icon:"icon/indirect.svg", dataFile:"data/indirect/i2_kyogetsu.json" },
+  { no:"Indirect3",  label:"I3",  kanji:"恒星", romaji:"Kosei",    icon:"icon/indirect.svg", dataFile:"data/indirect/i3_kosei.json" },
+  { no:"Indirect4",  label:"I4",  kanji:"水月", romaji:"Suigetsu", icon:"icon/indirect.svg", dataFile:"data/indirect/i4_suigetsu.json" },
+  { no:"Indirect5",  label:"I5",  kanji:"流星", romaji:"Ryusei",   icon:"icon/indirect.svg", dataFile:"data/indirect/i5_ryusei.json" },
+  { no:"Indirect6",  label:"I6",  kanji:"雲月", romaji:"Ungetsu",  icon:"icon/indirect.svg", dataFile:"data/indirect/i6_ungetsu.json" },
+  { no:"Indirect7",  label:"I7",  kanji:"浦月", romaji:"Hogetsu",  icon:"icon/indirect.svg", dataFile:"data/indirect/i7_hogetsu.json" },
+  { no:"Indirect8",  label:"I8",  kanji:"嵐月", romaji:"Rangetsu", icon:"icon/indirect.svg", dataFile:"data/indirect/i8_rangetsu.json" },
+  { no:"Indirect9",  label:"I9",  kanji:"銀月", romaji:"Gingetsu", icon:"icon/indirect.svg", dataFile:"data/indirect/i9_gingetsu.json" },
+  { no:"Indirect10", label:"I10", kanji:"明星", romaji:"Myojo",     icon:"icon/indirect.svg", dataFile:"data/indirect/i10_myojo.json" },
+  { no:"Indirect11", label:"I11", kanji:"斜月", romaji:"Shagetsu", icon:"icon/indirect.svg", dataFile:"data/indirect/i11_shagetsu.json" },
+  { no:"Indirect12", label:"I12", kanji:"名月", romaji:"Meigetsu", icon:"icon/indirect.svg", dataFile:"data/indirect/i12_meigetsu.json" },
+  { no:"Indirect13", label:"I13", kanji:"彗星", romaji:"Suisei",   icon:"icon/indirect.svg", dataFile:"data/indirect/i13_suisei.json" }
+];
+const SHAPE_CATALOG = { direct: DIRECT_SHAPES, indirect: INDIRECT_SHAPES };
+// 一覧専用の3手図。PDFの基本珠型と既存SVGアイコンを照合し、天元を黒1=(7,7)に正規化。
+// 詳細JSONが未入力でも一覧盤だけは完成形で表示できるよう、詳細データとは分離する。
+const DIRECT_PREVIEW_MOVES = {
+  Direct1:  [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:7,y:9,color:"black",n:3}],
+  Direct2:  [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:8,y:9,color:"black",n:3}],
+  Direct3:  [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:9,y:9,color:"black",n:3}],
+  Direct4:  [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:8,y:8,color:"black",n:3}],
+  Direct5:  [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:9,y:8,color:"black",n:3}],
+  Direct6:  [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:8,y:7,color:"black",n:3}],
+  Direct7:  [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:9,y:7,color:"black",n:3}],
+  Direct8:  [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:7,y:6,color:"black",n:3}],
+  Direct9:  [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:8,y:6,color:"black",n:3}],
+  Direct10: [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:9,y:6,color:"black",n:3}],
+  Direct11: [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:7,y:5,color:"black",n:3}],
+  Direct12: [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:8,y:5,color:"black",n:3}],
+  Direct13: [{x:7,y:7,color:"black",n:1},{x:7,y:8,color:"white",n:2},{x:9,y:5,color:"black",n:3}],
+  Indirect1:  [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:9,y:9,color:"black",n:3}],
+  Indirect2:  [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:9,y:8,color:"black",n:3}],
+  Indirect3:  [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:9,y:7,color:"black",n:3}],
+  Indirect4:  [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:9,y:6,color:"black",n:3}],
+  Indirect5:  [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:9,y:5,color:"black",n:3}],
+  Indirect6:  [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:8,y:7,color:"black",n:3}],
+  Indirect7:  [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:8,y:6,color:"black",n:3}],
+  Indirect8:  [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:8,y:5,color:"black",n:3}],
+  Indirect9:  [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:7,y:6,color:"black",n:3}],
+  Indirect10: [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:7,y:5,color:"black",n:3}],
+  Indirect11: [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:6,y:6,color:"black",n:3}],
+  Indirect12: [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:6,y:5,color:"black",n:3}],
+  Indirect13: [{x:7,y:7,color:"black",n:1},{x:8,y:8,color:"white",n:2},{x:5,y:5,color:"black",n:3}]
+};
+const SHAPE_YOMI = {
+  Direct1:"かんせい",Direct2:"けいげつ",Direct3:"そせい",Direct4:"かげつ",Direct5:"ざんげつ",
+  Direct6:"うげつ",Direct7:"きんせい",Direct8:"しょうげつ",Direct9:"きゅうげつ",Direct10:"しんげつ",
+  Direct11:"ずいせい",Direct12:"さんげつ",Direct13:"ゆうせい",
+  Indirect1:"ちょうせい",Indirect2:"きょうげつ",Indirect3:"こうせい",Indirect4:"すいげつ",
+  Indirect5:"りゅうせい",Indirect6:"うんげつ",Indirect7:"ほげつ",Indirect8:"らんげつ",
+  Indirect9:"ぎんげつ",Indirect10:"みょうじょう",Indirect11:"しゃげつ",Indirect12:"めいげつ",Indirect13:"すいせい"
+};
+const FAVORITES_KEY = "taraguchiCodex:favorites:v1";
+const RECENTS_KEY = "taraguchiCodex:recents:v1";
+let favoriteOrder = JSON.parse(localStorage.getItem(FAVORITES_KEY) || "[]");
+let favoriteShapes = new Set(favoriteOrder);
+let recentShapes = JSON.parse(localStorage.getItem(RECENTS_KEY) || "{}");
+// お気に入りがあれば次回訪問時はMy珠型から開始し、未登録なら直接打ちを維持する。
+currentCategory = favoriteOrder.length ? "favorites" : "direct";
+document.querySelectorAll(".header-cat-group .nav-pill[data-cat]").forEach(btn => {
+  btn.classList.toggle("active", btn.dataset.cat === currentCategory);
+});
+
+function shapeNameMarkup(shape){
+  return currentLang === "en" ? shape.romaji : shape.kanji;
+}
+function shapeYomiMarkup(shape){
+  return currentLang === "ja" ? `<small class="shape-card-yomi">${SHAPE_YOMI[shape.no] || ""}</small>` : "";
+}
+function favoriteButtonMarkup(shape){
+  const active = favoriteShapes.has(shape.no);
+  return `<button class="shape-favorite${active ? " is-favorite" : ""}" type="button" data-favorite="${shape.no}" aria-label="${active ? "お気に入りから外す" : "お気に入りに追加"}" aria-pressed="${active}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg></button>`;
+}
+function sortedShapes(shapes){
+  return shapes.slice();
+}
+function favoriteShapesNewestFirst(){
+  const byNo = new Map([...DIRECT_SHAPES, ...INDIRECT_SHAPES].map(shape => [shape.no, shape]));
+  return favoriteOrder.slice().reverse().map(no => byNo.get(no)).filter(Boolean);
+}
+
+// 共有の英語対応表に基づき、図の評価語だけを英訳する。
+// 数字や記号は原文のまま残し、長い語から置換して部分一致の衝突を防ぐ。
+const EVALUATION_TRANSLATIONS = [
+  ["黒主導〜有利", "Black initiative–advantage"],
+  ["黒やや有利", "Black slight advantage"], ["白やや有利", "White slight advantage"],
+  ["盤端重要", "Border line matters"], ["黒必勝", "Black win"],
+  ["黒優勢", "Black huge advantage"], ["黒有利", "Black advantage"],
+  ["黒主導", "Black initiative"], ["白主導", "White initiative"],
+  ["白有利", "White advantage"], ["白優勢", "White huge advantage"],
+  ["互角", "Balanced"], ["難解", "Complicated"]
+];
+function evaluationText(text){
+  if (currentLang !== "en") return text;
+  return EVALUATION_TRANSLATIONS.reduce((result, pair) => result.split(pair[0]).join(pair[1]), text);
+}
+
+// 珠型名表示は言語連動: 日本語は漢字、英語はローマ字表記。
+function shapeDisplayName(shape){
+  return currentLang === "ja" ? shape.kanji : shape.romaji;
+}
+
+// カード/詳細で珠型を選んだときに、対応するJSONを読み込んでDATAへ差し替える。
+// 一度読み込んだJSONはshapeDataCacheに保持し、同じ珠型を再度開いても
+// 通信を発生させない。
+async function selectShape(shape, options){
+  if (!shape || !shape.dataFile) return;
+  options = options || {};
+  try {
+    if (currentCategory !== "favorites" || options.preserveCategory === false){
+      currentCategory = INDIRECT_SHAPES.includes(shape) ? "indirect" : "direct";
+    }
+    document.querySelectorAll(".header-cat-group .nav-pill[data-cat]").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.cat === currentCategory);
+    });
+    if (!shapeDataCache[shape.dataFile]){
+      const res = await fetch(shape.dataFile, { cache: "no-cache" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      shapeDataCache[shape.dataFile] = await res.json();
+    }
+    DATA = shapeDataCache[shape.dataFile];
+    currentShapeNo = shape.no;
+    recentShapes[shape.no] = Date.now();
+    localStorage.setItem(RECENTS_KEY, JSON.stringify(recentShapes));
+    buildDetail();
+    renderDetailBoards();
+    renderDetailPager();
+    showDetailView();
+    if (options.updateRoute !== false){
+      const nextHash = `#${shape.label}`;
+      if (location.hash !== nextHash) history.pushState({ shape: shape.label }, "", nextHash);
+    }
+  } catch (err){
+    console.error("珠型データの読み込みに失敗しました:", shape.dataFile, err);
+    alert(currentLang === "en"
+      ? "Failed to load this shape's data. Please check your connection and try again."
+      : "珠型データの読み込みに失敗しました。通信状態を確認してもう一度お試しください。");
+  }
+}
+
+// --- トップページ(珠型一覧)。3手目までの珠型を規則正しいグリッドで並べ、
+// まず全体を見渡してから読みたい珠型を選べるようにする(以前の左サイドバーの
+// 置き換え)。dataFileを持つ珠型だけ実際の盤面(3手だけの局面)を描き、
+// 持たない珠型は「準備中」の空盤面カードとして並べる。 ---
+function buildShapeGrid(){
+  const grid = document.getElementById("shapeGrid");
+  grid.innerHTML = "";
+  const isFavorites = currentCategory === "favorites";
+  document.querySelector(".list-title").textContent = isFavorites ? t("listTitleFavorites") : currentCategory === "direct" ? t("listTitleDirect") : t("listTitleIndirect");
+  document.querySelector(".list-title-en").textContent = isFavorites ? "FAVORITES" : currentCategory === "direct" ? "DIRECT OPENINGS" : "INDIRECT OPENINGS";
+  document.querySelector(".list-lead").textContent = isFavorites ? t("listLeadFavorites") : currentCategory === "direct" ? t("listLead") : t("listLeadIndirect");
+  document.getElementById("listCategoryLabel").textContent = isFavorites ? t("shapeListFavorites") : currentCategory === "direct" ? t("shapeListDirect") : t("shapeListIndirect");
+
+  const shapes = isFavorites ? favoriteShapesNewestFirst() : sortedShapes(SHAPE_CATALOG[currentCategory] || []);
+  if (!shapes.length){
+    const note = document.createElement("div");
+    note.className = "empty-note";
+    note.textContent = isFavorites
+      ? (currentLang === "ja" ? "お気に入りはまだありません。珠型カードのハートから追加できます。" : "No favorites yet. Add one from the heart on a shape card.")
+      : t("notRegistered");
+    grid.appendChild(note);
+    return;
+  }
+  shapes.forEach(shape => {
+      const card = document.createElement("div");
+      card.className = "shape-card" + (shape.dataFile ? "" : " is-placeholder");
+      card.dataset.shapeNo = shape.no;
+      if (shape.dataFile){
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      }
+      card.innerHTML =
+        `<span class="shape-card-board"><canvas></canvas></span>` +
+        `<span class="shape-card-body">` +
+        `<span class="shape-card-no${currentLang === "en" ? " is-en" : ""}">${shape.label}</span>` +
+        `<span class="shape-card-name${currentLang === "en" ? " is-en" : ""}">${shapeNameMarkup(shape)}</span>` +
+        shapeYomiMarkup(shape) +
+        favoriteButtonMarkup(shape) +
+        `</span>`;
+      if (shape.dataFile){
+        card.addEventListener("click", e => { if (!e.target.closest(".shape-favorite")) selectShape(shape); });
+        card.addEventListener("keydown", e => { if ((e.key === "Enter" || e.key === " ") && !e.target.closest(".shape-favorite")){ e.preventDefault(); selectShape(shape); } });
+      }
+      grid.appendChild(card);
+      loadCardBoard(card, shape);
+  });
+}
+
+// カードのミニ盤面(3手目までの局面のみ・候補記号なし)を非同期で描く。
+// 詳細ページを開くときと同じJSON・同じキャッシュを使うので、カードを見てから
+// そのまま詳細を開いても二重に通信は発生しない。
+async function loadCardBoard(card, shape){
+  const canvas = card.querySelector("canvas");
+  const previewMoves = DIRECT_PREVIEW_MOVES[shape.no];
+  if (previewMoves){
+    renderBoard(canvas, previewMoves, [], JOSEKI_GEO, null, null);
+    return;
+  }
+  try {
+    if (!shapeDataCache[shape.dataFile]){
+      const res = await fetch(shape.dataFile, { cache: "no-cache" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      shapeDataCache[shape.dataFile] = await res.json();
+    }
+    const d = shapeDataCache[shape.dataFile];
+    const moves = (d.baseMoves || []).filter(m => m.n <= 3);
+    renderBoard(canvas, moves, [], JOSEKI_GEO, null, null);
+  } catch (err){
+    console.error("珠型カードの盤面読み込みに失敗しました:", shape.dataFile, err);
+  }
+}
+
+function setupCategorySwitch(){
+  const catBtns = document.querySelectorAll(".header-cat-group .nav-pill[data-cat]");
+  catBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentCategory = btn.dataset.cat;
+      catBtns.forEach(b => b.classList.toggle("active", b === btn));
+      showListView();
+    });
+  });
+}
+
+document.getElementById("shapeGrid").addEventListener("click", e => {
+  const button = e.target.closest(".shape-favorite");
+  if (!button) return;
+  e.stopPropagation();
+  const no = button.dataset.favorite;
+  if (favoriteShapes.has(no)){
+    favoriteShapes.delete(no);
+    favoriteOrder = favoriteOrder.filter(item => item !== no);
+  } else {
+    favoriteShapes.add(no);
+    favoriteOrder = favoriteOrder.filter(item => item !== no).concat(no);
+  }
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favoriteOrder));
+  const active = favoriteShapes.has(no);
+  button.classList.toggle("is-favorite", active);
+  button.setAttribute("aria-pressed", String(active));
+  button.setAttribute("aria-label", active ? "お気に入りから外す" : "お気に入りに追加");
+  // お気に入り一覧では解除したカードを即座に取り除き、時系列順を更新する。
+  if (currentCategory === "favorites") buildShapeGrid();
+});
+
+// 現在のカテゴリの中で、実際に開ける(dataFileを持つ)珠型だけを並べた配列。
+// 詳細ページ下部の前後移動はこの並び順に沿って進む。
+function navigableShapes(){
+  const shapes = currentCategory === "favorites" ? favoriteShapesNewestFirst() : sortedShapes(SHAPE_CATALOG[currentCategory] || []);
+  return shapes.filter(s => s.dataFile);
+}
+function currentShapeIndex(){
+  return navigableShapes().findIndex(s => s.no === currentShapeNo);
+}
+// 詳細ページ下部の「← 前の珠型」「次の珠型 →」。番号だけでなく珠型名も表示し、
+// 参考書のページをめくる感覚で連続して読み進められるようにする。
+function renderDetailPager(){
+  const list = navigableShapes();
+  const idx = currentShapeIndex();
+  const prev = idx > 0 ? list[idx - 1] : null;
+  const next = (idx >= 0 && idx < list.length - 1) ? list[idx + 1] : null;
+  const prevBtn = document.getElementById("prevShapeBtn");
+  const nextBtn = document.getElementById("nextShapeBtn");
+  const prevLabel = document.getElementById("prevShapeLabel");
+  const nextLabel = document.getElementById("nextShapeLabel");
+  prevBtn.disabled = !prev;
+  nextBtn.disabled = !next;
+  prevLabel.textContent = prev ? `${t("pagerPrev")} ・ ${shapeDisplayName(prev)}` : t("pagerPrev");
+  nextLabel.textContent = next ? `${shapeDisplayName(next)} ・ ${t("pagerNext")}` : t("pagerNext");
+  prevBtn.onclick = prev ? () => selectShape(prev) : null;
+  nextBtn.onclick = next ? () => selectShape(next) : null;
+}
+
+function buildDetail(){
+  if (!DATA) return; // JSON読み込み完了前(初回表示の一瞬)は何もしない
+  document.getElementById("detailNo").textContent = DATA.no.replace(/^Direct(\d+)$/, "Direct $1");
+  const activeShape = [...DIRECT_SHAPES, ...INDIRECT_SHAPES].find(shape => shape.no === DATA.no);
+  document.getElementById("detailName").textContent = currentLang === "en"
+    ? (activeShape ? activeShape.label : DATA.no.replace(/^Direct/, "D"))
+    : DATA.name;
+  document.getElementById("detailYomi").textContent = currentLang === "en"
+    ? (activeShape ? activeShape.romaji : DATA.yomi)
+    : DATA.yomi;
+  const detailComment = document.getElementById("detailComment");
+  detailComment.textContent = DATA.comment || "";
+  detailComment.hidden = currentLang === "en" || !DATA.comment;
+
+  const varGrid = document.getElementById("varGrid");
+  varGrid.innerHTML = ""; // 言語切替などで再呼び出しされたとき、変化図カードが二重に増えないようにする
+  DATA.variations.forEach((v, i) => {
+    const card = document.createElement("div");
+    card.className = "var-card";
+    const supplementalTags = (v.evalTags || []).filter(tag => !/題.*必勝/.test(tag));
+    card.innerHTML = `
+      <canvas id="varBoard${i}"></canvas>
+      <div class="var-eval">${supplementalTags.map(evaluationText).join("<br>")}</div>
+    `;
+    varGrid.appendChild(card);
+  });
+}
+
+// 基本図+変化図の盤面をまとめて再描画する(初回表示のほか、設定で盤面色・
+// 石のスタイルを変えたときにも呼び出す)。
+// 冒頭の基本図(白4候補を示す案内図)は少し濃いクリーム(BASE_BOARD_COLOR)・立体石で
+// 目立たせ、五珠候補の変化図は図の数が多くてもくどく見えないよう常にシンプルな
+// 石(flatStones=true)で統一する(候補ラベルの色はどちらもブランドカラーの深緑)。
+function renderDetailBoards(){
+  if (!DATA) return; // JSON読み込み完了前(初回表示の一瞬)は何もしない
+  const detailGeo = diagramGeometry(DATA.baseMoves, DATA.baseBranches, false, DATA.baseView);
+  detailGeo.showStars = false;
+  renderBoard(document.getElementById("detailBaseBoard"), DATA.baseMoves, DATA.baseBranches, detailGeo, "#3f7255", currentLargeBoardOption(), false, true, 1);
+  DATA.variations.forEach((v, i) => {
+    const canvas = document.getElementById("varBoard" + i);
+    const moves = (v.baseMoves || DATA.baseMoves).concat(v.moves);
+    const variationGeo = diagramGeometry(moves, v.branches, false, v.view || DATA.variationView);
+    variationGeo.showStars = false;
+    renderBoard(canvas, moves, v.branches, variationGeo, "#a44732", null, false, false, 1);
+  });
+}
+
+// --- 画面切り替え(一覧/詳細/検索/ヘルプ/編集)。ヘッダーのどのボタンを押しても、
+// 検索画面やヘルプ画面から確実に元の画面へ戻れるよう、切り替えは必ずこれらの
+// 関数を経由する。lastMainViewは「一覧」「詳細」のどちらを見ていたかを覚えておき、
+// 検索・ヘルプ・編集を閉じたときにその画面へ戻すための目印。 ---
+const listView = document.getElementById("listView");
+const detailView = document.getElementById("detailView");
+const searchView = document.getElementById("searchView");
+const helpView = document.getElementById("helpView");
+const editView = document.getElementById("editView");
+let lastMainView = "list";
+
+function closeHeaderMenu(){
+  headerNav.classList.remove("open");
+  headerMenuBtn.setAttribute("aria-expanded", "false");
+}
+
+function showListView(options){
+  options = options || {};
+  lastMainView = "list";
+  closeHeaderMenu();
+  buildShapeGrid();
+  listView.hidden = false;
+  detailView.hidden = true;
+  searchView.hidden = true;
+  helpView.hidden = true;
+  editView.hidden = true;
+  window.scrollTo(0, 0);
+  if (options.updateRoute !== false && location.hash){
+    history.pushState({ view: "list" }, "", location.pathname + location.search);
+  }
+}
+function showDetailView(){
+  // まだ珠型が選ばれていない状態(直接URLの操作など)では、詳細を開かず一覧へ
+  // 安全に戻す。トップページを起点に珠型を選んでから開く今回の構成では
+  // 通常発生しないが、念のための保険。
+  if (!DATA){ showListView(); return; }
+  lastMainView = "detail";
+  closeHeaderMenu();
+  listView.hidden = true;
+  detailView.hidden = false;
+  searchView.hidden = true;
+  helpView.hidden = true;
+  editView.hidden = true;
+  window.scrollTo(0, 0);
+}
+function returnToMainView(){
+  if (lastMainView === "detail" && DATA) showDetailView(); else showListView();
+}
+function showSearchView(options){
+  options = options || {};
+  closeHeaderMenu();
+  listView.hidden = true;
+  detailView.hidden = true;
+  helpView.hidden = true;
+  editView.hidden = true;
+  searchView.hidden = false;
+  searchQuery = defaultSearchQuery();
+  renderSearchBoard();
+  resetSearchResults();
+  window.scrollTo(0, 0);
+  if (options.updateRoute !== false && location.hash.toLowerCase() !== "#search"){
+    history.pushState({ view: "search" }, "", "#search");
+  }
+}
+function showHelpView(){
+  closeHeaderMenu();
+  listView.hidden = true;
+  detailView.hidden = true;
+  searchView.hidden = true;
+  editView.hidden = true;
+  helpView.hidden = false;
+  window.scrollTo(0, 0);
+}
+function showEditView(){
+  // ボタン自体は隠しているが、念のため合言葉が無ければここでも開かせない
+  // (開発者ツールなどで直接呼び出された場合の保険。真のアクセス制御ではない)。
+  if (!hasEditAccess()) return;
+  closeHeaderMenu();
+  listView.hidden = true;
+  detailView.hidden = true;
+  searchView.hidden = true;
+  editView.hidden = false;
+  populateEditSelects();
+  window.scrollTo(0, 0);
+}
+document.getElementById("brandBtn").addEventListener("click", showListView);
+document.getElementById("backToListTop").addEventListener("click", showListView);
+document.getElementById("backToListBottom").addEventListener("click", showListView);
+document.getElementById("helpBtn").addEventListener("click", showHelpView);
+document.getElementById("helpCloseBtn").addEventListener("click", returnToMainView);
+document.getElementById("editBtn").addEventListener("click", showEditView);
+document.getElementById("editCloseBtn").addEventListener("click", returnToMainView);
+
+function closeSearchView(){
+  if (DATA){
+    showDetailView();
+    const label = DATA.no.replace(/^Direct/, "D");
+    history.pushState({ shape: label }, "", `#${label}`);
+  } else {
+    showListView();
+  }
+}
+
+// --- ヘッダーのモバイル用ドロップダウン(ハンバーガーメニュー)。PC/タブレットの
+// 横幅では常時表示なので、この開閉が効くのはCSS側で折りたたまれるスマホ幅のみ。 ---
+const headerNav = document.getElementById("headerNav");
+const headerMenuBtn = document.getElementById("headerMenuBtn");
+headerMenuBtn.addEventListener("click", () => {
+  const willOpen = !headerNav.classList.contains("open");
+  headerNav.classList.toggle("open", willOpen);
+  headerMenuBtn.setAttribute("aria-expanded", String(willOpen));
+});
+document.addEventListener("click", (e) => {
+  if (!headerNav.classList.contains("open")) return;
+  if (headerNav.contains(e.target) || headerMenuBtn.contains(e.target)) return;
+  closeHeaderMenu();
+});
+
+applyTheme();
+applyI18n();
+loadContentRevisionDate();
+setupCategorySwitch();
+revealEditButtonsIfAllowed();
+function shapeFromLocationHash(){
+  const label = decodeURIComponent(location.hash.slice(1)).toUpperCase();
+  if (!/^[DI]\d+$/.test(label)) return null;
+  return [...DIRECT_SHAPES, ...INDIRECT_SHAPES].find(shape => shape.label === label && shape.dataFile) || null;
+}
+async function restoreViewFromUrl(){
+  if (location.hash.toLowerCase() === "#search"){
+    showSearchView({ updateRoute: false });
+    return;
+  }
+  const shape = shapeFromLocationHash();
+  if (shape) await selectShape(shape, { updateRoute: false, preserveCategory: false });
+  else showListView({ updateRoute: false });
+}
+window.addEventListener("popstate", restoreViewFromUrl);
+// URLに#D2・#I1等があれば詳細、#searchなら検索画面を復元し、無ければ一覧を表示する。
+
+// 図面ごとのシェアボタン。押した図面の.share-menuだけを開閉し、
+// 外側や他のボタンをクリックしたら全て閉じる(動的に増える変化図カードにも
+// 個別にリスナーを付けずに済むよう、documentへのイベント委任で処理する)。
+// 現在このHTMLにはまだ.share-btnを持つ図面は無いが、将来追加したときに
+// そのまま動く共通処理として残してある。
+function closeAllShareMenus(){
+  document.querySelectorAll(".share-menu.open").forEach(m => m.classList.remove("open"));
+}
+function downloadCanvas(canvas, filename){
+  const link = document.createElement("a");
+  link.download = filename;
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+}
+document.addEventListener("click", (e) => {
+  const shareBtn = e.target.closest(".share-btn");
+  if (shareBtn){
+    const menu = shareBtn.nextElementSibling;
+    const wasOpen = menu.classList.contains("open");
+    closeAllShareMenus();
+    if (!wasOpen) menu.classList.add("open");
+    return;
+  }
+  const actionBtn = e.target.closest(".share-menu button");
+  if (actionBtn){
+    const wrap = actionBtn.closest(".detail-cover-board, .var-card");
+    const canvas = wrap.querySelector("canvas");
+    if (actionBtn.dataset.action === "download"){
+      downloadCanvas(canvas, `${DATA.no}-${DATA.name}-${actionBtn.dataset.target}.png`);
+    }
+    // data-action="open-renjumemo" はRenjuMemo連携が実装されたら差し替えるスタブ
+    closeAllShareMenus();
+    return;
+  }
+  closeAllShareMenus();
+});
+
+// --- 設定。RenjuMemoと同じく、各丸ボタンを押すたび次の候補へ進む。 ---
+function updateModeToggleIcon(){
+  document.getElementById("modeToggleIcon").className = "ti ti-settings";
+}
+function updateLangToggleLabel(){
+  document.getElementById("langToggleLabel").textContent = t("langButtonLabel");
+}
+const settingsBackdrop = document.getElementById("settingsBackdrop");
+const settingsModalContent = document.getElementById("settingsModalContent");
+function redrawForSettings(){
+  if (!listView.hidden) buildShapeGrid();
+  if (DATA && !detailView.hidden) renderDetailBoards();
+  if (!searchView.hidden) renderSearchBoard();
+}
+function renderSettingsModal(){
+  const boardOpt = currentBoardDesign();
+  const stoneOpt = STONE_STYLE_OPTIONS.find(o => o.key === settings.stoneStyle) || STONE_STYLE_OPTIONS[0];
+  settingsModalContent.innerHTML = `
+    <h3 id="settingsModalTitle">${t("settings")}</h3>
+    <div class="settings-pill-row">
+      <button class="settings-pill" id="btnCycleBoard" type="button"><i class="ti ti-grid-dots" aria-hidden="true"></i><span>${t("boardPrefix")} ${currentLang === "ja" ? boardOpt.ja : boardOpt.en}</span></button>
+      <button class="settings-pill" id="btnCycleStone" type="button"><i class="ti ti-circle-filled" aria-hidden="true"></i><span>${t("stonePrefix")} ${currentLang === "ja" ? stoneOpt.ja : stoneOpt.en}</span></button>
+    </div>
+    <div class="modal-close-row"><button id="settingsCloseBtn" type="button" aria-label="${t("close")}">&times;</button></div>`;
+  document.getElementById("btnCycleBoard").onclick = () => {
+    const i = BOARD_COLOR_OPTIONS.findIndex(o => o.key === settings.boardColor);
+    settings.boardColor = BOARD_COLOR_OPTIONS[(i + 1) % BOARD_COLOR_OPTIONS.length].key;
+    saveSettings(); redrawForSettings(); renderSettingsModal();
+  };
+  document.getElementById("btnCycleStone").onclick = () => {
+    const i = STONE_STYLE_OPTIONS.findIndex(o => o.key === settings.stoneStyle);
+    settings.stoneStyle = STONE_STYLE_OPTIONS[(i + 1) % STONE_STYLE_OPTIONS.length].key;
+    saveSettings(); redrawForSettings(); renderSettingsModal();
+  };
+  document.getElementById("settingsCloseBtn").onclick = closeSettings;
+}
+function openSettings(){ renderSettingsModal(); settingsBackdrop.hidden = false; }
+function closeSettings(){ settingsBackdrop.hidden = true; }
+settingsBackdrop.addEventListener("click", e => { if (e.target === settingsBackdrop) closeSettings(); });
+document.getElementById("modeToggleBtn").addEventListener("click", openSettings);
+document.getElementById("langToggleBtn").addEventListener("click", () => {
+  currentLang = currentLang === "ja" ? "en" : "ja";
+  saveSettings();
+  applyI18n();
+  if (!listView.hidden) buildShapeGrid();
+  if (DATA){ buildDetail(); renderDetailBoards(); renderDetailPager(); }
+  if (!searchView.hidden){ updateRangeNote(searchQuery.length + 1); resetSearchResults(); }
+  updateLangToggleLabel();
+});
+updateModeToggleIcon();
+updateLangToggleLabel();
+
+// --- 手順検索(手順一致のみ。部分図一致には対応しない) ---
+// タラグチ10ルール(五珠交替打ち)に従い、黒1は天元固定。白2は天元から1路、
+// 黒3は2路、白4は3路、黒5は4路(1手だけ指定する場合)または5路(候補を10題宣言する場合)の
+// 範囲内でのみ入力できる(6手目以降は範囲の制約なし)。盤面は15路盤フルサイズで表示する。
+const searchCanvas = document.getElementById("searchBoardCanvas");
+let searchQuery = [];
+
+function defaultSearchQuery(){
+  return [{ x: TENGEN.x, y: TENGEN.y, color: "black" }];
+}
+
+function isWithinRadius(x, y, radius){
+  return Math.max(Math.abs(x - TENGEN.x), Math.abs(y - TENGEN.y)) <= radius;
+}
+
+function renderSearchBoard(){
+  // 開くたびに現在のビューポート(PC/スマホ)に合わせてgeoを作り直す
+  SEARCH_GEO = computeSearchGeo();
+  const moves = searchQuery.map((m, i) => ({ x: m.x, y: m.y, color: m.color, n: i + 1 }));
+  renderBoard(searchCanvas, moves, [], SEARCH_GEO, null, currentBoardOption());
+  const nextMove = searchQuery.length + 1;
+  const ctx = searchCanvas.getContext("2d");
+  const radius = RULE_RADIUS[nextMove];
+  if (radius){
+    drawRangeBoundary(ctx, SEARCH_GEO, radius, { color: "#2f6f52", dash: [7, 5] });
+  }
+  // 5手目だけは「1手だけ指定する場合」(4路)と「候補を10題宣言する場合」(5路)の
+  // 2種類の範囲があるので、点線を2本重ねて表示する。
+  const declareRadius = RULE_RADIUS_DECLARE10[nextMove];
+  if (declareRadius){
+    drawRangeBoundary(ctx, SEARCH_GEO, declareRadius, { color: "#c17a2f", dash: [3, 4] });
+  }
+  updateRangeNote(nextMove);
+}
+
+// 点線範囲の意味を、盤の下に文章で補足する(5手目は2本の点線を色で説明)。
+function updateRangeNote(nextMove){
+  const el = document.getElementById("searchRangeNote");
+  if (!el) return;
+  const singleKeys = { 2: "rangeNote2", 3: "rangeNote3", 4: "rangeNote4" };
+  if (nextMove === 5){
+    if (currentLang === "en"){
+      el.innerHTML = `Black 5: <span class="range-note-dot range-note-dot--single"></span>within 4 lines for one move; ` +
+        `<span class="range-note-dot range-note-dot--ten"></span>within 5 lines for 10 candidates`;
+    } else {
+      el.innerHTML = `黒5：<span class="range-note-dot range-note-dot--single"></span>1手指定は4路以内、` +
+        `<span class="range-note-dot range-note-dot--ten"></span>10題宣言は5路以内`;
+    }
+  } else if (singleKeys[nextMove]){
+    el.textContent = t(singleKeys[nextMove]);
+  } else {
+    el.textContent = t("rangeNoteFree");
+  }
+}
+
+function getAllSequences(){
+  if (!DATA) return [];
+  const seqs = [{ label: `${DATA.no} ${DATA.name}`, sub: t("baseDiagram"), moves: DATA.baseMoves }];
+  DATA.variations.forEach((v, i) => {
+    seqs.push({ label: `${DATA.no} ${DATA.name}`, sub: `${t("variationDiagram")}${i + 1}`, moves: (v.baseMoves || DATA.baseMoves).concat(v.moves) });
+  });
+  return seqs;
+}
+
+// 手順検索=先頭からの完全一致(prefix match)。入力した手順がそのまま
+// その順番・その色で現れる珠型だけをヒットさせる(部分図一致は対象外)。
+function matchesQuery(seqMoves, query){
+  if (query.length === 0 || query.length > seqMoves.length) return false;
+  return query.every((q, i) => seqMoves[i].x === q.x && seqMoves[i].y === q.y && seqMoves[i].color === q.color);
+}
+
+function hitsLabel(n){
+  return currentLang === "en" ? `${n} result${n === 1 ? "" : "s"} found` : `${n}件ヒットしました`;
+}
+
+function runSearch(){
+  const countEl = document.getElementById("searchResultsCount");
+  const listEl = document.getElementById("searchResultsList");
+  document.getElementById("searchSidePanel").classList.remove("is-empty");
+  listEl.innerHTML = "";
+  if (searchQuery.length === 0){
+    countEl.textContent = t("enterMoves");
+    return;
+  }
+  const matches = getAllSequences().filter(s => matchesQuery(s.moves, searchQuery));
+  countEl.textContent = matches.length ? hitsLabel(matches.length) : t("noHits");
+  matches.forEach(m => {
+    const item = document.createElement("div");
+    item.className = "search-result-item";
+    item.innerHTML = `<i class="ti ti-file-search" aria-hidden="true"></i>` +
+      `<div><div class="result-title">${m.label}</div><div class="result-meta">${m.sub}</div></div>`;
+    item.addEventListener("click", showDetailView);
+    listEl.appendChild(item);
+  });
+}
+
+function resetSearchResults(){
+  document.getElementById("searchResultsCount").textContent = "";
+  document.getElementById("searchResultsList").innerHTML = "";
+  document.getElementById("searchSidePanel").classList.add("is-empty");
+}
+
+document.getElementById("searchOpenBtn").addEventListener("click", showSearchView);
+document.getElementById("searchCloseBtn").addEventListener("click", closeSearchView);
+
+searchCanvas.addEventListener("click", (e) => {
+  const rect = searchCanvas.getBoundingClientRect();
+  const px = (e.clientX - rect.left) * (searchCanvas.width / rect.width);
+  const py = (e.clientY - rect.top) * (searchCanvas.height / rect.height);
+  const cell = SEARCH_GEO.pixelToCell(px, py);
+  if (cell.x < BOARD_MIN || cell.x > BOARD_MAX || cell.y < BOARD_MIN || cell.y > BOARD_MAX) return;
+  if (searchQuery.some(m => m.x === cell.x && m.y === cell.y)) return;
+  const nextMove = searchQuery.length + 1;
+  const radius = RULE_RADIUS[nextMove];
+  // 5手目は「10題宣言」経由なら5路まで実際に打たれ得るので、置ける判定は広い方の半径を使う
+  const effectiveRadius = RULE_RADIUS_DECLARE10[nextMove] || radius;
+  if (effectiveRadius && !isWithinRadius(cell.x, cell.y, effectiveRadius)) return; // 点線の範囲外はタラグチ10ルール違反として無視
+  const color = searchQuery.length % 2 === 0 ? "black" : "white";
+  searchQuery.push({ x: cell.x, y: cell.y, color });
+  renderSearchBoard();
+});
+document.getElementById("searchUndoBtn").addEventListener("click", () => {
+  // 黒1(天元)はルール上動かせないので、それより前へは戻さない
+  if (searchQuery.length > 1) searchQuery.pop();
+  renderSearchBoard();
+});
+document.getElementById("searchClearBtn").addEventListener("click", () => {
+  searchQuery = defaultSearchQuery();
+  renderSearchBoard();
+  resetSearchResults();
+});
+document.getElementById("searchRunBtn").addEventListener("click", runSearch);
+
+// searchQueryや検索盤イベントの準備が済んでからURLを復元する。
+// #search直読み時に初期化前の検索盤を描こうとして空白になるのを防ぐ。
+restoreViewFromUrl();
+
+// --- 編集モード ---------------------------------------------------------
+// 管理者(2〜3名を想定)が珠型データ(盤面・分岐・コメント・評価文)を
+// ブラウザ上で作成・修正し、JSONファイルとして書き出すためのツール。
+// GitHubの知識が無くても使えるよう、保存はサイトへの自動反映ではなく
+// 「JSONを書き出して、オーナーに渡す」方式にしている(2026-07-31 相談の結果)。
+// 既存珠型を選ぶと、詳細画面と同じdata/*.jsonをディープコピーして編集を始める。
+let editDraft = null;   // 編集中のデータ本体(data/*.jsonと同じスキーマ)
+const editBaseTool = { mode: "black", n: 1, label: "" };
+const editVarTools = []; // 変化図ごとの{mode,n,label}(indexはeditDraft.variationsと対応)
+
+function blankShapeTemplate(category){
+  const cat = category || currentCategory;
+  return {
+    schemaVersion: 1,
+    id: "", no: "", name: "", yomi: "", icon: "",
+    category: cat, categoryLabel: cat === "direct" ? "直接打ち" : "間接打ち",
+    updatedAt: "", comment: "",
+    baseMoves: [], baseBranches: [], variations: []
+  };
+}
+
+// 基本図に置く次の手数(baseMoves内の最大n+1)。
+function nextNForBase(){
+  let max = 0;
+  (editDraft.baseMoves || []).forEach(m => { if (m.n > max) max = m.n; });
+  return max + 1;
+}
+// 変化図に置く次の手数(基本図とその変化図自身の中での最大n+1。
+// 変化図同士は互いに独立しており、同じ数字が複数の変化図に出てもよい)。
+function nextNForVariation(v){
+  let max = 0;
+  (editDraft.baseMoves || []).forEach(m => { if (m.n > max) max = m.n; });
+  (v.moves || []).forEach(m => { if (m.n > max) max = m.n; });
+  return max + 1;
+}
+
+// 編集画面上部の「既存珠型を選ぶ/未登録の珠型から新規作成」プルダウンを、
+// 現在のDIRECT_SHAPES/INDIRECT_SHAPESの内容で作り直す。
+function populateEditSelects(){
+  const existingSel = document.getElementById("editExistingSelect");
+  const newSel = document.getElementById("editNewSelect");
+  const existingPlaceholder = existingSel.firstElementChild;
+  const newPlaceholder = newSel.firstElementChild;
+  existingSel.innerHTML = ""; existingSel.appendChild(existingPlaceholder);
+  newSel.innerHTML = ""; newSel.appendChild(newPlaceholder);
+  [...DIRECT_SHAPES, ...INDIRECT_SHAPES].forEach(shape => {
+    const opt = document.createElement("option");
+    opt.value = shape.no;
+    opt.textContent = `${shape.label} ${shapeDisplayName(shape)}`;
+    if (shape.dataFile) existingSel.appendChild(opt);
+    else newSel.appendChild(opt);
+  });
+}
+
+// 選んだ珠型のJSONを(必要ならfetchしてから)ディープコピーし、編集を開始する。
+// 表示中のDATA/shapeDataCacheを直接編集してしまうと、保存前に詳細画面へ
+// 戻ったときの表示まで狂ってしまうため、必ず複製してから触る。
+async function selectShapeForEdit(shape){
+  try {
+    if (!shapeDataCache[shape.dataFile]){
+      const res = await fetch(shape.dataFile, { cache: "no-cache" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      shapeDataCache[shape.dataFile] = await res.json();
+    }
+    editDraft = JSON.parse(JSON.stringify(shapeDataCache[shape.dataFile]));
+    openEditForm();
+  } catch (err){
+    console.error("編集用データの読み込みに失敗しました:", shape.dataFile, err);
+    alert(t("editLoadFailed"));
+  }
+}
+
+function openEditForm(){
+  document.getElementById("editEmptyNote").hidden = true;
+  document.getElementById("editFormBody").hidden = false;
+  if (!Array.isArray(editDraft.baseMoves)) editDraft.baseMoves = [];
+  if (!Array.isArray(editDraft.baseBranches)) editDraft.baseBranches = [];
+  if (!Array.isArray(editDraft.variations)) editDraft.variations = [];
+  editBaseTool.mode = "black"; editBaseTool.n = nextNForBase(); editBaseTool.label = "";
+  document.getElementById("editFieldNo").value = editDraft.no || "";
+  document.getElementById("editFieldId").value = editDraft.id || "";
+  document.getElementById("editFieldName").value = editDraft.name || "";
+  document.getElementById("editFieldYomi").value = editDraft.yomi || "";
+  document.getElementById("editFieldIcon").value = editDraft.icon || "";
+  document.getElementById("editFieldComment").value = editDraft.comment || "";
+  renderEditBaseToolbar();
+  renderEditBaseBoard();
+  renderEditVariations();
+  updateJsonPreview();
+}
+
+["editFieldNo","editFieldId","editFieldName","editFieldYomi","editFieldIcon"].forEach(id => {
+  document.getElementById(id).addEventListener("input", (e) => {
+    if (!editDraft) return;
+    editDraft[e.target.dataset.field] = e.target.value;
+    updateJsonPreview();
+  });
+});
+document.getElementById("editFieldComment").addEventListener("input", (e) => {
+  if (!editDraft) return;
+  editDraft.comment = e.target.value;
+  updateJsonPreview();
+});
+
+// 石/白石/分岐記号/消すの4モードと、手数・記号の入力欄をまとめたツールバーを作る。
+// 基本図・各変化図で共通の作りにして、コードの重複を避けている。
+function buildToolbarEl(tool){
+  const wrap = document.createElement("div");
+  wrap.className = "edit-toolbar";
+  const modes = [
+    { key: "black", icon: "●", labelKey: "editToolBlack" },
+    { key: "white", icon: "○", labelKey: "editToolWhite" },
+    { key: "branch", icon: "A", labelKey: "editToolBranch" },
+    { key: "erase", icon: "✕", labelKey: "editToolErase" }
+  ];
+  modes.forEach(m => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "edit-tool-btn" + (tool.mode === m.key ? " active" : "");
+    btn.textContent = m.icon;
+    btn.title = t(m.labelKey);
+    btn.addEventListener("click", () => {
+      tool.mode = m.key;
+      wrap.querySelectorAll(".edit-tool-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+    wrap.appendChild(btn);
+  });
+  const nInput = document.createElement("input");
+  nInput.type = "number"; nInput.className = "edit-tool-n"; nInput.min = "1";
+  nInput.value = tool.n; nInput.title = t("editToolMoveNumber");
+  nInput.addEventListener("input", () => { tool.n = parseInt(nInput.value, 10) || 1; });
+  wrap.appendChild(nInput);
+  const labelInput = document.createElement("input");
+  labelInput.type = "text"; labelInput.className = "edit-tool-label"; labelInput.maxLength = 2;
+  labelInput.placeholder = t("editToolLabelPlaceholder");
+  labelInput.value = tool.label;
+  labelInput.addEventListener("input", () => { tool.label = labelInput.value; });
+  wrap.appendChild(labelInput);
+  return wrap;
+}
+
+// 盤面クリック共通処理。クリックしたマスの既存の石・分岐はいったん取り除いてから、
+// 選択中のツールに応じて置き直す(消すツールなら、取り除いたままにする)。
+function handleEditBoardClick(evt, canvas, tool, movesArr, branchesArr, onDone){
+  const rect = canvas.getBoundingClientRect();
+  const px = (evt.clientX - rect.left) * (canvas.width / rect.width);
+  const py = (evt.clientY - rect.top) * (canvas.height / rect.height);
+  const cell = JOSEKI_GEO.pixelToCell(px, py);
+  if (cell.x < JOSEKI_GEO.min || cell.x > JOSEKI_GEO.max || cell.y < JOSEKI_GEO.min || cell.y > JOSEKI_GEO.max) return;
+  const mi = movesArr.findIndex(m => m.x === cell.x && m.y === cell.y);
+  if (mi >= 0) movesArr.splice(mi, 1);
+  const bi = branchesArr.findIndex(b => b.x === cell.x && b.y === cell.y);
+  if (bi >= 0) branchesArr.splice(bi, 1);
+  if (tool.mode === "black" || tool.mode === "white"){
+    movesArr.push({ x: cell.x, y: cell.y, color: tool.mode, n: tool.n || 1 });
+  } else if (tool.mode === "branch"){
+    const label = (tool.label || "").trim();
+    if (label) branchesArr.push({ x: cell.x, y: cell.y, label });
+  }
+  onDone();
+}
+
+function renderEditBaseToolbar(){
+  const host = document.getElementById("editBaseToolbar");
+  host.innerHTML = "";
+  editBaseTool.n = nextNForBase();
+  host.appendChild(buildToolbarEl(editBaseTool));
+}
+function renderEditBaseBoard(){
+  renderBoard(document.getElementById("editBaseCanvas"), editDraft.baseMoves, editDraft.baseBranches, JOSEKI_GEO, null, BASE_BOARD_COLOR);
+}
+document.getElementById("editBaseCanvas").addEventListener("click", (e) => {
+  if (!editDraft) return;
+  handleEditBoardClick(e, e.currentTarget, editBaseTool, editDraft.baseMoves, editDraft.baseBranches, () => {
+    renderEditBaseToolbar();
+    renderEditBaseBoard();
+    renderEditVariations(); // 基本図の石が増減すると全変化図の表示・手数も影響を受けるため作り直す
+    updateJsonPreview();
+  });
+});
+
+function renderEditVariations(){
+  const host = document.getElementById("editVarList");
+  host.innerHTML = "";
+  editVarTools.length = 0;
+  (editDraft.variations || []).forEach((v, i) => {
+    if (!v.id) v.id = "v" + (i + 1);
+    if (!Array.isArray(v.moves)) v.moves = [];
+    if (!Array.isArray(v.branches)) v.branches = [];
+    if (!Array.isArray(v.evalTags)) v.evalTags = [];
+    const tool = { mode: "black", n: nextNForVariation(v), label: "" };
+    editVarTools[i] = tool;
+
+    const card = document.createElement("div");
+    card.className = "edit-var-card";
+
+    const head = document.createElement("div");
+    head.className = "edit-board-head";
+    const label = document.createElement("span");
+    label.className = "edit-board-label";
+    label.textContent = `${t("variations")} ${i + 1}`;
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "edit-remove-btn";
+    removeBtn.textContent = t("editRemoveVariation");
+    removeBtn.addEventListener("click", () => {
+      editDraft.variations.splice(i, 1);
+      renderEditVariations();
+      updateJsonPreview();
+    });
+    head.appendChild(label);
+    head.appendChild(removeBtn);
+    card.appendChild(head);
+    card.appendChild(buildToolbarEl(tool));
+
+    const canvas = document.createElement("canvas");
+    canvas.className = "edit-canvas edit-canvas-small";
+    card.appendChild(canvas);
+
+    const evalLabel = document.createElement("label");
+    evalLabel.className = "edit-evaltags-label";
+    evalLabel.textContent = t("editEvalTags");
+    const evalArea = document.createElement("textarea");
+    evalArea.rows = 3;
+    evalArea.value = v.evalTags.join("\n");
+    evalArea.addEventListener("input", () => {
+      v.evalTags = evalArea.value.split("\n").map(s => s.trim()).filter(Boolean);
+      updateJsonPreview();
+    });
+    evalLabel.appendChild(evalArea);
+    card.appendChild(evalLabel);
+
+    host.appendChild(card);
+
+    function redraw(){
+      renderBoard(canvas, editDraft.baseMoves.concat(v.moves), v.branches);
+    }
+    redraw();
+    canvas.addEventListener("click", (e) => {
+      handleEditBoardClick(e, canvas, tool, v.moves, v.branches, () => {
+        tool.n = nextNForVariation(v);
+        const nInput = card.querySelector(".edit-tool-n");
+        if (nInput) nInput.value = tool.n;
+        redraw();
+        updateJsonPreview();
+      });
+    });
+  });
+}
+document.getElementById("editAddVarBtn").addEventListener("click", () => {
+  if (!editDraft) return;
+  editDraft.variations.push({ id: "v" + (editDraft.variations.length + 1), moves: [], branches: [], evalTags: [] });
+  renderEditVariations();
+  updateJsonPreview();
+});
+
+function updateJsonPreview(){
+  const el = document.getElementById("editJsonPreviewText");
+  if (!el || !editDraft) return;
+  el.value = JSON.stringify(editDraft, null, 2);
+}
+
+// 既存珠型を選ぶ/未登録の珠型から新規作成する/白紙から新規作成する/JSONを読み込む、の4通りの開始方法。
+document.getElementById("editExistingSelect").addEventListener("change", async (e) => {
+  const no = e.target.value;
+  e.target.value = "";
+  if (!no) return;
+  const shape = [...DIRECT_SHAPES, ...INDIRECT_SHAPES].find(s => s.no === no);
+  if (shape) await selectShapeForEdit(shape);
+});
+document.getElementById("editNewSelect").addEventListener("change", (e) => {
+  const no = e.target.value;
+  e.target.value = "";
+  if (!no) return;
+  const shape = [...DIRECT_SHAPES, ...INDIRECT_SHAPES].find(s => s.no === no);
+  if (!shape) return;
+  const cat = DIRECT_SHAPES.includes(shape) ? "direct" : "indirect";
+  editDraft = blankShapeTemplate(cat);
+  editDraft.no = shape.no;
+  editDraft.name = shape.kanji;
+  editDraft.icon = shape.icon;
+  openEditForm();
+});
+document.getElementById("editBlankBtn").addEventListener("click", () => {
+  editDraft = blankShapeTemplate(currentCategory);
+  openEditForm();
+});
+document.getElementById("editImportInput").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  e.target.value = "";
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      editDraft = JSON.parse(reader.result);
+      openEditForm();
+    } catch (err){
+      alert(t("editInvalidJson"));
+    }
+  };
+  reader.readAsText(file);
+});
+
+// 書き出し=JSONファイルのダウンロード。これが「保存」に相当する(相談の結果、
+// GitHubの知識が無くても使える「書き出し→手渡し」方式を採用しているため、
+// サイト側からの自動コミットは行わない)。
+document.getElementById("editExportBtn").addEventListener("click", () => {
+  if (!editDraft) return;
+  if (!editDraft.no || !editDraft.name){
+    alert(t("editInvalidFields"));
+    return;
+  }
+  editDraft.updatedAt = new Date().toISOString().slice(0, 10);
+  if (!editDraft.schemaVersion) editDraft.schemaVersion = 1;
+  updateJsonPreview();
+  const json = JSON.stringify(editDraft, null, 2);
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const safeName = (editDraft.id || editDraft.no || "shape").toString().replace(/[^a-zA-Z0-9_-]/g, "_");
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${safeName}.json`;
+  link.click();
+  URL.revokeObjectURL(url);
+});
+</script>
+
+</body>
+</html>
