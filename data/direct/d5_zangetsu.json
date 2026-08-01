@@ -9,52 +9,90 @@
   "categoryLabel": "直接打ち",
   "updatedAt": "2026-08-01",
   "comment": "ソーソロフ入門珠型。主な白4はa・b・cおよび渓月共通。白aではA2、A3が厄介。しかし厳密に勉強する優先度は低く、10手目あたりまでを確実に押さえておきたい。6・7は共通型合流の盤端違い。合流珠型が多く便利だ。8・9は白優勢だが、黒が一発を狙いやすく要注意。白bではA5および6が複雑。A5は初動に注意。8は精神的に白有利。白cでは9が白優勢だが逆転注意。白eは全体的に難しいが、黒の打ち回しは安定させやすい。",
-  "baseView": {"size":9,"centerX":7,"centerY":7},
-  "variationView": {"size":9,"centerX":7,"centerY":7},
-  "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
-  "baseBranches": [{"x":6,"y":7,"label":"a"},{"x":6,"y":6,"label":"b"},{"x":8,"y":9,"label":"c"},{"x":8,"y":7,"label":"渓"},{"x":8,"y":6,"label":"d"},{"x":9,"y":7,"label":"e"},{"x":9,"y":6,"label":"f"}],
+  "baseView": { "size": 9, "centerX": 7, "centerY": 7 },
+  "variationView": { "size": 9, "centerX": 7, "centerY": 7 },
+  "baseMoves": [
+    { "x": 7, "y": 7, "color": "black", "n": 1 },
+    { "x": 7, "y": 8, "color": "white", "n": 2 },
+    { "x": 9, "y": 8, "color": "black", "n": 3 }
+  ],
+  "baseBranches": [
+    { "x": 6, "y": 7, "label": "a" },
+    { "x": 6, "y": 6, "label": "b" },
+    { "x": 8, "y": 9, "label": "c" },
+    { "x": 8, "y": 7, "label": "渓" },
+    { "x": 8, "y": 6, "label": "d" },
+    { "x": 9, "y": 7, "label": "e" },
+    { "x": 9, "y": 6, "label": "f" },
+    { "x": 6, "y": 9, "label": "g" },
+    { "x": 6, "y": 8, "label": "h" }
+  ],
   "variations": [
     {
-      "id":"v1",
-      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
-      "moves":[{"x":6,"y":7,"color":"white","n":4}],
-      "branches":[{"x":7,"y":10,"label":"8"},{"x":8,"y":9,"label":"A"},{"x":9,"y":9,"label":"4"},{"x":6,"y":8,"label":"9"},{"x":8,"y":8,"label":"6"},{"x":8,"y":7,"label":"A2"},{"x":9,"y":7,"label":"5"},{"x":5,"y":6,"label":"A3"},{"x":6,"y":6,"label":"7"}],
-      "evalTags":["三題必勝","4 黒有利","5 黒主導","6 白主導","7 白主導","8・9 白優勢"]
+      "id": "v1",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
+      "moves": [{"x":6,"y":7,"color":"white","n":4}],
+      "branches": [{"x":7,"y":10,"label":"8"},{"x":8,"y":9,"label":"A"},{"x":9,"y":9,"label":"4"},{"x":6,"y":8,"label":"9"},{"x":8,"y":8,"label":"6"},{"x":8,"y":7,"label":"A2"},{"x":9,"y":7,"label":"5"},{"x":5,"y":6,"label":"A3"},{"x":6,"y":6,"label":"7"}],
+      "evalTags": ["三題必勝", "4 黒有利", "5 黒主導", "6 白主導", "7 白主導", "8・9 白優勢"]
     },
     {
-      "id":"v2",
-      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
-      "moves":[{"x":6,"y":6,"color":"white","n":4}],
-      "branches":[{"x":8,"y":9,"label":"A"},{"x":9,"y":9,"label":"7"},{"x":6,"y":7,"label":"A6"},{"x":8,"y":7,"label":"A"},{"x":9,"y":7,"label":"A5"},{"x":10,"y":7,"label":"A"},{"x":8,"y":6,"label":"A"},{"x":6,"y":5,"label":"8"}],
-      "evalTags":["六題必勝","7 黒有利","8 黒主導"]
+      "id": "v2",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
+      "moves": [{"x":6,"y":6,"color":"white","n":4}],
+      "branches": [{"x":8,"y":9,"label":"A1"},{"x":9,"y":9,"label":"7"},{"x":6,"y":7,"label":"A6"},{"x":8,"y":7,"label":"A3"},{"x":9,"y":7,"label":"A5"},{"x":10,"y":7,"label":"A2"},{"x":8,"y":6,"label":"A4"},{"x":6,"y":5,"label":"8"}],
+      "evalTags": ["六題必勝", "7 黒有利", "8 黒主導"]
     },
     {
-      "id":"v3",
-      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
-      "moves":[{"x":8,"y":9,"color":"white","n":4}],
-      "branches":[{"x":8,"y":10,"label":"A"},{"x":9,"y":10,"label":"A"},{"x":6,"y":9,"label":"A5"},{"x":7,"y":9,"label":"8"},{"x":9,"y":9,"label":"7"},{"x":8,"y":8,"label":"6"},{"x":6,"y":7,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":9,"y":7,"label":"C"},{"x":6,"y":6,"label":"9"}],
-      "evalTags":["五題必勝","6・7 白主導","8 白有利","9 白優勢"]
+      "id": "v3",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
+      "moves": [{"x":8,"y":9,"color":"white","n":4}],
+      "branches": [{"x":8,"y":10,"label":"A4"},{"x":9,"y":10,"label":"A5"},{"x":6,"y":9,"label":"A3"},{"x":7,"y":9,"label":"8"},{"x":9,"y":9,"label":"7"},{"x":8,"y":8,"label":"6"},{"x":6,"y":7,"label":"A1"},{"x":8,"y":7,"label":"A2"},{"x":9,"y":7,"label":"C"}],
+      "evalTags": ["五題必勝", "6・7 白主導", "8 白有利"]
     },
     {
-      "id":"v4",
-      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
-      "moves":[{"x":8,"y":6,"color":"white","n":4}],
-      "branches":[{"x":6,"y":9,"label":"A7"},{"x":7,"y":9,"label":"A10"},{"x":8,"y":9,"label":"A"},{"x":9,"y":9,"label":"A"},{"x":8,"y":8,"label":"A9"},{"x":8,"y":7,"label":"A"},{"x":9,"y":7,"label":"A"},{"x":6,"y":6,"label":"A"},{"x":9,"y":6,"label":"A8"},{"x":8,"y":5,"label":"A"}],
-      "evalTags":["十題必勝"]
+      "id": "v4",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
+      "moves": [{"x":8,"y":6,"color":"white","n":4}],
+      "branches": [{"x":6,"y":9,"label":"A11"},{"x":7,"y":9,"label":"A9"},{"x":8,"y":9,"label":"A1"},{"x":9,"y":9,"label":"A2"},{"x":8,"y":8,"label":"A8"},{"x":8,"y":7,"label":"A3"},{"x":9,"y":7,"label":"A5"},{"x":6,"y":6,"label":"A4"},{"x":9,"y":6,"label":"A7"},{"x":8,"y":5,"label":"A6"}],
+      "evalTags": ["十題必勝"]
     },
     {
-      "id":"v5",
-      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
-      "moves":[{"x":9,"y":7,"color":"white","n":4}],
-      "branches":[{"x":6,"y":9,"label":"A"},{"x":7,"y":9,"label":"A7"},{"x":5,"y":8,"label":"A"},{"x":3,"y":7,"label":"10"},{"x":4,"y":7,"label":"9"},{"x":8,"y":7,"label":"A"},{"x":6,"y":6,"label":"A"},{"x":8,"y":6,"label":"A"},{"x":6,"y":5,"label":"A8"},{"x":7,"y":5,"label":"11"},{"x":8,"y":5,"label":"A"}],
-      "evalTags":["八題必勝","10 黒優勢","9 黒優勢（難解）","11 黒主導〜黒有利"]
+      "id": "v5",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
+      "moves": [{"x":9,"y":7,"color":"white","n":4}],
+      "branches": [{"x":9,"y":10,"label":"A9"},{"x":6,"y":9,"label":"A2"},{"x":5,"y":8,"label":"A5"},{"x":8,"y":8,"label":"A3"},{"x":10,"y":8,"label":"12"},{"x":4,"y":7,"label":"A10"},{"x":5,"y":7,"label":"11"},{"x":6,"y":6,"label":"A4"},{"x":8,"y":6,"label":"A1"},{"x":9,"y":6,"label":"A7"},{"x":5,"y":5,"label":"13"},{"x":6,"y":5,"label":"A8"},{"x":8,"y":5,"label":"A6"}],
+      "evalTags": ["十題必勝", "11 黒主導〜黒有利"]
     },
     {
-      "id":"v6",
-      "baseMoves":[{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
-      "moves":[{"x":9,"y":6,"color":"white","n":4}],
-      "branches":[{"x":9,"y":11,"label":"A"},{"x":6,"y":9,"label":"A"},{"x":7,"y":9,"label":"A"},{"x":8,"y":9,"label":"A"},{"x":9,"y":9,"label":"A"},{"x":8,"y":8,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":6,"y":6,"label":"A"},{"x":8,"y":5,"label":"A9"},{"x":10,"y":5,"label":"A?"}],
-      "evalTags":["十題必勝"]
+      "id": "v6",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
+      "moves": [{"x":9,"y":6,"color":"white","n":4}],
+      "branches": [{"x":9,"y":10,"label":"A5"},{"x":6,"y":9,"label":"A7"},{"x":7,"y":9,"label":"A9"},{"x":8,"y":9,"label":"A4"},{"x":9,"y":9,"label":"A3"},{"x":6,"y":8,"label":"A13?"},{"x":8,"y":8,"label":"A2"},{"x":8,"y":7,"label":"A1"},{"x":6,"y":6,"label":"A6"},{"x":8,"y":6,"label":"A11"},{"x":8,"y":5,"label":"A8"},{"x":9,"y":5,"label":"A12?"},{"x":10,"y":5,"label":"A10"}],
+      "evalTags": ["十一題必勝"]
+    },
+    {
+      "id": "v7",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
+      "note": "候補g",
+      "moves": [{"x":6,"y":9,"color":"white","n":4}],
+      "branches": [{"x":8,"y":9,"label":"A8"},{"x":9,"y":9,"label":"A3"},{"x":10,"y":9,"label":"A2"},{"x":6,"y":8,"label":"A7"},{"x":8,"y":8,"label":"10"},{"x":8,"y":7,"label":"A4"},{"x":9,"y":7,"label":"A1"},{"x":10,"y":7,"label":"A5"},{"x":7,"y":6,"label":"A6"},{"x":9,"y":6,"label":"A9"}],
+      "evalTags": []
+    },
+    {
+      "id": "v8",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
+      "note": "候補h",
+      "moves": [{"x":6,"y":8,"color":"white","n":4}],
+      "branches": [{"x":9,"y":10,"label":"A3"},{"x":6,"y":9,"label":"A12"},{"x":7,"y":9,"label":"13"},{"x":8,"y":9,"label":"A7"},{"x":9,"y":9,"label":"A2"},{"x":10,"y":9,"label":"14"},{"x":4,"y":8,"label":"A10"},{"x":5,"y":8,"label":"A5"},{"x":5,"y":7,"label":"A8"},{"x":8,"y":7,"label":"A9"},{"x":9,"y":7,"label":"A1"},{"x":10,"y":7,"label":"A6"},{"x":6,"y":6,"label":"A4"},{"x":9,"y":6,"label":"A11"}],
+      "evalTags": []
+    },
+    {
+      "id": "v9",
+      "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":9,"y":8,"color":"black","n":3}],
+      "note": "候補渓",
+      "moves": [{"x":8,"y":7,"color":"white","n":4}],
+      "branches": [{"x":6,"y":9,"label":"A3"},{"x":7,"y":9,"label":"9"},{"x":8,"y":9,"label":"A4"},{"x":9,"y":9,"label":"A2"},{"x":8,"y":8,"label":"10"},{"x":6,"y":6,"label":"A5"},{"x":8,"y":6,"label":"A7"},{"x":9,"y":6,"label":"A1"},{"x":10,"y":6,"label":"A8?"},{"x":9,"y":5,"label":"A6"}],
+      "evalTags": []
     }
   ]
 }
