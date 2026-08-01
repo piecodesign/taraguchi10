@@ -501,12 +501,13 @@
   .var-card canvas{border-radius:0;border:0;}
   .var-eval{padding:10px 3px 0;line-height:1.8;min-height:3.6em;}
   @media(max-width:680px){
-    .header-inner{padding:calc(9px + var(--safe-top)) 12px 9px;gap:6px;}
-    .content-revision-date{font-size:9px;margin-left:-4px;margin-right:2px;}
+    .header-inner{padding:calc(9px + var(--safe-top)) 10px 9px;gap:4px;}
+    .content-revision-date{display:none;}
     .header-brand{font-size:14px;white-space:nowrap;line-height:1.25;}
     .header-brand .brand-ja-second{display:block;}
-    .nav-pill,.nav-link-btn,.nav-icon-btn{width:32px;height:34px;padding:5px;}
-    #helpBtn,#langToggleBtn{display:none;}
+    .header-nav,.header-nav-row{gap:1px!important;}
+    .nav-pill,.nav-link-btn,.nav-icon-btn{width:30px;height:34px;padding:5px;}
+    #langToggleBtn{display:none;}
     .page{padding:28px 16px 56px;}
     .shape-grid{grid-template-columns:1fr;gap:16px;}
     .shape-card{display:grid;grid-template-columns:minmax(150px,48%) minmax(0,1fr);align-items:center;gap:14px;padding:10px;}
