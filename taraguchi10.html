@@ -326,6 +326,8 @@
   .search-result-item i{font-size:15px;color:var(--text-secondary);flex:none;margin-top:2px;}
   .search-result-item .result-title{font-size:13.5px;}
   .search-result-item .result-meta{font-size:11.5px;color:var(--text-muted);}
+  .var-card.search-target{outline:3px solid var(--accent);outline-offset:4px;animation:searchTargetPulse 1.5s ease-out 2;}
+  @keyframes searchTargetPulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 0 8px rgba(63,114,85,.18)}}
 
   /* --- ヘルプページ。モーダルではなく本文エリアにページとして表示する
      (.search-view-headerと同じ見出し+閉じるボタンの型を流用)。 --- */
@@ -602,7 +604,6 @@
         <div class="search-action-btns">
           <button class="search-small-btn" id="searchUndoBtn" type="button" data-i18n-title="undo" aria-label="一手戻す"><i class="ti ti-arrow-back-up" aria-hidden="true"></i></button>
           <button class="search-small-btn" id="searchClearBtn" type="button" data-i18n-title="clear" aria-label="クリア"><i class="ti ti-refresh" aria-hidden="true"></i></button>
-          <button class="search-small-btn search-run-btn" id="searchRunBtn" type="button" data-i18n-title="runSearchBtn" aria-label="検索"><i class="ti ti-search" aria-hidden="true"></i></button>
         </div>
       </div>
       <div class="search-side-panel is-empty" id="searchSidePanel">
@@ -780,9 +781,8 @@ function getBoardGeometryForSize(size, mobile){
   const originX = margin, originY = size - margin;
   return {
     originX, originY, step, margin, min: 0, max: 14, showCoords: true,
-    // 検索盤(このgeometryを使うのはSEARCH_GEOのみ)は、RenjuMemo本体の局面検索と同じく
-    // settings.stoneStyleを無視して常にフラット表示にする(drawSearchStoneを使わせる)。
-    forceFlatStones: true,
+    // 検索盤も設定の「立体／平面」を反映する。盤素材の切替と同じタイミングで再描画される。
+    forceFlatStones: false,
     canvasW: size, canvasH: size, stoneR: step * 0.46,
     cellToPixel(x, y){ return { px: originX + x * step, py: originY - y * step }; },
     pixelToCell(px, py){ return { x: Math.round((px - originX) / step), y: Math.round((originY - py) / step) }; }
@@ -951,7 +951,7 @@ const I18N = {
     variationGuideNote: "A＝黒必勝、C＝白必勝、数字は実戦で有力な候補", share: "共有",
     openInRenjuMemo: "RenjuMemoで開く", downloadDiagram: "図面ダウンロード",
     searchTitle: "手順検索", close: "閉じる",
-    searchDesc: "黒1は天元(星印、h8)に固定です。点線はタラグチ10ルール(五珠交替打ち)で次の一手が打てる範囲を示します。5手目だけは、1手を指定する場合と候補を10題宣言する場合とで範囲が異なるため、点線が2本表示されます。範囲内をタップして手順を入力すると、その手順で始まる珠型を探します(部分図一致には対応していません)。",
+    searchDesc: "黒1は天元(星印、h8)に固定です。点線はタラグチ10ルール(五珠交替打ち)で次の一手が打てる範囲を示します。5手目だけは、1手を指定する場合と候補を10題宣言する場合とで範囲が異なるため、点線が2本表示されます。3手目以降は、石を置くたびに同じ黒白配置の珠型を自動検索します。着手順が異なる合流形と、回転・反転した対称形も同じ局面として扱います。",
     undo: "一手戻す", clear: "クリア", runSearchBtn: "検索",
     enterMoves: "手順を入力してください", noHits: "一致する珠型が見つかりませんでした",
     notRegistered: "この珠型はまだ登録されていません", preparing: "準備中",
@@ -994,7 +994,7 @@ const I18N = {
     variationGuideNote: "A = Black win, C = White win; numbers indicate practical candidate moves", share: "Share",
     openInRenjuMemo: "Open in RenjuMemo", downloadDiagram: "Download diagram",
     searchTitle: "Move search", close: "Close",
-    searchDesc: "Black 1 is fixed at tengen (star, h8). The dashed line shows where the next move can be played under the Taraguchi-10 rule. Move 5 shows two dashed lines, since the allowed range differs depending on whether one move is specified or 10 candidates are declared. Tap inside the range to build a sequence and search for shapes that start with it (partial-diagram matching is not supported).",
+    searchDesc: "Black 1 is fixed at tengen (star, h8). The dashed line shows where the next move can be played under the Taraguchi-10 rule. Move 5 shows two dashed lines, since the allowed range differs depending on whether one move is specified or 10 candidates are declared. From move 3 onward, matching black-and-white positions are found automatically. Transpositions with a different move order and all rotated or reflected forms are treated as the same position.",
     undo: "Undo", clear: "Clear", runSearchBtn: "Search",
     enterMoves: "Enter a move sequence", noHits: "No matching shapes found",
     notRegistered: "This shape hasn't been added yet", preparing: "Coming soon",
@@ -1259,11 +1259,8 @@ function drawStone(ctx, px, py, r, color, n, flat){
   }
 }
 
-// RenjuMemo本体の局面検索(js/main.js wireSearchPanel)の石はsettings.stoneStyleを
-// 一切見ず、常にこの通りのシンプルな塗り(グラデーション・影なし)で描かれる。検索盤
-// だけこの専用関数を使い、「立体」設定を選んでいても検索盤では常にフラット表示にする
-// (これが前回「シャドウが違って見える」の原因だった。RenjuMemo本体の検索盤は
-// そもそも立体スタイルを反映しない作りになっている)。
+// forceFlatStonesを指定する特殊な盤用のシンプル描画。現在の検索盤では使わず、
+// 通常のdrawStoneを通して設定の「立体／平面」を反映する。
 function drawSearchStone(ctx, px, py, r, color, n){
   const isBlack = color === "black";
   ctx.beginPath();
@@ -1638,6 +1635,7 @@ function buildDetail(){
   DATA.variations.forEach((v, i) => {
     const card = document.createElement("div");
     card.className = "var-card";
+    card.dataset.variationId = v.id || `v${i + 1}`;
     const supplementalTags = (v.evalTags || []).filter(tag => !/題.*必勝/.test(tag));
     card.innerHTML = `
       <canvas id="varBoard${i}"></canvas>
@@ -1895,7 +1893,7 @@ document.getElementById("langToggleBtn").addEventListener("click", () => {
 updateModeToggleIcon();
 updateLangToggleLabel();
 
-// --- 手順検索(手順一致のみ。部分図一致には対応しない) ---
+// --- 局面検索(3〜5手・8方向の対称形を含む) ---
 // タラグチ10ルール(五珠交替打ち)に従い、黒1は天元固定。白2は天元から1路、
 // 黒3は2路、白4は3路、黒5は4路(1手だけ指定する場合)または5路(候補を10題宣言する場合)の
 // 範囲内でのみ入力できる(6手目以降は範囲の制約なし)。盤面は15路盤フルサイズで表示する。
@@ -1950,45 +1948,148 @@ function updateRangeNote(nextMove){
   }
 }
 
-function getAllSequences(){
-  if (!DATA) return [];
-  const seqs = [{ label: `${DATA.no} ${DATA.name}`, sub: t("baseDiagram"), moves: DATA.baseMoves }];
-  DATA.variations.forEach((v, i) => {
-    seqs.push({ label: `${DATA.no} ${DATA.name}`, sub: `${t("variationDiagram")}${i + 1}`, moves: (v.baseMoves || DATA.baseMoves).concat(v.moves) });
-  });
-  return seqs;
+function searchTransforms(moves){
+  const rotate = (p) => ({ x: 14 - p.y, y: p.x, color: p.color });
+  const mirror = (p) => ({ x: 14 - p.x, y: p.y, color: p.color });
+  const variants = [];
+  let current = moves.map(m => ({ ...m }));
+  for (let i = 0; i < 4; i++){
+    variants.push(current);
+    variants.push(current.map(mirror));
+    current = current.map(rotate);
+  }
+  return variants;
 }
 
-// 手順検索=先頭からの完全一致(prefix match)。入力した手順がそのまま
-// その順番・その色で現れる珠型だけをヒットさせる(部分図一致は対象外)。
-function matchesQuery(seqMoves, query){
-  if (query.length === 0 || query.length > seqMoves.length) return false;
-  return query.every((q, i) => seqMoves[i].x === q.x && seqMoves[i].y === q.y && seqMoves[i].color === q.color);
+function samePosition(actual, query){
+  if (actual.length !== query.length) return false;
+  const actualStones = new Set(actual.map(m => `${m.x},${m.y},${m.color}`));
+  return query.every(q => actualStones.has(`${q.x},${q.y},${q.color}`));
+}
+
+async function loadSearchCatalog(){
+  const entries = [];
+  for (const shape of [...DIRECT_SHAPES, ...INDIRECT_SHAPES]){
+    if (!shape.dataFile) continue;
+    if (!shapeDataCache[shape.dataFile]){
+      const res = await fetch(shape.dataFile, { cache: "no-cache" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}: ${shape.dataFile}`);
+      shapeDataCache[shape.dataFile] = await res.json();
+    }
+    entries.push({ shape, data: shapeDataCache[shape.dataFile] });
+  }
+  return entries;
+}
+
+function findPositionMatches(entries, query){
+  const results = [];
+  const seen = new Set();
+  const originShapes = new Map();
+  for (const transformed of searchTransforms(query)){
+    for (const { shape, data } of entries){
+      // 4手目以降も、入力した最初の3石の配置から検索開始時の珠型を保持する。
+      // 対称形を含めて参照元が1珠型に特定できたときだけ、合流先との矢印表示に使う。
+      if (query.length >= 4 && samePosition((data.baseMoves || []).slice(0, 3), transformed.slice(0, 3))){
+        originShapes.set(shape.no, shape);
+      }
+      if (query.length === 3){
+        if (!samePosition((data.baseMoves || []).slice(0, 3), transformed)) continue;
+        const key = shape.no;
+        if (!seen.has(key)){
+          seen.add(key);
+          results.push({ shape, variationId: null, variationIndex: null, branchLabel: null });
+        }
+        continue;
+      }
+      (data.variations || []).forEach((variation, index) => {
+        const firstFour = (variation.baseMoves || data.baseMoves || []).concat(variation.moves || []);
+        const variationId = variation.id || `v${index + 1}`;
+        if (query.length === 4){
+          if (!samePosition(firstFour.slice(0, 4), transformed)) return;
+          const key = `${shape.no}:${variationId}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+          results.push({ shape, variationId, variationIndex: index, branchLabel: null });
+          return;
+        }
+        // 5手検索は黒3と黒5が入れ替わる合流形も同一局面として扱う。
+        // 先頭4手を固定せず、白4までの石+各候補点を黒石として加えた5石全体で比較する。
+        for (const branch of (variation.branches || [])){
+          const position = firstFour.slice(0, 4).concat({ x: branch.x, y: branch.y, color: "black" });
+          if (!samePosition(position, transformed)) continue;
+          const key = `${shape.no}:${variationId}:${branch.x},${branch.y}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          results.push({ shape, variationId, variationIndex: index, branchLabel: branch.label });
+        }
+      });
+    }
+  }
+  // 参照元が一意で、実データの珠型が異なるときだけ「元珠型 → 合流先」と表示する。
+  // 複数の3手珠型が一致する不完全データでは、誤案内を避けるため通常表示に戻す。
+  if (originShapes.size === 1){
+    const sourceShape = originShapes.values().next().value;
+    results.forEach(result => {
+      if (result.shape.no !== sourceShape.no) result.sourceShape = sourceShape;
+    });
+  }
+  return results;
 }
 
 function hitsLabel(n){
   return currentLang === "en" ? `${n} result${n === 1 ? "" : "s"} found` : `${n}件ヒットしました`;
 }
 
-function runSearch(){
+async function openPositionSearchResult(result){
+  await selectShape(result.shape);
+  if (!result.variationId) return;
+  requestAnimationFrame(() => {
+    const card = document.querySelector(`.var-card[data-variation-id="${CSS.escape(result.variationId)}"]`);
+    if (!card) return;
+    card.scrollIntoView({ behavior: "smooth", block: "center" });
+    card.classList.add("search-target");
+    window.setTimeout(() => card.classList.remove("search-target"), 3200);
+  });
+}
+
+let searchRunToken = 0;
+async function runSearch(){
+  const runToken = ++searchRunToken;
   const countEl = document.getElementById("searchResultsCount");
   const listEl = document.getElementById("searchResultsList");
   document.getElementById("searchSidePanel").classList.remove("is-empty");
   listEl.innerHTML = "";
-  if (searchQuery.length === 0){
-    countEl.textContent = t("enterMoves");
+  if (searchQuery.length < 3){
+    countEl.textContent = currentLang === "en" ? "Enter at least 3 moves" : "3手目まで入力してください";
     return;
   }
-  const matches = getAllSequences().filter(s => matchesQuery(s.moves, searchQuery));
-  countEl.textContent = matches.length ? hitsLabel(matches.length) : t("noHits");
-  matches.forEach(m => {
-    const item = document.createElement("div");
-    item.className = "search-result-item";
-    item.innerHTML = `<i class="ti ti-file-search" aria-hidden="true"></i>` +
-      `<div><div class="result-title">${m.label}</div><div class="result-meta">${m.sub}</div></div>`;
-    item.addEventListener("click", showDetailView);
-    listEl.appendChild(item);
-  });
+  countEl.textContent = currentLang === "en" ? "Searching…" : "検索中…";
+  try {
+    const matches = findPositionMatches(await loadSearchCatalog(), searchQuery.slice(0, 5));
+    if (runToken !== searchRunToken) return;
+    countEl.textContent = matches.length ? hitsLabel(matches.length) : t("noHits");
+    matches.forEach(result => {
+      const item = document.createElement("div");
+      item.className = "search-result-item";
+      const shapeName = currentLang === "en" ? result.shape.romaji : result.shape.kanji;
+      const sourceName = result.sourceShape
+        ? (currentLang === "en" ? result.sourceShape.romaji : result.sourceShape.kanji)
+        : "";
+      const resultTitle = result.sourceShape
+        ? `${result.sourceShape.label} ${sourceName} → ${result.shape.label} ${shapeName}`
+        : `${result.shape.label} ${shapeName}`;
+      const meta = result.variationIndex === null
+        ? t("baseDiagram")
+        : `${t("variationDiagram")}${result.variationIndex + 1}${result.branchLabel ? ` ・ 黒5候補「${result.branchLabel}」` : " ・ 白4配置図"}${result.sourceShape ? (currentLang === "en" ? " (transposition reference)" : "（共通形）") : ""}`;
+      item.innerHTML = `<i class="ti ti-file-search" aria-hidden="true"></i>` +
+        `<div><div class="result-title">${resultTitle}</div><div class="result-meta">${meta}</div></div>`;
+      item.addEventListener("click", () => openPositionSearchResult(result));
+      listEl.appendChild(item);
+    });
+  } catch (err){
+    console.error("局面検索データの読み込みに失敗しました:", err);
+    countEl.textContent = currentLang === "en" ? "Search data could not be loaded" : "検索データを読み込めませんでした";
+  }
 }
 
 function resetSearchResults(){
@@ -2008,6 +2109,7 @@ searchCanvas.addEventListener("click", (e) => {
   if (cell.x < BOARD_MIN || cell.x > BOARD_MAX || cell.y < BOARD_MIN || cell.y > BOARD_MAX) return;
   if (searchQuery.some(m => m.x === cell.x && m.y === cell.y)) return;
   const nextMove = searchQuery.length + 1;
+  if (nextMove > 5) return;
   const radius = RULE_RADIUS[nextMove];
   // 5手目は「10題宣言」経由なら5路まで実際に打たれ得るので、置ける判定は広い方の半径を使う
   const effectiveRadius = RULE_RADIUS_DECLARE10[nextMove] || radius;
@@ -2015,18 +2117,19 @@ searchCanvas.addEventListener("click", (e) => {
   const color = searchQuery.length % 2 === 0 ? "black" : "white";
   searchQuery.push({ x: cell.x, y: cell.y, color });
   renderSearchBoard();
+  if (searchQuery.length >= 3) runSearch(); else resetSearchResults();
 });
 document.getElementById("searchUndoBtn").addEventListener("click", () => {
   // 黒1(天元)はルール上動かせないので、それより前へは戻さない
   if (searchQuery.length > 1) searchQuery.pop();
   renderSearchBoard();
+  if (searchQuery.length >= 3) runSearch(); else resetSearchResults();
 });
 document.getElementById("searchClearBtn").addEventListener("click", () => {
   searchQuery = defaultSearchQuery();
   renderSearchBoard();
   resetSearchResults();
 });
-document.getElementById("searchRunBtn").addEventListener("click", runSearch);
 
 // searchQueryや検索盤イベントの準備が済んでからURLを復元する。
 // #search直読み時に初期化前の検索盤を描こうとして空白になるのを防ぐ。
