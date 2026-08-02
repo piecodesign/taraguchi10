@@ -57,6 +57,7 @@
   }
   *{box-sizing:border-box;}
   .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
+  [hidden]{display:none!important;}
   html,body{margin:0;min-height:100%;}
   body{
     font-family:-apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;
@@ -308,7 +309,10 @@
   }
 
   /* --- 手順検索パネル --- */
-  .search-view-header{display:flex;align-items:center;justify-content:flex-end;margin-bottom:6px;}
+  .search-view-header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px;}
+  .search-title-row{display:flex;align-items:flex-end;gap:14px;min-width:0;}
+  .search-title-main{font-family:var(--font-serif);font-size:30px;line-height:1;margin:0;color:var(--text-primary);}
+  .search-title-en{font-size:11px;line-height:1.15;letter-spacing:.15em;color:#806c4b;white-space:nowrap;}
   .search-page-title{font-family:var(--font-serif);font-weight:700;font-size:19px;color:var(--text-primary);margin:0;}
   .search-page-desc{margin:0 0 22px;font-size:13px;line-height:1.9;color:var(--text-secondary);}
   .search-close-btn{
@@ -521,6 +525,35 @@
     .var-intro-title{margin-bottom:7px;}
     .var-grid{grid-template-columns:1fr;}
   }
+
+  /* サイトホーム。既存の珠型データと盤面描画を使う3列の入口。 */
+  .home-view{display:flex;flex-direction:column;gap:42px;}
+  .home-opening-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;}
+  .home-opening-column{min-width:0;text-align:left;}
+  .home-opening-heading{display:flex;align-items:baseline;gap:14px;font-family:var(--font-serif);font-size:27px;line-height:1.35;margin:0 0 14px;color:var(--text-primary);}
+  .home-opening-heading-en{font-family:-apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;font-size:11px;font-weight:500;letter-spacing:.15em;color:#806c4b;white-space:nowrap;}
+  .home-opening-column .shape-card{width:100%;max-width:240px;margin:0;}
+  .home-opening-column .home-entry-board{display:block;max-width:240px;padding:9px;background:#fbf8ef;border:1px solid #ddd0b5;box-shadow:0 5px 14px rgba(72,51,20,.06);transform:scale(.9);transform-origin:top left;}
+  .home-opening-column .home-entry-board:hover{transform:scale(.9) translateY(-2px);}
+  .home-opening-column .home-entry-board:active{transform:scale(.9);}
+  .home-opening-column .home-entry-board .shape-card-board{display:block;width:100%;aspect-ratio:1/1;border:1px solid #cfc3a5;}
+  .home-opening-column .home-entry-board::after{content:"";display:block;height:34px;}
+  .home-preview-empty{box-sizing:border-box;width:100%;max-width:240px;aspect-ratio:1/1;margin:0;display:flex;align-items:center;justify-content:center;padding:20px;border:1px solid #ddd0b5;background:rgba(251,248,239,.56);box-shadow:0 5px 14px rgba(72,51,20,.06);transform:scale(.9);transform-origin:top left;color:var(--text-muted);font-size:12px;line-height:1.8;text-align:center;cursor:pointer;}
+  body.theme-dark .home-preview-empty{background:rgba(61,54,43,.45);}
+  .nav-pill .ti-school{font-size:20px;color:#201d19;}
+  .home-quiz-list{border-top:1px solid var(--border);}
+  .home-quiz-item{display:block;width:100%;padding:23px 2px;border:0;border-bottom:1px solid var(--border);background:none;color:inherit;text-align:left;text-decoration:none;cursor:pointer;}
+  .home-quiz-item.is-coming{cursor:default;opacity:.58;}
+  .home-quiz-mainline{display:flex;align-items:center;gap:11px;flex-wrap:wrap;}.home-quiz-mainline>i{font-size:28px;color:var(--text-secondary);}
+  .home-quiz-title{font-family:var(--font-serif);font-size:27px;line-height:1.35;}
+  .home-advanced-title-row{display:flex;align-items:baseline;gap:9px;}
+  .home-quiz-level{font-family:-apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;font-size:18px;font-weight:500;margin-left:5px;}
+  .home-quiz-en{flex-basis:100%;font-size:11px;letter-spacing:.12em;color:#806c4b;margin-left:39px;white-space:nowrap;}
+  .home-quiz-desc{display:block;margin-top:6px;margin-left:39px;font-size:12.5px;color:var(--text-muted);}
+  .home-coming-badge{font:500 11px/1.2 -apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;color:var(--text-muted);margin-left:9px;}
+  @media(max-width:680px){
+    .home-view{gap:30px}.home-opening-grid{grid-template-columns:1fr;gap:28px}.home-opening-heading{font-size:21px;margin-bottom:9px}.home-opening-column .shape-card,.home-preview-empty{max-width:240px}.home-quiz-mainline>i{font-size:24px}.home-quiz-title{font-size:21px}.home-quiz-level{font-size:15px}.home-quiz-en{display:block;margin:4px 0 0 35px;font-size:9.5px}.home-quiz-desc{margin-left:35px}.home-quiz-item{padding:19px 2px}
+  }
 </style>
 </head>
 <body>
@@ -533,6 +566,7 @@
     <nav class="header-nav" id="headerNav">
       <div class="header-nav-row">
         <div class="header-cat-group" id="categorySwitch">
+          <button class="nav-pill" id="quizOpenBtn" type="button" aria-label="珠型クイズ" title="Opening Quiz"><i class="ti ti-school" aria-hidden="true"></i></button>
           <button class="nav-pill" data-cat="favorites" type="button" data-i18n-title="catFavorites" aria-label="my珠型"><svg class="nav-favorite-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg></button>
           <button class="nav-pill active" data-cat="direct" type="button" data-i18n-title="catDirect" aria-label="直接打ち"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="stone-black" cx="12" cy="17" r="4.55"/><circle class="stone-white" cx="12" cy="7" r="4.55"/></svg></button>
           <button class="nav-pill" data-cat="indirect" type="button" data-i18n-title="catIndirect" aria-label="間接打ち"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="stone-black" cx="8.5" cy="15.5" r="4.2"/><circle class="stone-white" cx="15.5" cy="8.5" r="4.2"/></svg></button>
@@ -562,6 +596,14 @@
 </header>
 
 <main class="page">
+  <section id="homeView" class="home-view">
+    <div class="home-opening-grid" id="homeOpeningGrid"></div>
+    <div class="home-quiz-list">
+      <a class="home-quiz-item" href="quiz.html"><span class="home-quiz-mainline"><i class="ti ti-school" aria-hidden="true"></i><span class="home-quiz-title" id="homeBeginnerTitle">珠型クイズ <span class="home-quiz-level">入門</span></span><span class="home-quiz-en" id="homeBeginnerEn">OPENING QUIZ FOR BEGINNERS</span></span><span class="home-quiz-desc" id="homeBeginnerDesc">珠型の形や名前をおぼえよう</span></a>
+      <div class="home-quiz-item is-coming"><span class="home-quiz-mainline"><i class="ti ti-school" aria-hidden="true"></i><span class="home-advanced-title-row"><span class="home-quiz-title" id="homeAdvancedTitle">珠型クイズ <span class="home-quiz-level">上級</span></span><span class="home-coming-badge" id="homeComingBadge">coming soon</span></span><span class="home-quiz-en" id="homeAdvancedEn">OPENING QUIZ FOR ADVANCED PLAYERS</span></span><span class="home-quiz-desc" id="homeAdvancedDesc">五珠をおぼえよう</span></div>
+    </div>
+  </section>
+
   <section id="listView">
     <div class="list-head">
       <div class="list-title-row">
@@ -611,6 +653,7 @@
 
   <div id="searchView" hidden>
     <div class="search-view-header">
+      <div class="search-title-row"><h1 class="search-title-main" data-i18n="positionSearchTitle">局面検索</h1><span class="search-title-en">POSITION SEARCH</span></div>
       <button class="search-close-btn" id="searchCloseBtn" type="button" data-i18n-title="close" aria-label="閉じる"><i class="ti ti-x" aria-hidden="true"></i></button>
     </div>
     <div class="search-flex-row">
@@ -967,7 +1010,7 @@ const I18N = {
     variations: "五珠候補", variationGuideTitle: "白４と黒５の候補手",
     variationGuideNote: "A＝黒必勝、C＝白必勝、数字は実戦で有力な候補", share: "共有",
     openInRenjuMemo: "RenjuMemoで開く", downloadDiagram: "図面ダウンロード",
-    searchTitle: "手順検索", close: "閉じる",
+    searchTitle: "手順検索", positionSearchTitle: "局面検索", close: "閉じる",
     searchDesc: "黒1は天元(星印、h8)に固定です。点線はタラグチ10ルール(五珠交替打ち)で次の一手が打てる範囲を示します。5手目だけは、1手を指定する場合と候補を10題宣言する場合とで範囲が異なるため、点線が2本表示されます。3手目以降は、石を置くたびに同じ黒白配置の珠型を自動検索します。着手順が異なる合流形と、回転・反転した対称形も同じ局面として扱います。",
     undo: "一手戻す", clear: "クリア", runSearchBtn: "検索",
     enterMoves: "手順を入力してください", noHits: "一致する珠型が見つかりませんでした",
@@ -1010,7 +1053,7 @@ const I18N = {
     variations: "Candidates", variationGuideTitle: "White 4 and Black 5 Candidates",
     variationGuideNote: "A = Black win, C = White win; numbers indicate practical candidate moves", share: "Share",
     openInRenjuMemo: "Open in RenjuMemo", downloadDiagram: "Download diagram",
-    searchTitle: "Move search", close: "Close",
+    searchTitle: "Move search", positionSearchTitle: "Position Search", close: "Close",
     searchDesc: "Black 1 is fixed at tengen (star, h8). The dashed line shows where the next move can be played under the Taraguchi-10 rule. Move 5 shows two dashed lines, since the allowed range differs depending on whether one move is specified or 10 candidates are declared. From move 3 onward, matching black-and-white positions are found automatically. Transpositions with a different move order and all rotated or reflected forms are treated as the same position.",
     undo: "Undo", clear: "Clear", runSearchBtn: "Search",
     enterMoves: "Enter a move sequence", noHits: "No matching shapes found",
@@ -1060,6 +1103,26 @@ function applyI18n(){
     el.setAttribute("aria-label", label);
     el.title = label;
   });
+  const beginnerTitle = document.getElementById("homeBeginnerTitle");
+  if (beginnerTitle){
+    if (currentLang === "ja"){
+      beginnerTitle.innerHTML = `珠型クイズ <span class="home-quiz-level">入門</span>`;
+      document.getElementById("homeBeginnerEn").textContent = "OPENING QUIZ FOR BEGINNERS";
+      document.getElementById("homeBeginnerDesc").textContent = "珠型の形や名前をおぼえよう";
+      document.getElementById("homeAdvancedTitle").innerHTML = `珠型クイズ <span class="home-quiz-level">上級</span>`;
+      document.getElementById("homeAdvancedEn").textContent = "OPENING QUIZ FOR ADVANCED PLAYERS";
+      document.getElementById("homeComingBadge").textContent = "coming soon";
+      document.getElementById("homeAdvancedDesc").textContent = "五珠をおぼえよう";
+    } else {
+      beginnerTitle.textContent = "Opening Quiz for Beginners";
+      document.getElementById("homeBeginnerEn").textContent = "";
+      document.getElementById("homeBeginnerDesc").textContent = "Learn opening shapes and names";
+      document.getElementById("homeAdvancedTitle").textContent = "Opening Quiz for Advanced Players";
+      document.getElementById("homeAdvancedEn").textContent = "";
+      document.getElementById("homeComingBadge").textContent = "coming soon";
+      document.getElementById("homeAdvancedDesc").textContent = "Learn the fifth move";
+    }
+  }
   const sort = document.getElementById("listSort");
   if (sort){
     sort.options[0].textContent = currentLang === "ja" ? "番号順" : "Number";
@@ -1552,11 +1615,11 @@ function buildShapeGrid(){
 // カードのミニ盤面(3手目までの局面のみ・候補記号なし)を非同期で描く。
 // 詳細ページを開くときと同じJSON・同じキャッシュを使うので、カードを見てから
 // そのまま詳細を開いても二重に通信は発生しない。
-async function loadCardBoard(card, shape){
+async function loadCardBoard(card, shape, maxMove){
   const canvas = card.querySelector("canvas");
   const previewMoves = DIRECT_PREVIEW_MOVES[shape.no];
   if (previewMoves){
-    renderBoard(canvas, previewMoves, [], JOSEKI_GEO, null, null);
+    renderBoard(canvas, previewMoves.filter(m => m.n <= (maxMove || 3)), [], JOSEKI_GEO, null, null);
     return;
   }
   try {
@@ -1566,7 +1629,7 @@ async function loadCardBoard(card, shape){
       shapeDataCache[shape.dataFile] = await res.json();
     }
     const d = shapeDataCache[shape.dataFile];
-    const moves = (d.baseMoves || []).filter(m => m.n <= 3);
+    const moves = (d.baseMoves || []).filter(m => m.n <= (maxMove || 3));
     renderBoard(canvas, moves, [], JOSEKI_GEO, null, null);
   } catch (err){
     console.error("珠型カードの盤面読み込みに失敗しました:", shape.dataFile, err);
@@ -1582,23 +1645,88 @@ function setupCategorySwitch(){
   });
 }
 
-function showCategoryList(category){
+function showCategoryList(category, options){
+  options = options || {};
   currentCategory = category;
   document.querySelectorAll(".header-cat-group .nav-pill[data-cat]").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.cat === currentCategory);
   });
-  showListView();
+  showListView({ updateRoute:false });
+  const nextHash = `#${category}`;
+  if (options.updateRoute !== false && location.hash !== nextHash) history.pushState({ category }, "", nextHash);
 }
 
-// ロゴは直前のカテゴリや検索状態に関係なく、常にサイトのトップ(直接打ち)へ戻す。
-function showHomeView(){
-  showCategoryList("direct");
+function buildHomeView(){
+  const host = document.getElementById("homeOpeningGrid");
+  host.innerHTML = "";
+  const entries = [
+    { category:"direct", title:currentLang === "ja" ? "直接打ち" : "Direct", shape:DIRECT_SHAPES[0] },
+    { category:"indirect", title:currentLang === "ja" ? "間接打ち" : "Indirect", shape:INDIRECT_SHAPES[0] },
+    { category:"favorites", title:currentLang === "ja" ? "my珠型" : "My Openings", shape:favoriteShapesNewestFirst()[0] || null }
+  ];
+  entries.forEach(entry => {
+    const column = document.createElement("section");
+    column.className = "home-opening-column";
+    const heading = document.createElement("h2");
+    heading.className = "home-opening-heading";
+    heading.innerHTML = `<span>${entry.title}</span>${entry.category === "direct" ? '<span class="home-opening-heading-en">DIRECT OPENINGS</span>' : entry.category === "indirect" ? '<span class="home-opening-heading-en">INDIRECT OPENINGS</span>' : ""}`;
+    column.appendChild(heading);
+    if (entry.shape){
+      const card = document.createElement("div");
+      const isOpeningEntry = entry.category !== "favorites";
+      card.className = "shape-card" + (isOpeningEntry ? " home-entry-board" : "");
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.innerHTML = isOpeningEntry
+        ? `<span class="shape-card-board"><canvas></canvas></span>`
+        : `<span class="shape-card-board"><canvas></canvas></span><span class="shape-card-body"><span class="shape-card-no${currentLang === "en" ? " is-en" : ""}">${entry.shape.label}</span><span class="shape-card-name${currentLang === "en" ? " is-en" : ""}">${shapeNameMarkup(entry.shape)}</span>${shapeYomiMarkup(entry.shape)}${favoriteButtonMarkup(entry.shape)}</span>`;
+      card.addEventListener("click", event => {
+        const favoriteButton = event.target.closest(".shape-favorite");
+        if (favoriteButton){ event.stopPropagation(); toggleFavoriteButton(favoriteButton); return; }
+        showCategoryList(entry.category);
+      });
+      card.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " "){ event.preventDefault(); showCategoryList(entry.category); } });
+      column.appendChild(card);
+      loadCardBoard(card, entry.shape, isOpeningEntry ? 2 : 3);
+    } else {
+      const empty = document.createElement("div");
+      empty.className = "home-preview-empty";
+      empty.tabIndex = 0;
+      empty.setAttribute("role", "button");
+      empty.textContent = currentLang === "ja" ? "お気に入りはまだありません。珠型カードのハートから追加できます。" : "No favorites yet. Add one from the heart on a shape card.";
+      empty.addEventListener("click", () => showCategoryList(entry.category));
+      empty.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " "){ event.preventDefault(); showCategoryList(entry.category); } });
+      column.appendChild(empty);
+    }
+    host.appendChild(column);
+  });
+}
+
+// ロゴは直前のカテゴリや検索状態に関係なくサイトホームへ戻す。
+function showHomeView(options){
+  options = options || {};
+  lastMainView = "home";
+  closeHeaderMenu();
+  document.querySelectorAll(".header-cat-group .nav-pill[data-cat]").forEach(btn => btn.classList.remove("active"));
+  buildHomeView();
+  homeView.hidden = false;
+  listView.hidden = true;
+  detailView.hidden = true;
+  searchView.hidden = true;
+  helpView.hidden = true;
+  editView.hidden = true;
+  window.scrollTo(0, 0);
+  if (options.updateRoute !== false && location.hash) history.pushState({ view:"home" }, "", location.pathname + location.search);
 }
 
 document.getElementById("shapeGrid").addEventListener("click", e => {
   const button = e.target.closest(".shape-favorite");
   if (!button) return;
   e.stopPropagation();
+  toggleFavoriteButton(button);
+});
+
+function toggleFavoriteButton(button){
   const no = button.dataset.favorite;
   if (favoriteShapes.has(no)){
     favoriteShapes.delete(no);
@@ -1614,7 +1742,8 @@ document.getElementById("shapeGrid").addEventListener("click", e => {
   button.setAttribute("aria-label", active ? "お気に入りから外す" : "お気に入りに追加");
   // お気に入り一覧では解除したカードを即座に取り除き、時系列順を更新する。
   if (currentCategory === "favorites") buildShapeGrid();
-});
+  if (!homeView.hidden) buildHomeView();
+}
 
 // 現在のカテゴリの中で、実際に開ける(dataFileを持つ)珠型だけを並べた配列。
 // 詳細ページ下部の前後移動はこの並び順に沿って進む。
@@ -1696,12 +1825,13 @@ function renderDetailBoards(){
 // 検索画面やヘルプ画面から確実に元の画面へ戻れるよう、切り替えは必ずこれらの
 // 関数を経由する。lastMainViewは「一覧」「詳細」のどちらを見ていたかを覚えておき、
 // 検索・ヘルプ・編集を閉じたときにその画面へ戻すための目印。 ---
+const homeView = document.getElementById("homeView");
 const listView = document.getElementById("listView");
 const detailView = document.getElementById("detailView");
 const searchView = document.getElementById("searchView");
 const helpView = document.getElementById("helpView");
 const editView = document.getElementById("editView");
-let lastMainView = "list";
+let lastMainView = "home";
 
 function closeHeaderMenu(){
   headerNav.classList.remove("open");
@@ -1713,6 +1843,7 @@ function showListView(options){
   lastMainView = "list";
   closeHeaderMenu();
   buildShapeGrid();
+  homeView.hidden = true;
   listView.hidden = false;
   detailView.hidden = true;
   searchView.hidden = true;
@@ -1730,6 +1861,7 @@ function showDetailView(){
   if (!DATA){ showListView(); return; }
   lastMainView = "detail";
   closeHeaderMenu();
+  homeView.hidden = true;
   listView.hidden = true;
   detailView.hidden = false;
   searchView.hidden = true;
@@ -1738,11 +1870,12 @@ function showDetailView(){
   window.scrollTo(0, 0);
 }
 function returnToMainView(){
-  if (lastMainView === "detail" && DATA) showDetailView(); else showListView();
+  if (lastMainView === "detail" && DATA) showDetailView(); else if (lastMainView === "home") showHomeView(); else showListView();
 }
 function showSearchView(options){
   options = options || {};
   closeHeaderMenu();
+  homeView.hidden = true;
   listView.hidden = true;
   detailView.hidden = true;
   helpView.hidden = true;
@@ -1758,6 +1891,7 @@ function showSearchView(options){
 }
 function showHelpView(){
   closeHeaderMenu();
+  homeView.hidden = true;
   listView.hidden = true;
   detailView.hidden = true;
   searchView.hidden = true;
@@ -1770,6 +1904,7 @@ function showEditView(){
   // (開発者ツールなどで直接呼び出された場合の保険。真のアクセス制御ではない)。
   if (!hasEditAccess()) return;
   closeHeaderMenu();
+  homeView.hidden = true;
   listView.hidden = true;
   detailView.hidden = true;
   searchView.hidden = true;
@@ -1778,6 +1913,7 @@ function showEditView(){
   window.scrollTo(0, 0);
 }
 document.getElementById("brandBtn").addEventListener("click", showHomeView);
+document.getElementById("quizOpenBtn").addEventListener("click", () => { location.href = "quiz.html"; });
 document.getElementById("backToListTop").addEventListener("click", showListView);
 document.getElementById("backToListBottom").addEventListener("click", showListView);
 document.getElementById("helpBtn").addEventListener("click", showHelpView);
@@ -1791,7 +1927,7 @@ function closeSearchView(){
     const label = DATA.no.replace(/^Direct/, "D");
     history.pushState({ shape: label }, "", `#${label}`);
   } else {
-    showListView();
+    returnToMainView();
   }
 }
 
@@ -1821,13 +1957,22 @@ function shapeFromLocationHash(){
   return [...DIRECT_SHAPES, ...INDIRECT_SHAPES].find(shape => shape.label === label && shape.dataFile) || null;
 }
 async function restoreViewFromUrl(){
-  if (location.hash.toLowerCase() === "#search"){
+  const route = location.hash.toLowerCase();
+  if (route === "#search"){
     showSearchView({ updateRoute: false });
+    return;
+  }
+  if (["#direct","#indirect","#favorites"].includes(route)){
+    showCategoryList(route.slice(1), { updateRoute:false });
+    return;
+  }
+  if (route === "#home"){
+    showHomeView({ updateRoute:false });
     return;
   }
   const shape = shapeFromLocationHash();
   if (shape) await selectShape(shape, { updateRoute: false, preserveCategory: false });
-  else showListView({ updateRoute: false });
+  else showHomeView({ updateRoute: false });
 }
 window.addEventListener("popstate", restoreViewFromUrl);
 // URLに#D2・#I1等があれば詳細、#searchなら検索画面を復元し、無ければ一覧を表示する。
@@ -1879,6 +2024,7 @@ function updateLangToggleLabel(){
 const settingsBackdrop = document.getElementById("settingsBackdrop");
 const settingsModalContent = document.getElementById("settingsModalContent");
 function redrawForSettings(){
+  if (!homeView.hidden) buildHomeView();
   if (!listView.hidden) buildShapeGrid();
   if (DATA && !detailView.hidden) renderDetailBoards();
   if (!searchView.hidden) renderSearchBoard();
