@@ -34,9 +34,9 @@
     .nav-icon-btn{position:relative;width:36px;height:36px;padding:6px;border:0;background:transparent;color:var(--text-secondary);display:flex;align-items:center;justify-content:center;cursor:pointer;text-decoration:none}
     .nav-icon-btn:hover{background:var(--hover-bg);color:var(--accent)}.nav-icon-btn.active{color:var(--accent)}.nav-icon-btn.active::after{content:"";position:absolute;left:5px;right:5px;bottom:0;height:2px;background:currentColor}.nav-icon-btn i{font-size:20px}.nav-icon-btn .ti-school{font-size:20px;color:#201d19}.nav-icon-btn svg{width:24px;height:24px}.nav-icon-btn .stone-black{fill:#201d19;stroke:#201d19}.nav-icon-btn .stone-white{fill:#faf6ec;stroke:#766a57;stroke-width:1.4}
     .page{max-width:1060px;margin:auto;padding:42px 42px calc(76px + var(--safe-bottom))}
-    .quiz-head{width:min(92vw,600px);margin:0 auto 12px;display:flex;align-items:flex-end;justify-content:center;gap:16px;text-align:center}
-    h1{margin:0;font-family:var(--font-serif);font-size:30px;line-height:1.2}.title-en{font:500 11px/1.2 -apple-system,"Hiragino Sans","Yu Gothic",system-ui,sans-serif;letter-spacing:.15em;color:#806c4b;white-space:nowrap}
-    body.theme-dark .title-en{color:var(--text-muted)}
+    .quiz-head{width:min(92vw,600px);margin:0 auto 12px;display:flex;align-items:flex-end;gap:24px;text-align:left}
+    h1{margin:0;font-family:var(--font-serif);font-size:30px;line-height:1.2;white-space:nowrap}
+    .level-switch{margin-left:auto;display:flex;align-items:flex-end;justify-content:center;gap:28px;border-bottom:1px solid var(--border)}.level-link{position:relative;padding:8px 3px 10px;color:var(--text-secondary);font-size:13px;text-decoration:none;white-space:nowrap}.level-link.active{color:var(--accent);font-weight:700}.level-link.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:currentColor}
     .mode-switch{width:min(92vw,600px);margin:0 auto 24px;display:flex;justify-content:center;gap:28px;border-bottom:1px solid var(--border)}
     .mode-link{position:relative;border:0;background:none;color:var(--text-secondary);padding:8px 3px 10px;font-size:13px;cursor:pointer}.mode-link.active{color:var(--accent);font-weight:700}.mode-link.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:currentColor}
     .lead{width:min(92vw,600px);margin:16px auto 0;font-size:13px;line-height:1.9;color:var(--text-secondary);text-align:center}
@@ -67,18 +67,18 @@
   <div class="header-inner">
     <a class="header-brand" href="index.html">Taraguchi-10 <span data-i18n="guide">五珠指南書</span></a>
     <div class="header-actions">
-      <a class="nav-icon-btn active" href="quiz.html" aria-label="珠型クイズ" title="Opening Quiz"><i class="ti ti-school" aria-hidden="true"></i></a>
-      <a class="nav-icon-btn" href="index.html#favorites" aria-label="my珠型" title="My Openings"><i class="ti ti-heart" aria-hidden="true"></i></a>
-      <a class="nav-icon-btn" href="index.html#direct" aria-label="直接打ち" title="Direct"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="stone-black" cx="12" cy="17" r="4.55"/><circle class="stone-white" cx="12" cy="7" r="4.55"/></svg></a>
-      <a class="nav-icon-btn" href="index.html#indirect" aria-label="間接打ち" title="Indirect"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="stone-black" cx="8.5" cy="15.5" r="4.2"/><circle class="stone-white" cx="15.5" cy="8.5" r="4.2"/></svg></a>
-      <a class="nav-icon-btn" href="index.html#search" aria-label="手順検索" title="Search"><i class="ti ti-search" aria-hidden="true"></i></a>
+      <a id="quizNav" class="nav-icon-btn active" href="quiz.html" aria-label="珠型クイズ" title="珠型クイズ"><i class="ti ti-school" aria-hidden="true"></i></a>
+      <a id="favoritesNav" class="nav-icon-btn" href="index.html#favorites" aria-label="my珠型" title="my珠型"><i class="ti ti-heart" aria-hidden="true"></i></a>
+      <a id="directNav" class="nav-icon-btn" href="index.html#direct" aria-label="直接打ち" title="直接打ち"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="stone-black" cx="12" cy="17" r="4.55"/><circle class="stone-white" cx="12" cy="7" r="4.55"/></svg></a>
+      <a id="indirectNav" class="nav-icon-btn" href="index.html#indirect" aria-label="間接打ち" title="間接打ち"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="stone-black" cx="8.5" cy="15.5" r="4.2"/><circle class="stone-white" cx="15.5" cy="8.5" r="4.2"/></svg></a>
+      <a id="searchNav" class="nav-icon-btn" href="index.html#search" aria-label="手順検索" title="手順検索"><i class="ti ti-search" aria-hidden="true"></i></a>
       <button class="nav-icon-btn" id="settingsButton" type="button" aria-label="設定" title="Settings"><i class="ti ti-settings" aria-hidden="true"></i></button>
     </div>
   </div>
 </header>
 <main class="page">
   <section aria-labelledby="quizTitle">
-    <div class="quiz-head"><h1 id="quizTitle" data-i18n="title">珠型クイズ 入門</h1><span class="title-en" id="quizTitleEn">OPENING QUIZ FOR BEGINNERS</span></div>
+    <div class="quiz-head"><h1 id="quizTitle" data-i18n="title">珠型クイズ</h1><nav id="levelSwitch" class="level-switch" aria-label="難易度"><span class="level-link active" aria-current="page" data-i18n="beginner">入門</span><a class="level-link" href="quiz-advanced.html" data-i18n="advanced">上級</a></nav></div>
     <nav class="mode-switch" aria-label="クイズモード">
       <button id="shapeModeButton" class="mode-link active" type="button" data-i18n="shapeMode">形を当てる</button>
       <button id="nameModeButton" class="mode-link" type="button" data-i18n="nameMode">名前を当てる</button>
@@ -104,8 +104,8 @@ const DATA_FILES=[
   "data/indirect/i1_chosei.json","data/indirect/i2_kyogetsu.json","data/indirect/i3_kosei.json","data/indirect/i4_suigetsu.json","data/indirect/i5_ryusei.json","data/indirect/i6_ungetsu.json","data/indirect/i7_hogetsu.json","data/indirect/i8_rangetsu.json","data/indirect/i9_gingetsu.json","data/indirect/i10_myojo.json","data/indirect/i11_shagetsu.json","data/indirect/i12_meigetsu.json","data/indirect/i13_suisei.json"
 ];
 const I18N={
-  ja:{guide:"五珠指南書",title:"珠型クイズ 入門",shapeMode:"形を当てる",nameMode:"名前を当てる",lead:"表示された名前の珠型を作りましょう。白2、黒3の順に置いてください。",nameLead:"盤面の珠型名を選びましょう。",white2:"白2",black3:"黒3",question:n=>`第${n}問 / 10`,loading:"珠型データを読み込んでいます…",loadError:"珠型データを読み込めませんでした。ローカルサーバー経由で開いてください。",settings:"設定",board:"盤",stone:"石",theme:"表示",light:"ライト",dark:"ダーク",close:"閉じる",undo:"一手戻す",next:"次の問題",again:"もう一度あそぶ",correct:"正解",incorrect:"不正解"},
-  en:{guide:"Opening Guide",title:"Opening Quiz for Beginner",shapeMode:"Match the Shape",nameMode:"Match the Name",lead:"Create the opening shown above. Place White 2, then Black 3.",nameLead:"Choose the name of the opening shown on the board.",white2:"White 2",black3:"Black 3",question:n=>`Question ${n} / 10`,loading:"Loading opening data…",loadError:"Opening data could not be loaded. Please open this page through a local server.",settings:"Settings",board:"Board",stone:"Stone",theme:"Theme",light:"Light",dark:"Dark",close:"Close",undo:"Undo",next:"Next",again:"Play Again",correct:"Correct",incorrect:"Incorrect"}
+  ja:{guide:"五珠指南書",title:"珠型クイズ",beginner:"入門",advanced:"上級",shapeMode:"形を当てる",nameMode:"名前を当てる",lead:"表示された名前の珠型を作りましょう。白2、黒3の順に置いてください。",nameLead:"盤面の珠型名を選びましょう。",white2:"白2",black3:"黒3",question:n=>`第${n}問 / 10`,loading:"珠型データを読み込んでいます…",loadError:"珠型データを読み込めませんでした。ローカルサーバー経由で開いてください。",settings:"設定",board:"盤",stone:"石",theme:"表示",light:"ライト",dark:"ダーク",close:"閉じる",undo:"一手戻す",next:"次の問題",again:"もう一度あそぶ",correct:"正解",incorrect:"不正解",quiz:"珠型クイズ",favorites:"my珠型",direct:"直接打ち",indirect:"間接打ち",search:"手順検索"},
+  en:{guide:"Opening Guide",title:"Opening Quiz",beginner:"Beginner",advanced:"Advanced",shapeMode:"Match the Shape",nameMode:"Match the Name",lead:"Create the opening shown above. Place White 2, then Black 3.",nameLead:"Choose the name of the opening shown on the board.",white2:"White 2",black3:"Black 3",question:n=>`Question ${n} / 10`,loading:"Loading opening data…",loadError:"Opening data could not be loaded. Please open this page through a local server.",settings:"Settings",board:"Board",stone:"Stone",theme:"Theme",light:"Light",dark:"Dark",close:"Close",undo:"Undo",next:"Next",again:"Play Again",correct:"Correct",incorrect:"Incorrect",quiz:"Opening Quiz",favorites:"My Openings",direct:"Direct",indirect:"Indirect",search:"Search"}
 };
 const BOARD_OPTIONS=[
   {key:"wood",ja:"木目",en:"Wood",bg:"#e6c98d",line:"rgba(88,54,22,.38)",star:"#71502b",label:"rgba(88,54,22,.52)"},
@@ -149,7 +149,7 @@ function transform(dx,dy,k){switch(k){case 0:return[dx,dy];case 1:return[-dy,dx]
 function isCorrect(){const target=current.baseMoves.filter(m=>m.n===2||m.n===3).sort((a,b)=>a.n-b.n);return Array.from({length:8},(_,k)=>k).some(k=>target.every((m,i)=>{const[dx,dy]=transform(m.x-7,m.y-7,k);return answer[i].x===7+dx&&answer[i].y===7+dy}))}
 function applyLanguage(){
   document.documentElement.lang=lang;document.querySelectorAll("[data-i18n]").forEach(el=>el.textContent=t(el.dataset.i18n));
-  document.title=`${t("title")}｜Taraguchi-10`;document.getElementById("quizTitleEn").hidden=lang==="en";document.querySelector(".mode-switch").setAttribute("aria-label",lang==="ja"?"クイズモード":"Quiz mode");undoButton.setAttribute("aria-label",t("undo"));document.getElementById("settingsButton").setAttribute("aria-label",t("settings"));document.getElementById("quizInstruction").textContent=quizMode==="shape"?t("lead"):t("nameLead");if(current){document.getElementById("progress").textContent=t("question")(questionCount);document.getElementById("shapeName").innerHTML=quizMode==="shape"?displayNameMarkup(current):"";if(quizMode==="name"&&!finished)buildNameOptions()}
+  document.title=`${t("title")}｜Taraguchi-10`;document.querySelector(".mode-switch").setAttribute("aria-label",lang==="ja"?"クイズモード":"Quiz mode");document.getElementById("levelSwitch").setAttribute("aria-label",lang==="ja"?"難易度":"Difficulty");[["quizNav","quiz"],["favoritesNav","favorites"],["directNav","direct"],["indirectNav","indirect"],["searchNav","search"],["settingsButton","settings"]].forEach(([id,key])=>{const el=document.getElementById(id);el.setAttribute("aria-label",t(key));el.setAttribute("title",t(key))});undoButton.setAttribute("aria-label",t("undo"));document.getElementById("quizInstruction").textContent=quizMode==="shape"?t("lead"):t("nameLead");if(current){document.getElementById("progress").textContent=t("question")(questionCount);document.getElementById("shapeName").innerHTML=quizMode==="shape"?displayNameMarkup(current):"";if(quizMode==="name"&&!finished)buildNameOptions()}
 }
 function applyTheme(){document.body.classList.toggle("theme-dark",theme==="dark");if(current)drawBoard()}
 function shuffled(items){const out=[...items];for(let i=out.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[out[i],out[j]]=[out[j],out[i]]}return out}

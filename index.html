@@ -600,7 +600,7 @@
     <div class="home-opening-grid" id="homeOpeningGrid"></div>
     <div class="home-quiz-list">
       <a class="home-quiz-item" href="quiz.html"><span class="home-quiz-mainline"><i class="ti ti-school" aria-hidden="true"></i><span class="home-quiz-title" id="homeBeginnerTitle">珠型クイズ <span class="home-quiz-level">入門</span></span><span class="home-quiz-en" id="homeBeginnerEn">OPENING QUIZ FOR BEGINNERS</span></span><span class="home-quiz-desc" id="homeBeginnerDesc">珠型の形や名前をおぼえよう</span></a>
-      <div class="home-quiz-item is-coming"><span class="home-quiz-mainline"><i class="ti ti-school" aria-hidden="true"></i><span class="home-advanced-title-row"><span class="home-quiz-title" id="homeAdvancedTitle">珠型クイズ <span class="home-quiz-level">上級</span></span><span class="home-coming-badge" id="homeComingBadge">coming soon</span></span><span class="home-quiz-en" id="homeAdvancedEn">OPENING QUIZ FOR ADVANCED PLAYERS</span></span><span class="home-quiz-desc" id="homeAdvancedDesc">五珠をおぼえよう</span></div>
+      <a class="home-quiz-item" href="quiz-advanced.html"><span class="home-quiz-mainline"><i class="ti ti-school" aria-hidden="true"></i><span class="home-advanced-title-row"><span class="home-quiz-title" id="homeAdvancedTitle">珠型クイズ <span class="home-quiz-level">上級</span></span></span><span class="home-quiz-en" id="homeAdvancedEn">OPENING QUIZ FOR ADVANCED PLAYERS</span></span><span class="home-quiz-desc" id="homeAdvancedDesc">五珠をおぼえよう</span></a>
     </div>
   </section>
 
@@ -1111,7 +1111,6 @@ function applyI18n(){
       document.getElementById("homeBeginnerDesc").textContent = "珠型の形や名前をおぼえよう";
       document.getElementById("homeAdvancedTitle").innerHTML = `珠型クイズ <span class="home-quiz-level">上級</span>`;
       document.getElementById("homeAdvancedEn").textContent = "OPENING QUIZ FOR ADVANCED PLAYERS";
-      document.getElementById("homeComingBadge").textContent = "coming soon";
       document.getElementById("homeAdvancedDesc").textContent = "五珠をおぼえよう";
     } else {
       beginnerTitle.textContent = "Opening Quiz for Beginners";
@@ -1119,7 +1118,6 @@ function applyI18n(){
       document.getElementById("homeBeginnerDesc").textContent = "Learn opening shapes and names";
       document.getElementById("homeAdvancedTitle").textContent = "Opening Quiz for Advanced Players";
       document.getElementById("homeAdvancedEn").textContent = "";
-      document.getElementById("homeComingBadge").textContent = "coming soon";
       document.getElementById("homeAdvancedDesc").textContent = "Learn the fifth move";
     }
   }
