@@ -29,6 +29,10 @@
     { "x": 6, "y": 9, "label": "j" },
     { "x": 9, "y": 7, "label": "k" }
   ],
+  "mergeMarkerExclusions": [
+    { "x": 8, "y": 7 },
+    { "x": 7, "y": 6 }
+  ],
   "variations": [
     {
       "id": "v1",

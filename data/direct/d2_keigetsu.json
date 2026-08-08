@@ -8,7 +8,7 @@
   "category": "direct",
   "categoryLabel": "直接打ち",
   "updatedAt": "2026-08-01",
-  "comment": "かつての人気珠型だったが、現在は減少気味。主に打たれるのは白a〜白e。それ以降はハメ手的意味合いが強い。",
+  "comment": "題数指定打ちまでの開局規定で人気珠型だった。\nソーソロフ８・タラグチ10では黒が打ちやすい展開が多く減少傾向。\n主に打たれるのは白a〜白e。",
   "baseView": { "size": 9, "centerX": 7, "centerY": 7 },
   "variationView": { "size": 9, "centerX": 7, "centerY": 7 },
   "baseMoves": [
@@ -60,8 +60,8 @@
       "id": "v5",
       "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":9,"color":"black","n":3}],
       "moves": [{"x":9,"y":6,"color":"white","n":4}],
-      "branches": [{"x":6,"y":9,"label":"A1"},{"x":7,"y":9,"label":"A5"},{"x":9,"y":9,"label":"A6"},{"x":6,"y":8,"label":"A2"},{"x":9,"y":8,"label":"A4"},{"x":10,"y":8,"label":"A8"},{"x":8,"y":7,"label":"A3"},{"x":6,"y":6,"label":"A7"},{"x":10,"y":6,"label":"A9"},{"x":10,"y":5,"label":"10"}],
-      "evalTags": ["九題必勝", "10 黒主導"]
+      "branches": [{"x":6,"y":9,"label":"A1"},{"x":7,"y":9,"label":"A5"},{"x":9,"y":9,"label":"A6"},{"x":6,"y":8,"label":"A2"},{"x":9,"y":8,"label":"A4"},{"x":10,"y":8,"label":"A8"},{"x":8,"y":7,"label":"A3"},{"x":9,"y":7,"label":"11"},{"x":6,"y":6,"label":"A7"},{"x":10,"y":6,"label":"A9"},{"x":10,"y":5,"label":"10"}],
+      "evalTags": ["九題必勝", "10 黒有利", "11 黒主導"]
     },
     {
       "id": "v6",
@@ -74,7 +74,7 @@
       "id": "v7",
       "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":9,"color":"black","n":3}],
       "moves": [{"x":9,"y":7,"color":"white","n":4}],
-      "branches": [{"x":6,"y":10,"label":"A?"},{"x":8,"y":10,"label":"A"},{"x":6,"y":9,"label":"A"},{"x":10,"y":9,"label":"A?"},{"x":6,"y":8,"label":"A"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":8,"y":7,"label":"A10"},{"x":8,"y":6,"label":"A"},{"x":9,"y":6,"label":"A"}],
+      "branches": [{"x":6,"y":10,"label":"A?"},{"x":8,"y":10,"label":"A"},{"x":6,"y":9,"label":"A"},{"x":10,"y":9,"label":"A?"},{"x":6,"y":8,"label":"A"},{"x":8,"y":8,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":8,"y":6,"label":"A"},{"x":9,"y":6,"label":"A"}],
       "evalTags": ["十題必勝"]
     },
     {
@@ -82,7 +82,7 @@
       "baseMoves": [{"x":7,"y":7,"color":"black","n":1},{"x":7,"y":8,"color":"white","n":2},{"x":8,"y":9,"color":"black","n":3}],
       "moves": [{"x":9,"y":9,"color":"white","n":4}],
       "branches": [{"x":6,"y":9,"label":"A"},{"x":6,"y":8,"label":"A"},{"x":9,"y":8,"label":"A"},{"x":5,"y":7,"label":"A"},{"x":6,"y":7,"label":"A"},{"x":8,"y":7,"label":"A"},{"x":9,"y":7,"label":"A8"},{"x":8,"y":6,"label":"A"},{"x":9,"y":6,"label":"A?"}],
-      "evalTags": ["九題必勝"]
+      "evalTags": ["九題必勝", "※10題A？"]
     },
     {
       "id": "v9",
