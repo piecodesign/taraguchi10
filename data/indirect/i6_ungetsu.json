@@ -67,6 +67,10 @@
       "label": "e"
     }
   ],
+  "mergeSymmetryPoints": [
+    { "x": 7, "y": 6 },
+    { "x": 7, "y": 8 }
+  ],
   "variations": [
     {
       "id": "v1",

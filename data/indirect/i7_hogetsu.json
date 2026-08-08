@@ -57,6 +57,10 @@
       "label": "b"
     }
   ],
+  "mergeMarkerExclusions": [
+    { "x": 7, "y": 8 },
+    { "x": 8, "y": 7 }
+  ],
   "variations": [
     {
       "id": "v1",
@@ -128,9 +132,22 @@
           "x": 7,
           "y": 6,
           "label": "A3"
+        },
+        {
+          "x": 11,
+          "y": 5,
+          "label": "8'"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "label": "5'"
         }
       ],
-      "evalTags": []
+      "evalTags": [
+        "5' 黒主導",
+        "8' 白優勢"
+      ]
     },
     {
       "id": "v2",

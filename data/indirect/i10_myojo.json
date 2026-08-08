@@ -67,6 +67,9 @@
       "label": "c"
     }
   ],
+  "mergeMarkerExclusions": [
+    { "x": 6, "y": 6 }
+  ],
   "variations": [
     {
       "id": "v1",

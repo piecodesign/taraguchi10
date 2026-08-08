@@ -82,6 +82,10 @@
       "label": "h"
     }
   ],
+  "mergeMarkerExclusions": [
+    { "x": 6, "y": 6 },
+    { "x": 8, "y": 6 }
+  ],
   "variations": [
     {
       "id": "v1",
