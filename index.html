@@ -231,6 +231,15 @@
     width:100%;height:100%;display:block;border-radius:10px;
     border:0.5px solid var(--border-strong);box-shadow:0 12px 28px rgba(50,38,16,0.10);
   }
+  .detail-board-stage{position:relative;}
+  .detail-branch-links{position:absolute;inset:0;pointer-events:none;}
+  .detail-branch-link{
+    position:absolute;transform:translate(-50%,-50%);width:var(--hit-size);aspect-ratio:1;
+    min-width:28px;max-width:44px;padding:0;border:0;border-radius:50%;background:transparent;
+    cursor:pointer;pointer-events:auto;
+  }
+  .detail-branch-link:hover{background:rgba(63,114,85,.12);}
+  .detail-branch-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px;background:rgba(63,114,85,.12);}
   .detail-cover-info{flex:1;min-width:230px;padding-top:2px;}
   .detail-no{font-size:15px;color:#806c4b;letter-spacing:0.06em;font-weight:400;margin-bottom:7px;}
   .detail-name-row{margin:0 0 15px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-weight:700;}
@@ -260,7 +269,8 @@
 
   /* シェアメニューがカード幅より広く外側にはみ出して表示される仕様なので、
      overflow:hiddenは付けない(canvasの角丸だけborder-radiusで表現する)。 */
-  .var-card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:12px;position:relative;}
+  .var-card{background:var(--card-bg);border:0.5px solid var(--border);border-radius:12px;position:relative;scroll-margin-top:88px;}
+  .var-card:focus{outline:2px solid var(--accent);outline-offset:3px;}
   .var-card canvas{width:100%;display:block;border-radius:12px 12px 0 0;border-bottom:0.5px solid var(--border);}
   .merge-source{display:inline-block;margin:11px 15px 0;padding:4px 9px;border-radius:999px;background:rgba(63,114,85,.13);color:#3f7255;font-size:12.5px;font-weight:600;line-height:1.6;}
   body.theme-dark .merge-source{background:rgba(137,190,158,.18);color:#a8cfb5;}
@@ -634,7 +644,10 @@
 
     <div class="detail-cover">
       <div class="detail-cover-board">
-        <canvas id="detailBaseBoard"></canvas>
+        <div class="detail-board-stage">
+          <canvas id="detailBaseBoard"></canvas>
+          <div class="detail-branch-links" id="detailBaseBranchLinks"></div>
+        </div>
       </div>
       <div class="detail-cover-info">
         <div class="detail-no" id="detailNo"></div>
@@ -1820,6 +1833,11 @@ function buildDetail(){
     const card = document.createElement("div");
     card.className = "var-card";
     card.dataset.variationId = v.id || `v${i + 1}`;
+    const white4 = (v.moves || []).find(move => move.color === "white") || (v.moves || [])[0];
+    if (white4){
+      card.dataset.white4X = white4.x;
+      card.dataset.white4Y = white4.y;
+    }
     const supplementalTags = (v.evalTags || []).filter(tag => !/題.*必勝/.test(tag));
     const sourceShape = item.mergeSourceShape;
     const sourceText = !sourceShape ? "" : sourceShape.no === currentShapeNo
@@ -1836,6 +1854,36 @@ function buildDetail(){
   appendCards(detailMergeVariations, mergeGrid, "mergeVar");
 }
 
+// 上部の白4候補を、同じ座標の変化図カードへつなぐ。盤面そのものはcanvasのままにし、
+// 候補文字の位置にだけ透明なボタンを重ねることで、マウスとキーボードの両方に対応する。
+function renderDetailBranchLinks(geo){
+  const links = document.getElementById("detailBaseBranchLinks");
+  links.innerHTML = "";
+  const hitSize = `${Math.max(8, Math.min(12, geo.step * 1.05 / geo.canvasW * 100))}%`;
+  detailBaseBranches.forEach(branch => {
+    const target = document.querySelector(`.var-card[data-white4-x="${branch.x}"][data-white4-y="${branch.y}"]`);
+    if (!target) return;
+    const p = geo.cellToPixel(branch.x, branch.y);
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "detail-branch-link";
+    button.style.left = `${p.px / geo.canvasW * 100}%`;
+    button.style.top = `${p.py / geo.canvasH * 100}%`;
+    button.style.setProperty("--hit-size", hitSize);
+    button.setAttribute("aria-label", currentLang === "en"
+      ? `Open details for white 4 candidate ${branch.label}`
+      : `白4候補「${branch.label}」の詳細へ`);
+    button.title = currentLang === "en" ? "Open details" : "詳細へ移動";
+    button.addEventListener("click", () => {
+      const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+      target.scrollIntoView({ behavior, block: "start" });
+      target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+    });
+    links.appendChild(button);
+  });
+}
+
 // 基本図+変化図の盤面をまとめて再描画する(初回表示のほか、設定で盤面色・
 // 石のスタイルを変えたときにも呼び出す)。
 // 冒頭の基本図(白4候補を示す案内図)は少し濃いクリーム(BASE_BOARD_COLOR)・立体石で
@@ -1846,6 +1894,7 @@ function renderDetailBoards(){
   const detailGeo = diagramGeometry(DATA.baseMoves, detailBaseBranches, false, DATA.baseView);
   detailGeo.showStars = false;
   renderBoard(document.getElementById("detailBaseBoard"), DATA.baseMoves, detailBaseBranches, detailGeo, "#3f7255", currentLargeBoardOption(), false, true, 1);
+  renderDetailBranchLinks(detailGeo);
   const renderVariations = (items, prefix) => items.forEach((item, i) => {
     const v = item.variation;
     const canvas = document.getElementById(prefix + "Board" + i);
