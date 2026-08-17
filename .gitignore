@@ -1,4 +1,10 @@
 .DS_Store
 .claude/
 tmp/
-
+archive/
+backup/
+data/test/
+test.html
+quiz-advanced-preview.html
+shukeiicon.ai
+start-server.command
